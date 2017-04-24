@@ -1,0 +1,16 @@
+/*
+	Style 
+	Name: Basis
+	Version: alpha
+	Creator: Freddy
+	*/
+
+input{
+width: 206px;
+font-size:14px;
+padding:4px 6px;
+border-radius:4px;
+color:#555;
+border: linear .2;
+box-shadow: linear .2s;
+}

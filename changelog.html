@@ -1,0 +1,734 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" >
+<meta http-equiv="content-language" content="de">
+<meta name="robots" content="no-index, follow" />
+<link rel="icon" href="favicon.ico" type="image/png">
+
+<title>Changelog</title>
+</head>
+<body>
+<div style="float:right;"><b><a href="Nutzerbestimmungen.html">Nutzerbedingungen</a></b></div>
+<h2><a href="index.php" name="Anfang">Changelog</a></h2>
+<h3>Weiter zum <a href="Entwicklerblog.php">Entwicklerblog</a></h3>
+<ul>
+<b><a href="changelog.html#Anfang">Inhaltsverzeichnis</a></b>
+<!--
+<li><a href="changelog.html#version0.8">0.8 'Early Bird (Admin)'</a>
+<li><a href="changelog.html#version0.7">0.7 'Early Hatch (CMS)'</a>
+-->
+<li><a href="changelog.html#version0.7">0.7 'Early Hatch'</a>
+<li><a href="changelog.html#version0.6">0.6 'Uuser' & 'Burn(V)'</a>
+<li><a href="changelog.html#version0.5">0.5 'Spherix</a>
+<li><a href="changelog.html#version0.4">0.4 'Papa'</a>
+<li><a href="changelog.html#version0.3">0.3 '3rd Step'</a>
+<li><a href="changelog.html#version0.2">0.2 '2nd Step'</a>
+<li><a href="changelog.html#version0.1">0.1 '1st Step'</a>
+<li><h4><a href="changelog.html#Legende">Legende</a></h4>
+</ul>
+
+<div>
+
+
+Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> Mai 2015
+<br>
+<br>
+<b><a name="version0.8">Version 0.8</a></b>
+<br>Beginn of Development: -not planed-
+<br>
+<br>
+<b><a name="version0.7">Version 0.7 'Early Hatch'</a></b>
+<br>Beginn of Development: 8.2.2017
+<br>Alpha-Release: April-Juni 2017
+<br>Beta-Release: Q3 2017
+<br>Release: Q4 2017
+<br>
+<ul>
+<li><b>Page-System</b>
+	<ul>
+		<li>Page with Name, Title and Content
+		<li>Page Title recognitionn (beta)
+		<li>Pages are editable via Adminstration
+	</ul>
+	<li><b>Administration</b>
+	<ul>
+		<li>Page-Manager (CED)
+		<li>Area-Creator (CD)
+		<li>Entries-Creator (CD)
+		<li>Settings-Manager
+		<li>Different Setting-Templates depending on the Entry
+		<li>Menu-Item-Order via Settings
+	</ul>
+	<li><b>Settings</b>
+	<ul>
+		<li>Settings implemented in FireWeb Moduls and Functions
+		<li>Default Meta
+		<li>Default Style
+		<li>Selected Core
+		<li>Selected Modul
+		<li>Menu Order
+		<li>Current Version
+	</ul>
+	<li><b>User</b>
+	<ul>
+		<li>Reworked Logout
+		<li>Automatic Style-List in Profil
+		<li>FW_User_Login updated to 0.7a
+		<li>FW_User supports now "no-algo" as option for default passwords
+		<li>Fixed redirecting and other Bugs about the Login-Token
+		<li>Various security Improvements
+		<li>Security Profil Submit (wip)
+	</ul>
+	
+	<li><b>Design</b>
+	<ul>
+		<li>New Container Center
+		<li>Material Design
+		<li>Responsive Design improved
+		<li>Viewport Minimum Scale definend
+	</ul>
+	<li><b>API Changes/Technical</b>
+	<ul>
+		<li>Library "php.inc" separate
+		<ul>
+			<li>lb_administration.php
+			<li>lb_area
+			<li>lb_calendar
+			<li>lb_comments
+			<li>lb_entries
+			<li>lb_entry
+			<li>lb_page
+			<li>Mobile-Browser-Detection Libs unified (wip)
+			<li>lb1 deprecated
+		</ul>
+		<li>Modul extends the default/'core' modul
+		<li>Prefix Support
+		<li>Function return instead of echo
+		<li>Added errno function to db_mysqli
+		<li>"INSERT INTO table_name (column1, column2, column3, ...)VALUES (value1, value2, value3, ...)" embraced
+		<li>New pre-installed Fonts
+		<li>Better Font integration
+		<li>Header splited (show_title->show_header)
+		<li>Comments universall
+		<li>Bug_report now part of comments
+		<li>Bug_report not core part but addon(wip/experimental)
+		<li>Moduls can edit/create Cookies
+		<li>Tests on PHP 7.1
+		<li>Style Set reworked (wip/experimental)
+		<li>entry/_edit/_edit_send/_remove/_remove_send all in one(wip/experimental)
+		<li>Modul XML
+		<li>Title & Name for Area
+		<li>Login class (wip)
+	</ul>
+	<li><b>Other features</b>
+	<ul>
+		<li>New overworked Image-Slider
+		<li><b>SEO</b>
+		<ul>
+			<li>Html Language Tag
+			<li>@meta addon (experimental)
+		</ul>
+		<li>Install Wizard port from Moco
+		<li>Statistics updated (wip)
+	</ul>
+	<li><b>Bug fixes</b>
+	<ul>
+		<li>Fixed First Loading Issue
+		<li>Fixed Mobile Area View
+		<li>Fixed Title for Praxis Modul
+		<li>Status Massage now gets Status Value from Settings
+		<li>!Meta Addon uses 3 Queries, not 1
+	</ul>
+</ul>
+<br>
+<br>
+<b>Version 0.6 'Burn'</b>
+<br>Entwicklungsstart: 17.09.2014
+<br>Alpha-Release: 09.10.2014
+<br>Beta-Release: 17.11.2014
+<br>Pre-Release: 30.12.2014
+<br>Release: 30.01.2015
+<br>Supportende: Februar 2017
+<br>
+<br>
+<b>0.6.9 V  RC</b>
+<br>19. Januar 2017
+<br>
+<ul>
+<li>Entry überholt
+<li>Area überholen
+<li>news.php -> entries.php?p=news
+<li>about_us.php -> area.php?p=about_us
+<li>Funktionsbennenungsregeln
+<li>php.inc.php aufgeräumt
+<li>php.inc.php Funktionen umbennant -> englisch
+<li>profil_geaendert.php -> submited.php
+<li>date table -> englisch
+<li>Entries und Area werden jetut generell geöffnet (News.php -> entries.php?p=news )
+<li>Post in submited werden jetzt nur noch einzeln verarbeitet
+<li>Pre API 8
+<ul>
+<li>Calender update to pre API 8
+<li>Modul update to pre API 8
+<li>Core uptadted to pre API 8
+<li>FW_Login to pre API 8
+</ul>
+<li>Versionsvergleich
+<li>Core Style überarbeitet
+<li>neuer Default Style
+<ul>
+<li>Mindest Größe 1000px
+<li>Menu_modul funktion
+<li>Dynamische Menu Link
+<li>modul/include.php -> modul/name/include
+<li>Fix bei Profilscalierung
+<li>Fix bei Editorscalierung
+</ul>
+<li>Statistik gesammelte Version jetzt Core Version + Status, statt Page Version
+<li>FW_PAGE_VERSION durch FW_CORE_VERSION erstätzt
+</ul>
+<br>
+<br>
+<b>0.6.9 IV RC</b>
+<br>31. October 2016
+<br>
+<ul>
+<li>RewriteMod on
+<li>FW_CLIENT_ROOT
+<br>FireWebLink tempöräre entfernt
+<li>AMP entfernt
+<li>Minor fix
+</ul>
+<br>
+<br>
+<b>0.6.9 III alpha</b>
+<br>Nicht veröffentlicht
+<br>
+<ul>
+<li>Undokumentiert
+<li>Accelerated Mobile Pages Test
+</ul>
+<br>
+<br><b>0.6.9 II</b>
+<br>30. September 2016
+<br>
+<ul>
+<li>Statistik überarbeitet
+<br>Mein Profilbild
+<li>Minor fix
+</ul>
+<br>
+<br>
+<b>0.6.9 II</b>
+<br>31. Juli 2016
+<br>
+<ul>
+<!--<li>Vorbereitung um Core-Modul global zu definieren-->
+<!--<li>Wordpress Brace Style-->
+<li>Spamschutz Sicherheitslücke behoben
+<li>PHP Prepared Statements (experimental)
+<!--<li>PDO support(experimental)-->
+<li>Passwort ändern nun bcyrpt
+<li>Anti-XSS Scripte (experimental)
+</ul>
+<b>0.6.9 I</b>
+<br>31. Mai 2016
+<br>
+<ul>
+<li>Abfrage ob Nutzer exestiert verhindert
+<li>Neue Passwörter werden deutlich sicherer gespeichert
+<li>Anti-Brute-Force Massnahmen
+<li>Favicon-Standart vereinfacht
+<li>Passwort ändern fix
+</ul>
+<b>0.6.9</b>
+<br>29. April 2016
+<br>
+<ul>
+<li>Struktur & Sicherheit
+<ul>
+<li>Strukturüberarbeitung
+<li>Core-System
+<li>Neues Verbindungs-System
+<li>Functions-API-System
+<li>Library-System
+<li>Modul-System
+<li>Basic-Style
+<li>Manueller Addon Support
+<li>Global Definitionen
+<li>Startscript entfernt
+<li>Globale Seitenstruktur
+<li>Codesprache für neuen Code Englisch
+</ul>
+
+<li>Neue Features
+<ul>
+<li>Inline bearbeiten (Experimental)
+<li>Anpassung für Mobile Geräte
+<li>Profilactionsvorgang überarbeitet
+<li>Responsive Design(Experimental)
+<li>Addons
+<ul>
+<li>Hot news (Experimental-Alpha)
+<li>Bilder hochladen (Experimental)
+<li>Avatare nutzen (Experimental)
+<li>Offline Version (Experimental)
+<li>Lesemodus (Experimental)
+</ul>
+</ul>
+<li>Anderes
+<ul>
+<li>Basic-Chaching
+<li>Gz
+<li>Neue Icons
+<li>Header-Element überarbeitet
+<li>Fixed Menu verbessert
+<li>Editors überarbeitet
+<li>Statistiken überarbeitet
+</ul>
+</ul>
+<b>0.6.8</b>
+<br>29. November 2015
+<br>
+<ul>
+<li>Profil
+<ul>
+<li>Profilversion nicht mehr unabhänging von Version
+<li>Wechsel von MyBB Accounts zu eigenen Accounts
+<li>Eigene Benutzeraccounts überarbeitet
+<li>Neues überarbeitetes 'Mein Profil'
+<li>Loginkey System überarbeitet
+</ul>
+<li>Statistiken
+<ul>
+<li>Website Statistiken
+<li>Statistik Archive Datenbank
+</ul>
+<li>Mobile Browsing
+<ul>
+<li>W3C behindert jetzt nicht mehr Mobile Browsing
+<li>Kalender unter Mobile aufrufbar
+<li>Mobile Style aktiviert nun auch Mobileansicht
+</ul>
+<li>Sonstiges
+<ul>
+<li>Toggle jetzt für mehrere Objekte mit selben Namens Tag
+<li>Position von Wartungsarbeiten überarbeitet
+<li>Cookie Active überarbeitet
+<li>Style set überarbeitet
+<li>TinyMCE durch CKEditor ersetzt
+<li>Meta teilweiße global
+<li>Serverschlaf entfernt
+</ul>
+</ul>
+<b>0.6.7</b>
+<br>27. September 2015
+<br>
+<ul>
+<li>Sicherheit
+<ul>
+<li>Maßnahmen gegen unerlaubten Zugriff auf Admin-/Moderatorbereiche
+</ul>
+<li>Bug fix im Bereich include in andern Serverordnern
+<ul>
+<li>Entwicklerblog
+<li>Include der Main-PHP Datei
+<li>Include der Javascript Datei
+<li>Kalender
+<li>W3C Validator URI
+</ul>
+</ul>
+<b>0.6.6</b>
+<br>30. Juli 2015
+<br>
+<ul>
+<li>Loginverfahren überarbeitet
+<li>Darstellung auf Smartphones stark verbessert
+</ul>
+<b>0.6.5</b>
+<br>01. Juli 2015
+<ul>
+<li>Sicherheit
+<ul>
+<li>Maßnahmen gegen SQL-Injections
+</ul>
+<li>Leistungsverbesserung
+<li>Struktur
+<ul>
+<li>Datenbankbereich-Verwaltungsbereich
+</ul>
+<li>Bug fixes
+</ul>
+<b>0.6.4</b>
+<br>01. Mai 2015
+<ul>
+<li>Features
+<ul>
+<li>Kalender exportieren by 'kayalshri'
+</ul>
+<li>Struktur
+<ul>
+<li>Datenbankbereiche
+<li>Datenbankbereiche änderbar
+</ul>
+</ul>
+<b>0.6.3</b>
+<br>19. April 2015
+<ul>
+<li><del>Shoutbox</del>
+<li>Token für Angemeldet bleiben
+<li>Kalenderverbesserung
+<ul>
+<li>Kalenderdesign überarbeitet
+<li>Name des Events als Tooltip
+<li>Im Vollbildmodus Liste der Events
+<li>Events bearbeitbar
+</ul>
+<li>Content wenn Textüberschuss scrollbar
+<li>Schriftartenersatz
+<li>Favicon 
+
+</ul>
+<b>0.6.2</b>
+<br>31. März 2015
+<ul>
+<li>Sicherheit
+<ul>
+<li>MySQL durch MySQLi ersetzen
+<li>Sichere Datenbankinformationensweitergabe bei neuen Einträgen in der DB
+<li>Sichere Datenbankinformationensweitergabe an anderen Stellen
+</ul>
+<li>Beitrag geändert überarbeitet
+<li>Entwicklerblog schreiben
+<li>Nutzung des Datenbank Prefix erweitert
+<li>Mitglieder nach Rängen sortiert
+<li>Kalender
+<ul>
+<li>Anzeige wenn Event heute
+<li>Keine 2 Events an einem Tag
+<li>Keine Weiterleitung wenn kein Event
+</ul>
+</ul>
+<b>0.6.1</b>
+<br>27. Februar 2015
+<ul>
+<li>Datenbankbeinträge direkt änderbar
+<li>Datenbankbeinträge direkt löschbar
+<li>Bugreport und Kommentar getrennt
+<li>Mobil blendet Kalender aus
+<li>Schnellere Verbindung zur Datenbank
+<li>Hintergrundbild fixiert
+<li>Versionsnummer Global
+</ul>
+<br><b><a name="version0.6">0.6 'BurnV'</a></b>
+<br>30. Januar 2015
+<ul>
+<li><b>Neue Funktionen</b>
+<ul>
+<li>Globale Einstellungen und Funktionen getrennt
+<li>Sliderbildbreite und -höhe automatisch
+<li>Titel individuell
+<li>Content Schatten
+<li>Style individuell
+<li>Wartungsarbeiten-Modus (Experimental)
+<li>Bugreport-Funktion (Experimental)
+<li>Neuer Datenbank Prefix
+</ul>
+<li><b>Verbesserung</b>
+<ul>
+<li>Max.-Breite festgelegt
+<li>Slider überarbeitet
+<li>Warnung wenn Cookies deaktiviert überarbeitet
+</ul>
+<li><b>Anderes</b>
+<ul>
+<li>Anpassungen für die komplette Inbetriebnahme
+<li>Bei altem Contentsystem automatische Meldung
+<li>Bug mit "Nächstes Kalender-Event" behoben
+</ul>
+</ul>
+<br><b>0.6PR 'Burn'</b>
+<br>30. Dezember 2014
+<ul>
+<li><b>Neue Funktionen</b>
+<ul>
+<li>"Eag"-Schnittstelle(Experimental)
+<li>&#10007; Beitreten-Funktion
+<li>&#10007; Bugreport-Funktion
+<li>Mobile-Browser-Erkennung
+<li>Mobile-Style
+<li>Sytleauswahl arbeitet jetzt teilweiße mit Cookies
+<li>Neuer Hilfe- und Verbesserungsservice
+<li>Entwicklerblog
+<li>MyBB-Users-Plug-in (Login via MyBB-Daten)
+</ul>
+<li><b>Verbesserung</b>
+<ul>
+<li>Verbesserung an 'Mein Profil'
+<ul>
+<li>Anzeigen/Verstecken überarbeitet
+<li>Admins sehen neuste Kommentare
+<li>Anzeigeprobleme im Profil auf kleineren Bildschirmen erkannt und wird behoben
+</ul>
+<li>Passwörter werden jetzt deutlich sicherer gespeichert
+<li>Kalender leitet auf eingetragene Links weiter
+<li>Anzeigeprobleme mit Menü auf kleineren Bildschirmen behoben
+</ul>
+
+<li><b>Anderes</b>
+<ul>
+<li>Warnung wenn Cookies deaktiviert sind
+<li>Kommentare können nun als nicht Öffentlich geteilt werden, nur an Admins
+<li>Tooltips überarbeitet
+<li>Schnellere Datenbank abfragen
+</ul>
+0.6b einwandfrei in 0.6PR nutzbar
+</ul>
+<br><b>0.6beta 'Burn'</b>
+<br>17. November 2014
+<ul>
+<li><b>Neue Funktionen</b>
+<ul>
+<li>Java-Php Kalender Hybrid, Benutzer können jetzt dort Events erstellen
+<li>Mitglieder-Anzeigen-Funktion
+<li>Nächstes-Event Anzeige
+</ul>
+<li><b>Anderes</b>
+<ul>
+<li>Main Content kann jetzt leichter angepasst werden
+<li>Erster Buchstabe im Titel groß
+<li>Slideshow hat jetzt keinen Rand mehr oben und unten
+<li>Menü ist jetzt Serverseitig
+<li>Auto-Serverswitch, kein Umschreiben von Offline und Online Server mehr
+<li>Performance des Auto-Serverswitch verbessert
+<li>Hintergrundgröße und -positon, zu Gunsten von Mobile Geräten, angepasst
+<li>Neues Main Contentsystem mit altem Kompatibel gemacht
+</ul>
+<li><b>Bug fix</b>
+<ul>
+<li>Fix des Session Startes
+<li>Fix bei Problemen mit der Anzeige des Kalenders
+<li>Fix bei dem Hinzufügen von Events
+<li>Weitere Bug fix
+</ul>
+0.6a und älter teilweiße übertragbar zu 0.6b
+</ul>
+
+<br><b>0.6alpha 'Uuser'</b>
+<br>09. Oktober 2014
+<ul>
+<li><b>Layout-Änderungen</b>
+<ul>
+<li>Inhalt der Container Left und Right in mehrere Contents aufgeteilt
+<li>neue Bilderslideshow by 'macattck'
+<li>Weiter Styles
+<li>Tooltipps
+</ul>
+
+<li><b>Mein Profil-Bereich</b>
+<ul>
+<li>User muss Nutzerbedinungen akzeptieren
+<li>Ändern von Passwort und E-Mail möglich
+<li>Moderatoren können Events erstellen
+<li>Admins können News schreiben mit TinyMCE#
+<li>Style auswählbar
+</ul>
+
+
+<li><b>PHP/MySQL Änderungen</b>
+<ul>
+<li>Benutzer-Bereiche "Mein Profil"
+<li>Admin-Bereich entfernt und in "Mein Profil" eingebunden
+<li>Admin- und Moderatorwert
+<li>Benutzer einloggen und registrieren Script
+<li>Login-System mit Sessions
+<li>Event erstellen als Moderator
+<li>Kommentare benutzen automatisch E-Mail des Accounts
+<li>Umlaute bei Kommentaren möglich
+<li>Datenbankverbindung leichter veränderbar
+<li>Datenbanktabelle für Benutzer (Benutzer+Passwort(One-Way-Protection))
+<li>Änderung bei Funktionen mit "Wenn/Wenn nicht"
+<li>Server-Sessions werden nun erstellt und genutzt
+<li>Nur einfache MySQL Fehler werden angezeigt
+<li>Connection Überprüfungsscript eingefügt
+</ul>
+<li><b>Anderes</b>
+<ul>
+<li>Bei Datum Event, z.B. Weihnachten(Experimental)
+<li>iframe Event-Kalender via PHP oder JavaScript Kalender
+<li>Kalender Vollbild-Funktion
+<li>Multi-Styling
+<li>Ordner für Globalesettings
+<li>W3C Link ist jetzt immer für die aktuelle Seite
+<li>Forum-Software einbindbar
+<li>Notiz im Code wie lange die Seite zum Aufbau braucht
+<li>Kleinere Bug fix
+</ul>
+0.5 voll übertragbar zu 0.6a 
+</ul>
+
+<br><b><a name="version0.5">Version 0.5 'Spherix'</a></b>
+<br>Entwicklungsstart: 26.08.2014
+<br>Pre-Release: 29.08.2014
+<br>Release: 1.09.2014
+<br>Supportende: 09.10.2014
+<br>
+<br>0.5+
+<ul>
+<li>Content leicht durchsichtig(95%Sichtbar)
+<li>Automatische Verlinkung von PHP
+<li>"Stand" wird global aktualisiert 
+<li>Tabelen Format nun vollkommen entfernt
+<li>W3C anpassungen
+<li>UTF-8 ist jetzt Charset und kodierung
+<li>Automatischer Seiten Titel(FireWeb/beispiel)
+<li>Admin-Bereich(noch ohne Funktion)
+<li>Kontakt neu platziert
+<li>Anzeige der Kontaktier-Funktion überarbeitet
+<li>Kontakt Feld jetzt dort wo "Hosted by" war
+<li>Nolink erstellt
+<li>bug fix
+</ul>
+<br>0.5
+<ul>
+<li>Wird nun auch als HTML5 erkannt
+<li>Entspricht nun den W3C Standards
+<li>komplett neues aktuelleres Design
+<li>neue Navigationsleiste
+<li>neue Bilder Slideshow
+<li>Content hat ein Hintergrundbild
+<li>Contentfelder sind in stylischeren Boxen
+<li>Infos zum aktuellen Stand der Website in eigener Box
+<li>Kein Datum und Zeit mehr
+<li>Kein Vor und Zurück
+<li>Credits mit Hosted und Created Angabe
+<li>Kontaktieren und Beitreten im Contentfenster rechts und links
+<li>Menüleiste bewegt sich mit
+<li>Kommentarfunktion überarbeitet
+<ul>
+<li>Anzeige von Kommentaren geändert
+<li>neues E-Mailfeld
+</ul>
+<li>Seitenenspezifische Funktionen sind nun extern
+<li>Navigationsleistenbreite jetzt 100%
+<li>(!)Alle Seiten sind jetzt ANSI und die neuen Seiten sind Charset=windows-1252 statt ISO-8859-1
+<li>bug fix
+<li>vieles mehr
+<br>ältere nicht kompatibel
+</ul>
+<br><b><a name="version0.4">Version 0.4 RC 'Papa'</a></b>
+<br>[Info: erste FireWeb Version]
+<br>Vor 14.3.2014
+<ul>
+<li>Erstmals PHP
+<li>Neues Leistendesign
+<li>Buttons unten anstatt Links(beta)
+<li>Zeit und Datum sind jetzt PHP nicht mehr JavaS(schneller)
+<li>JavaS extern nicht inline
+<li>Texte sind nun Serverseitig(PHP)
+<li>Sicherheitslücke beim Einloggen gefixt
+<li>Menüleiste überarbeitet
+<li>Fix bei der Linkfarbe
+</ul>
+
+<h4>&darr; [FireTeam69.net16.net] &darr;</h4>
+<br>
+<b><a name="version0.3">Version 0.3 '3rd Step'</a></b>
+<br>[Info: letzte eigene FT69 Version vor Joomla-Nutzung]
+<ul>
+<li>Uhrzeitanzeige statt "back to Google"
+<li>Schönerer Tabellenrand
+<li>Textschatten
+<li>Zurück-Botton(Beta)
+<li>Vor-Botton(Beta)
+<li>Die Alpha2 der Funktion uns zu "joinen"
+<li>Die Alpha2 der Funktion uns News oder Blogs zu zuschicken
+</ul>
+Version 0.3beta
+<ul>
+<li>Überarbeiteter Tabname
+<li>Ein Zurück Button (Aplha)
+<li>Google per Klick auf OK
+<li>Uhrzeitanzeige statt "back to Google"
+</ul>
+Version 0.3alpha
+<ul>
+<li>Kleinere Autorangabe
+<li>Bessere Tab Namen
+<li>Link zu "join use" (oben rechts)
+<li>Link zu "send use"
+</ul>
+<b><a name="version0.2">Version 0.2 '2nd Step'</a></b>
+<ul>
+<li>Überarbeitetes Design
+<li>Links zu unseren Platoons
+<li>Neues Hintergrundbild
+<li>Bearbeitete Style Sheets (.CSS)
+<li>Neue Textfarbe(Weiß)
+<li>Links sind nicht unterstrichen und farbig
+<li>Unten rechts Datum
+<li>Neue Schriftart (Helvetica)
+<li>Umlaute werden richtig angezeigt
+<li>Besser Position von "back to Google" und Datumsanzeige
+</ul>
+Version 0.2beta3
+<ul>
+<li>Favicon
+<li>Angepasste Bildergrösse
+</ul>
+Version 0.2beta2
+<ul>
+<li>Angepasste Bildergrösse
+</ul>
+
+Version 0.2beta1
+<ul>
+<li>Angepasste Bildergrösse
+<li>Bessere Größenanpassung
+</ul>
+Version 0.2beta
+<ul>
+<li>Links und rechts Bilder mit Links
+<li>Verbessertes Design 
+<li>Anpassung der Website auf die Grösse des Bildschirmes
+<li>Hindergrundbild 
+<li>Style Sheets (.CSS)
+</ul>
+<br>Version 0.2alpha
+<br>vor ca. 26.11.2013
+<ul>
+<li>Neues Design
+<li>Angabe des Autors
+<li>Klick zeigt Bild in Vollbild (nicht 100%)
+</ul>
+<br>
+<b><a name="version0.1">Version 0.1 '1st Step'</a></b>
+<ul>
+<li>Erste Version
+</ul>
+<br>
+<br><h3><a name="Legende">Legende</a></h3>
+<b>Versions-Bezeichnung</b>
+<br>Alpha(0.1a): Erste Veröffentlichung einer neuen Version. Meistens nicht online, da meistens nicht getestet. Erste Vorschau auf neue Funktionen.
+<br>Beta(0.1b): Ein vorgeschrittener Version als die Alpha, oft schon online auf manchen Seiten, Funktionen werden getestet.
+<br>PR(pre-release)(0.1PR): Ein Vorabversion des Releases, zur Release Version nur minimale Änderung. Umfangreiche Testphase um Bugs beheben.
+<br>Release(0.1): Die fertige Version, auf allen Seiten online.
+<br>Support(0.1+): Dies ist die Supportversion, das heißt Bugs werden entfernt und kleinere neue Funktionen hinzugefügt. 
+<br>
+<br><b>Versions-Status</b>
+<br>Work in Progress(0.1(wip)): Diese Version ist grade in Arbeit.
+<br>Testphase(0.1(test)): Diese Version ist grade in der Testphase. 
+<br>
+<br><b>Funktions-Status</b>
+<br>Geplant(&#10007;): Ein Feature was kommt, aber noch nicht begonnen wurde.
+<br>Begonnen(&#9998;): Ein Feature was kommt, noch in Arbeit ist.
+<br>Bug(!): Kennzeichnung eines Bugs.
+<br>
+<br>
+<br><b>Kompatibilität</b>
+<br>0.4RC-!>0.5-->0.6a-*>0.6b-->0.6PR-*>0.6-->0.6.1-*>0.6.3-->0.6.8-*>0.6.9
+<br>! = Nicht Kompatibel; * = Teilweiße Kompatibel; - = Kompatibel; 
+<br>
+<h3><a href="changelog.html#Anfang">Seiten Anfang</a></h3>
+</div>

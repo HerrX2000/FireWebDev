@@ -1,0 +1,23 @@
+<style>
+
+	<name>
+		FWMobile
+	</name>
+	
+	<api>
+		7
+	</api>
+	
+	<version>
+		0.6.9b4
+	</version>
+	
+	<platform>
+		Mobile
+	</platform>
+	
+	<fwversion>
+		0.6.9V
+	</fwversion>
+	
+</style>

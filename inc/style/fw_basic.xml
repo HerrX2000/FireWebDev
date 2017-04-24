@@ -1,0 +1,23 @@
+<style>
+
+	<name>
+		FW_Basic
+	</name>
+	
+	<api>
+		8
+	</api>
+	
+	<version>
+		0.7a
+	</version>
+	
+	<platform>
+		Desktop
+	</platform>
+	
+	<fwversion>
+		0.7a
+	</fwversion>
+	
+</style>

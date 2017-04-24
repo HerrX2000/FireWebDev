@@ -1,0 +1,60 @@
+
+/*Kalenderblock*/
+a.kalender_block{
+	margin-left:-3px;
+	margin-right:-3px;
+	text-align:center;
+	text-decoration:none;
+	text-shadow:none;
+	color: black;
+	width:100%;
+	display:inline-block;
+}
+
+
+/*Tage*/
+.calendar_link {
+	line-height:160%;
+	font-size: 14px;
+	text-align: center;
+	color: #000000;
+	text-decoration: none;
+}
+/*Tage wenn Evenet*/
+.calendar_link_event{
+	font-weight:bold;
+	font-size: 14px;
+	text-align: center;
+	color:  #DF0101;
+	text-decoration: none;
+}
+/*Monatkasten*/
+.calendar_head {
+
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	color: #FFFFFF;
+	background-color: rgba(50, 28, 4, 0.8);
+}
+/*Monat*/
+.calendar_head_month {
+
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	background-color: rgba(50, 28, 4, 0.8);
+	color: #FFFFFF;
+}
+
+
+/*Wochentage*/
+.calendar_day {
+width:14.1%;
+	font-size: 90%;
+	line-height:130%;
+	font-weight: bold;
+	text-align: center;
+	color: #FFFFFF;
+	background-color: #707070 ;
+}

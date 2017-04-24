@@ -1,0 +1,22 @@
+<modul>
+
+	<name>
+		Default
+	</name>
+	
+	<api>
+		7
+	</api>
+	
+	<version>
+		0.7a
+	</version>
+	
+	<platform>
+		Desktop
+	</platform>
+	
+	<fwversion>
+		0.7a
+	</fwversion>
+</modul>

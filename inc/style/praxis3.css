@@ -1,0 +1,374 @@
+	/*
+	Style 
+	Name: FireWeb Style Advanced
+	Version: alpha
+	FW-Version: 0.6.9V
+	API: 7
+	*/
+	
+	html {
+		min-width:1000px;
+		height:100%;
+		margin:0 !important;
+		padding:0 !important;
+		
+		/*Bug with sub ordner*/
+		
+	}
+	/*Allegemeines*/
+	body {
+		height:100%;
+		width:100%;
+		min-width:360px;
+		background-color:#FFFFFF;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		font-family:Helvetica;
+		color:#1C1C1C;
+		margin:0;
+		margin:0 !important;
+		padding:0 !important;
+		background-size: cover;
+		background-image:url("background_wave.jpg");
+	}
+	
+	a{
+	text-decoration:none;
+	}
+	/*Element*/
+	
+	.header 
+		{
+		padding-top:16px;
+		height:78px;
+		}
+	
+	
+	.top {
+		text-align:center;
+		margin-bottom:0px;
+		}
+	
+	.menu{
+		height:78px;
+		width:100%;
+		background:rgba(8,8,138, 0.2);
+		}
+	
+	#menu_fixed {
+		height:78px;
+		text-align:center;
+		background:rgba(8,8,138,  0.2);
+		width: 100%;
+		position:fixed;
+		display:none;
+		overflow:hidden;
+		z-index: 100;
+		}
+		
+	figure.figure{
+	  height:auto;
+	  max-height:420px;
+	  margin-top: 0px;
+	  margin-bottom: 0px;
+	  position: absolute;
+	  opacity: 0;
+	  transition: 1s opacity;
+	}
+	img.slider{
+	width:80%;
+	max-width: 100%;
+	height: auto;
+	}
+	figcaption.show{
+	  
+	  position: absolute;
+	  font-family: sans-serif;
+	  font-size: .8em;
+	  bottom: 0px;
+	  right: .35em;
+	  padding: .25em;
+	  color: #fff;
+	  background: rgba(0,0,0, .25);
+	  border-radius: 2px;
+	}
+	figure.show{
+	  opacity: 1;
+	  position: static;
+	  transition: 1s opacity;
+	}
+	.next, .prev{
+	  color: #fff;
+	  position: absolute;
+	  background: rgba(0,0,0, .6);
+	  top: 40%;
+	  z-index: 1;
+	  font-size: 3em;
+	  opacity: .5;
+	  border-radius: 2px;
+	}
+	.next:hover, .prev:hover{
+	  cursor: pointer;
+	  opacity: 1;
+	}
+	.next{
+	  right: 3px;
+	  padding: 16px 14px 18px 14px;
+	}
+	.prev{
+	  left: 3px;
+	  padding: 16px 14px 18px 14px;
+	}
+	
+	
+		
+	.content_top {
+		background-color:#FFFFFFF;
+		background-color: rgba(255, 255, 255, 0.2);
+		}
+	/*old 0.6.8*/
+	.top_content {
+		background-color:#FFFFFFF;
+		background-color: rgba(255, 255, 255, 0.2);
+		}
+	
+	.middle {
+		min-height:90%;
+		background-color: rgba(230,230,230, 0.6);
+		}
+				
+	.background{
+	/*only for fixed background*/
+	/*background-color: #E6E6E6;
+	position:fixed;
+	top: 94px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	z-index: -1;*/
+	}
+		
+	.container
+		{
+		min-height:500px;	
+		max-width:1480px;
+		padding-top: 8px;
+		margin:0 auto;
+		width:auto;
+		padding-bottom:30px;		
+		}
+	.container_left{
+		float: left;
+		}
+	.content_left
+		{
+		width:170px;
+		background-color:#FAFAFA;
+		margin-top:18%;
+		margin-left:30px;
+		margin-bottom:10px;
+		padding-top:1px;
+		padding-left:3px;
+		padding-right:3px;
+		padding-bottom:4px;
+		}
+	.container_right{
+		float: right;
+		}	
+	.content_right
+		{
+		width:170px;
+		background-color:#FAFAFA;
+		margin-top:18%;
+		margin-right:30px;
+		margin-bottom:10px;
+		padding-top:1px;
+		padding-left:3px;
+		padding-right:3px;
+		padding-bottom:4px;
+		}	
+		 
+	.content
+	{
+		background-color:#FAFAFA;
+		margin-top:12px;
+		margin-left:240px;
+		margin-right:240px;
+		margin-bottom:42px;
+		padding-top:12px;
+		padding-left:28px;
+		padding-right:28px;
+		padding-bottom:12px;
+		overflow:auto;
+	}
+
+		
+	.footer {
+		color:#D8D8D8;
+		padding-bottom: 20px;
+		background:#000000;
+		padding-top:8px;
+		padding-right:8px;
+		padding-bottom:8px;
+	}
+	
+	.credits {
+		text-align:center;
+		padding-left:15%;
+		padding-right:15%;
+		background:#A4A4A4;
+		opacity: 0.8;
+	}	
+		
+		
+/*Eigene Classen*/		
+
+		a.link_accent:link {
+			color:#A4A4A4;
+		}
+		a.link_accent:visited {
+			color:#A4A4A4;
+		}
+		a.link_accent:active {
+			color:#A4A4A4;
+		}
+		a.link_accent:hover {
+			color:#585858;
+		}
+		a.link_accent:focus{
+			color:#585858;
+		}	
+	
+	
+		a.link:link {
+			color:#444444;
+		}
+		a.link:visited {
+			color:#444444;
+		}
+		a.link:active {
+			color:#000000;
+		}
+		a.link:hover {
+			color:#000000;
+		}
+		a.link:focus{
+			color:#000000;
+		}
+		
+		a.button{
+		text-align:center;
+		background-color:#FDFDFD;
+		display:inline-block;
+		color:#000000;
+		line-height:200%;
+		width:100%;
+		text-decoration:none;
+		text-shadow:none;
+		}
+		a.button:hover {
+			background-color:#424242;
+			}
+		a.button:focus{
+			background-color:#424242;
+		}	
+			
+		a.button_theme {
+			margin-left:0px;
+			margin-right:0px;
+			background-color:rgba(8,8,138, 0.9);
+			text-align:center;
+			display:inline-block;
+			color:#FFFFFF;
+			line-height:400%;
+			text-decoration:none;
+			text-shadow:none;
+			}
+
+		a.button_theme:hover {
+			background-color:#585858;
+			color:#FFFFFF;
+			}
+		a.button_theme:focus{
+			background-color:#585858;
+			color:#FFFFFF;
+		}
+		
+		/*Alte Linkfarbe und Block
+		linkfarbe1=link_accent
+		linkfarbe2=link
+		block1=button_theme
+		block2=button
+		*/
+		
+		#tooltip 
+		{
+		}
+		#tooltip a span { 
+		display: none;	
+		}
+		#tooltip a:hover span { 
+		position: absolute;
+		display:inline-block;
+		background-color:#BDBDBD;
+		border-color:#BEBEBE;
+		margin-top:32px;
+		margin-left:-30px;
+		border-style: solid;
+		border-width: 3px;
+		border-radius: 3px;
+		color:#000000;
+		}	
+		
+		#tooltip_2 
+		{
+		width:100%;
+		}
+		#tooltip_2  a span { 
+		display: none;	
+		}
+		#tooltip_2  a:hover span { 
+		width:102%;
+		/*display:block;*/
+		position: absolute;
+		margin-left:-3px;
+		margin-right:-3px;
+		background-color:#1F1F1F;
+		text-align:center;
+		display:inline-block;
+		color:#DCDCDC;
+		top: 40px;
+		left: 0px;
+		}		
+		
+		.nodisplay{
+		display:none;
+			}
+		#safe{
+		display:none;
+			}
+			
+		/*Profil*/
+		
+		.profil_menu
+		{
+		height:340px;
+		overflow-y: scroll;
+		max-width:36%;
+		width:230px;
+		border-width:0px;
+		border-style:dotted;
+		border-color:grey;
+		float: right;
+		}
+		.profil_menu_entry
+		{
+		
+		width:220px;
+		height:40px;
+		text-align:center;
+		background-color:#FFFFFF;
+		}

@@ -1,0 +1,39 @@
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+	
+    padding: 3px;
+}
+th {
+background-color: #4CAF50;
+    color: white;
+	}
+tr:nth-child(even) {background-color: #f2f2f2}
+
+
+
+
+
+		a.button{
+		text-align:center;
+		background-color:#F4F4F4;
+		display:inline-block;
+		color:#000000;
+		line-height:200%;
+		padding-left:2px;
+		padding-right:2px;
+		text-decoration:none;
+		text-shadow:none;
+		}
+		a.button:hover {
+			background-color:#424242;
+			}
+		a.button:focus{
+			background-color:#424242;
+		}	
