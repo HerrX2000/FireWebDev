@@ -37,6 +37,7 @@ function show_area_menu_mobile($table='',$width='',$col='')
 			global $db_my; 
 			//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
 			//
+			$table_n = $table;
 			$table = $db_my->escape_string($table);
 			$table = "area_".$table;
 			$query="SELECT id,name,content from ". $db_my->prefix ."$table ORDER by ID ";
@@ -59,7 +60,7 @@ function show_area_menu_mobile($table='',$width='',$col='')
 			$counter=0;
 			foreach($rows as $row){
 			
-			echo "<a href='".$pfad."?p=".$table."&r=".$row['name']."' style='width:".$width.";height:40%;line-height:200%;font-size:1.0em;' class='button'>".$row['name']."</a>";
+			echo "<a href='".$pfad."?p=".$table_n."&r=".$row['name']."' style='width:".$width.";height:40%;line-height:200%;font-size:1.0em;' class='button'>".$row['name']."</a>";
 			$counter = $counter + 1;
 			if ($counter==$col){echo"<br>";$counter==0;}
 			}

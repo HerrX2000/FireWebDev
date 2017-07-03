@@ -320,7 +320,7 @@ Thanks to the Notepad++ Team!
 		}
 //Function Titel	use unknown
 	
-		function show_file_title(){
+		function show_head_title(){
 		global $settings;
 		if (function_exists('file_title'))
 		{
@@ -626,12 +626,39 @@ function cookie_check()
 		}
 	}
 		
-		
-function set_style()
-		{
-		global $settings;
-		$default_style = $settings['default_style'];//<-- analysis if mobile desktop or responsive
-		echo FW_CLIENT_ROOT."inc/style/$default_style.css";
+function style_sub(){
+	global $settings;
+	$style = $settings['default_style'];
+	if (strpos($style, '@') !== false){
+		$styles = explode("@", $style);
+		return $styles;
+	}
+	else{
+		return false;
+	}
+}
+function show_style(){
+	global $settings;
+	if (style_sub()==false){
+		$style = $settings['default_style'];//<-- analysis if mobile desktop or responsive
+	}
+	else{
+		$styles=style_sub();
+		$style=$styles[0];
+	}
+	echo FW_CLIENT_ROOT."inc/style/$style.css";
+}
+function show_style_sub(){
+	global $settings;
+	if (style_sub()==false){
+		return false;
+	}
+	else{
+		$styles=style_sub();
+		$style=$styles[1];
+	}
+	echo FW_CLIENT_ROOT."inc/style/sub/$style.css";
+}
 		/*
 		if (isset ($_COOKIE["style_set"])){
 		echo FW_CLIENT_ROOT."inc/style/".$_COOKIE["style_set"];
@@ -644,5 +671,4 @@ function set_style()
 			echo FW_CLIENT_ROOT."inc/style/$default_style";
 		}
 		*/
-		}
 ?>

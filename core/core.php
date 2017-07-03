@@ -45,10 +45,11 @@ require(FW_ROOT."/inc/include.php");
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <link rel="stylesheet" type="text/css" href="inc/functions/calendar/calendar.css">
 <link rel="stylesheet" type="text/css" href="inc/style/fw_basic.css">
-<link rel="stylesheet" type="text/css" href="<?php set_style();?>">
+<link rel="stylesheet" type="text/css" href="<?php show_style();?>">
+<link rel="stylesheet" type="text/css" href="<?php show_style_sub();?>">
 
 <title><?php
-		show_file_title();
+		show_head_title();
 		?>
 	</title>
 </head>
