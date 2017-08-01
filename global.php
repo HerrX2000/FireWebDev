@@ -39,11 +39,12 @@ $settings['version'] = "0.7";
 $settings['api'] = "7";
 $settings['core'] = "core";
 define("FW_VERSION", $settings['version']);
-define("FW_VERSION_STATUS", "alpha");
+define("FW_VERSION_STATUS", "beta");
 define("FW_API", $settings['api']);
 define('FW_ROOT', dirname(__FILE__));
 define('FW_SERVER_ROOT', dirname(__FILE__));
 define('FW_CLIENT_ROOT', base_url());
+
 require_once 'inc/config.php';
 require_once 'inc/db_base.php';
 require_once 'inc/db_mysqli.php';

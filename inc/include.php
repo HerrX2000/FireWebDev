@@ -11,7 +11,17 @@
 
  
 require_once(FW_ROOT."/inc/functions/php.inc.php");
-
+require_once(FW_ROOT."/inc/functions/fw_users.inc.php");
 include_once(FW_ROOT."/inc/functions/find_mobile_browser.php");
-require(FW_ROOT."/inc/functions/fw_users.inc.php");
+
+//Function Modul_include		
+function modul_include($modul=null){
+	if(!isset($modul)){
+		global $settings;
+		$modul=$settings['modul'];
+		}
+	if(!include_once FW_ROOT."/modul/$modul/include.php"){
+		include_once FW_ROOT."/modul/core/include.php";
+	}
+}
 ?>

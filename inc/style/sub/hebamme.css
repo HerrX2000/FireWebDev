@@ -1,0 +1,112 @@
+/*
+Sub-Style
+Name: Praxis Hebamme
+Version: alpha
+FW-Version: 0.7a
+API: 7
+*/
+body{
+	background-image: none;
+}
+.menu{
+	background:rgba(4,180,95, 0.7);
+	}
+
+#menu_fixed {
+	background:rgba(4,180,95, 1);
+	}
+
+.middle {
+	background-color: rgba(230,230,230, 0.6);
+	}
+.background{
+/*only for fixed background*/
+	/*background-color: #E6E6E6;*/
+	background-size: cover;
+	background-image:url("background_hebamme.jpg");
+	position:fixed;
+	/*top value 94px or 78px*/
+	top: 78px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	z-index: -1;
+}
+				
+	
+/*Eigene Classen*/		
+
+a.link_accent:link {
+	color:#A4A4A4;
+}
+a.link_accent:visited {
+	color:#A4A4A4;
+}
+a.link_accent:active {
+	color:#A4A4A4;
+}
+a.link_accent:hover {
+	color:#585858;
+}
+a.link_accent:focus{
+	color:#585858;
+}	
+
+
+a.link:link {
+	color:#444444;
+}
+a.link:visited {
+	color:#444444;
+}
+a.link:active {
+	color:#000000;
+}
+a.link:hover {
+	color:#000000;
+}
+a.link:focus{
+	color:#000000;
+}
+
+a.button{
+text-align:center;
+background-color:#FDFDFD;
+display:inline-block;
+color:#000000;
+line-height:200%;
+width:100%;
+text-decoration:none;
+text-shadow:none;
+}
+a.button:hover {
+	background-color:#424242;
+	}
+a.button:focus{
+	background-color:#424242;
+}	
+	
+a.button_theme {
+	margin-left:0px;
+	margin-right:0px;
+	background-color:rgba(4,180,95, 0.4);
+	text-align:center;
+	display:inline-block;
+	color:#FFFFFF;
+	line-height:400%;
+	text-decoration:none;
+	text-shadow:none;
+	}
+
+a.button_theme:hover {
+	background-color:#585858;
+	color:#FFFFFF;
+	}
+a.button_theme:focus{
+	background-color:#585858;
+	color:#FFFFFF;
+}
+		
+	

@@ -1,9 +1,18 @@
 <?php
 //Titel
 
-function file_title(){
-		show_area_title($default='Bereich');
+function file_title($case="title"){
+		switch ($case){
+			case "title": return area_title('Bereich', true);
+			break;
+			
+			case "head": return area_title('Bereich', false);
+			break;
+			
+			default:return area_title($default='Bereich');
 		}
+	}
+		
 //Content
 //Spezialteil
 	function content_top()
@@ -16,8 +25,10 @@ function file_title(){
 	function content_main()
 	{
 		$table=$_GET['p'];
-		if (find_mobile_browser()==true){bereich_menu_mobile($table=$table,$width='24%',$col='3');}
-		echo "<div class='content'>";
+		echo "<div class='mobile'>";
+		show_area_menu_mobile($table);
+		echo "</div>
+		<div class='content'>";
 		
 		show_area_entry($table=$table);
 		echo"</div>";	

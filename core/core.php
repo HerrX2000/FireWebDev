@@ -22,7 +22,8 @@ require_once("global.php");
 require(FW_ROOT."/inc/include.php");
 ?>
 <?php
-	cookie();
+	$cookie = new cookie;
+	$cookie->run();
 	header_script();
 //HEADER_SEND
 ?>
@@ -31,7 +32,7 @@ require(FW_ROOT."/inc/include.php");
 <head>
 <?php
 	head_script();
-	cookie_check();
+	$cookie->check();
 ?>
 <?php modul_include();  ?>
 <meta charset="utf-8">
@@ -39,26 +40,23 @@ require(FW_ROOT."/inc/include.php");
 <meta name="keywords" content="<?php	echo meta_keywords(); ?>">
 <meta name="robots" content="<?php	echo meta_robots(); ?>">
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/x-icon" href="./favicon.ico">
 <meta name="theme-color" content="#0F2104">
 <meta name="viewport" content="width=device-width,minimum-scale=1">
-<script src='https://www.google.com/recaptcha/api.js'></script>
-<link rel="stylesheet" type="text/css" href="inc/functions/calendar/calendar.css">
+<!--high priority scripts-->
 <link rel="stylesheet" type="text/css" href="inc/style/fw_basic.css">
-<link rel="stylesheet" type="text/css" href="<?php show_style();?>">
-<link rel="stylesheet" type="text/css" href="<?php show_style_sub();?>">
-
-<title><?php
-		show_head_title();
-		?>
-	</title>
+<title><?php show_head_title(); ?></title>
 </head>
 <body>
+
 <nav id="menu_fixed">
 		<?php
 		show_menu();
 		?>
 </nav>
+<?php
+$cookie->hint();
+?>
 <div class="header">
 	
 	<?php 
@@ -108,7 +106,7 @@ require(FW_ROOT."/inc/include.php");
 		</div>
 		<?php
 		if (FW_MODUL_MATERIAL_BUTTON == true){
-			echo "<a href='".FW_MODUL_MATERIAL_BUTTON_LINK."' class=\"material_button\"><img style=\"height:90%;padding-top:5%;auto;\" alt=\"info\" src=\"images/icons/material_button.png\"></a>";
+			echo "<a href='".@FW_MODUL_MATERIAL_BUTTON_LINK."' class=\"material_button\"><img style=\"height:90%;padding-top:5%;auto;\" alt=\"info\" src=\"images/icons/material_button.png\"></a>";
 		}
 		?>
 	</div>
@@ -123,9 +121,23 @@ require(FW_ROOT."/inc/include.php");
 	<?php footer_show_version();?>
 	<br><b>Powered by  <a href='' class="link_accent">FireWeb</a> </b>
 </footer>
-<script type="text/javascript" src="inc/js.inc.js"></script>
-<?php show_note();?>
-<?php 
+
+<!--low priority scripts-->
+<link rel="stylesheet" type="text/css" href="<?php show_style();?>">
+<?php
+if (show_style_sub()!=""){
+	echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"". show_style_sub()."\";>
+	";
+}
+
+echo modul_show_script(0);
+?>
+
+<script type="text/javascript" src="inc/library/js.inc.js"></script>
+
+
+<?php show_note();
+
 $ENDTIME = microtime(true);
 $RUNTIME = $ENDTIME - $STARTTIME;
 $RUNTIME = round ($RUNTIME, 3);
@@ -133,6 +145,13 @@ $RUNTIME_MS = $RUNTIME * 1000;
 $USERAGENT = $_SERVER['HTTP_USER_AGENT'];
 $SCRIPT_NAME = basename($_SERVER['SCRIPT_NAME']);
 $SCRIPT_PARENT = dirname($_SERVER['SCRIPT_NAME']);
+
+if(isset ($_GET['p'])){
+	$SCRIPT_NAME = $SCRIPT_NAME."?".$_GET['p'];
+}
+//
+statistics_collector($SCRIPT_NAME, $USERAGENT, $RUNTIME_MS, $SCRIPT_PARENT);
+//
 $query_count = $db_my->query_count;
 $query_time = $db_my->query_time;
 $query_strings= $db_my->query_strings;
@@ -142,15 +161,18 @@ Build-up time: $RUNTIME_MS ms
 Useragent: $USERAGENT
 Page: $SCRIPT_NAME
 Parent: $SCRIPT_PARENT
-Querys: $query_count
-Querytime: $query_time ms?
 
+Statistics are anonymously saved in a local database and are not shared automatically with any 3rd parties.
+If cookies are enabled an anonymous SessionID is created for less than an hour.
 -->";
 
 if(@$_SESSION["admin"] === "1"){
 echo"
 <!--
-Querys:	";
+Querys: $query_count
+Querytime: $query_time ms?
+Querys:
+	";
 foreach ($query_strings as $query_string){
 	echo $query_string."
 	";
@@ -158,5 +180,5 @@ foreach ($query_strings as $query_string){
 echo"
 -->";
 }
-statistics_collector($SCRIPT_NAME, $USERAGENT, $RUNTIME_MS, $SCRIPT_PARENT);
+
 ?>

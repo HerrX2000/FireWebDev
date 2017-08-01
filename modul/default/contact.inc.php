@@ -14,11 +14,6 @@ function content_top()
 	{
 		echo"
 		<div class='content'>
-		<h3>Blackburn Division</h3>
-		<h4>Kontakt:</h4>
-		<b>Clan-Leader</b>
-		<br>Name: Katho
-		<br>E-Mail: <a href='mailto:info@blackburn-division.de' class='link'>info@blackburn-division.de</a>
 		<br><br>Schreibe eine E-Mail oder einen Kommentar, letzters wird langsamer bearbeitet<br>
 		<br><h4>Kommentar:</h4>
 	";

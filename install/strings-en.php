@@ -1,9 +1,10 @@
 <?php
 
 $string = array();
-$string['PAGE_TITLE'] = "Moco Installation";
+$string['NAME'] = "FireWeb";
+$string['PAGE_TITLE'] = $string['NAME']." Installation";
 $string['PAGE_FOOTER'] = "Copyright © Frederik Mann / Licenes GNU GPL";
-$string['INSTALL_WARNING'] = "<h2>WARNING</h2><p><b>If 'Moco' is already installed abort this process and check the global.php for correctness.</p>";
+$string['INSTALL_WARNING'] = "<h2>WARNING</h2><p><b>If '".$string['NAME']."' is already installed abort this process and check the global.php for correctness.</p>";
 $string['OLD_PHP_VERSION'] = "Old PHP Version Detectet! <br> Your host: PHP".PHP_VERSION.". <br> Moco needs: PHP 5.3.10 <br> Recommend: PHP 5.6";
 
 $string['INSTALLATION'] = "Installation";

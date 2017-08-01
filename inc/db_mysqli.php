@@ -180,7 +180,7 @@ function connect($config)
 			}
 		}
 		if (!$read_link){
-			echo "Connection error on init";
+			echo "Connection error on init @ db/connect";
 			die;
 		}
 		return $read_link;

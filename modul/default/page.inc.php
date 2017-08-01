@@ -1,9 +1,7 @@
 <?php
 //Content
 function file_title(){
-		$titel=$_GET['p'];	
-		$titel= ucfirst($titel);
-		return $titel;
+		return page_title($default=null);
 		}
 //Spezialteil
 	function content_top()
