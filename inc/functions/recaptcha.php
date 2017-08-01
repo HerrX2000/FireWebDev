@@ -1,6 +1,7 @@
 <?php 
+$settings ['recaptcha_key'] = "6LfriyETAAAAADZQ65lKV9zcinpwPsdUWhcicdvp";
+	
 	function recaptcha(){
-		global $settings;
 		$settings ['recaptcha'] = 1;
 		$settings ['recaptcha_key'] = "6LfriyETAAAAADZQ65lKV9zcinpwPsdUWhcicdvp";
 		if ($settings ['recaptcha'] == 1){

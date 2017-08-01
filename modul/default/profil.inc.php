@@ -142,12 +142,7 @@ function file_title()
 	</tr>
 	<tr name='administration' style='display:none;'>
 		<td class='profil_menu_entry'>
-			<a href='inc/statistics.php' class='button' style='width:100%;height:40px;' target='_blank'>Statistiken &#8250;</a>
-		</td>
-	</tr>
-	<tr name='administration' style='display:none;'>
-		<td class='profil_menu_entry'>
-			<a href='administration.php' class='button' style='width:100%;height:40px;' target='_blank'>Admin-Panel &#8250;</a>
+			<a href='inc/statistics.php' class='button' style='width:100%;height:40px;' target='_blank'>Statistiken</a>
 		</td>
 	</tr>
 	

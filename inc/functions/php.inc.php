@@ -2,14 +2,12 @@
 
 /**
  * FireWeb webbased software series
- * Copyright 2017 Frederik Mann, All Rights Reserved
+ * Copyright 2014-2016 Frederik Mann, All Rights Reserved
  *
  * License: http://www.gnu.org/licenses/
  *
-**/
-/**
- *Core-FireWeb PHP Function Library
-**/
+ */
+//!!PHP_Bibilothek
 //!Header
 $error_report=1;
 //
@@ -62,7 +60,7 @@ function show_status($disabled = ''){
 			if($settings['status'] == 0 and isset ($_SESSION["username"])){ 
 				echo "<p style='text-align:center;'>Wartungsarbeiten</p>";
 			}
-			elseif($settings['status'] == 0 and !isset ($_SESSION["username"])){
+			elseif($settings['status'] == 0 and !isset ($_SESSION["username"])){ 
 				$status_reason=$db_my->query("SELECT name, value FROM ". $db_my->prefix ."settings WHERE name LIKE 'status_reason'", $hide_errors=0, $write_query=0);
 				$status_reason = $db_my->fetch_assoc($status_reason); 
 				echo "<div class='background'></div><div class='content' style='height:300px;overflow-y:auto;margin-top:40px;'><div style='text-align:center;'><h1>Offline</h1></div>";
@@ -117,19 +115,31 @@ function edit_status(){
 
 //Titel
 function show_header(){
-	global $settings;
-		$page_name = $settings['page_name'];
-		$home_name = $settings['home_name'];
-		$home_url = $settings['home_url']; 
-		if($home_name != "" and $page_name == $home_name){
-			echo"<p><span style='font-size:x-large;margin-left:10%;'><a href='index.php' class='link'><b>".$page_name."</b></a></span></p>";
+	/*echo "	<div style='float:right;text-align:right;margin-top:-6px;margin-right:8px;'>";
+	if (find_mobile_browser(false)==true){
+		if(isset($_SESSION['username'])){
+			echo "<a href='profil.php'>";
+			include_once FW_ROOT . '/addon/@user_pictures/init.php';
+			//picture execute and if picture
+			if (at_user_pictures ($width='64px',$height='64px') === false)
+			{
+			//then no picture
+				echo "<img style='height:48px;width:48px;' src='images/icons/icon_login.png' alt='Login'>";
+				}
+			echo"</a>";
 		}
-		else{
-			echo"<p><span style='font-size:x-large;margin-left:10%;'>
-			<a href='".$home_url."'>
-			<img hreflang='de' src='images/icons/home.png' alt='Home' style='height:22px;width:22px'/></a>
-			<a href='index.php' class='link'><b>".$page_name."</b></a></span></p>";
+		else{	
+			echo "<a href='login.php'><img style='height:48px;width:48px;' src='images/icons/icon_login.png' alt='Login'></a>";
 		}
+	}
+	else{
+		/*
+		echo "<a href='bug_report.php?site=".basename($_SERVER['PHP_SELF'])." onclick=\"alert('Bugreport');\">
+		<img src='images/icons/bug_report.png' alt='Bugreport' style='height:22px;width:22px'/></a>";*/
+	/*}
+	echo"</div>";*/
+	
+	show_title();
 }
 	function show_title()
 	{
@@ -145,7 +155,8 @@ function show_header(){
 			<a href='".$home_url."'>
 			<img src='images/icons/home.png' alt='Home' style='height:22px;width:22px'/></a>
 			<a href='index.php' class='link'><b>".$page_name."</b></a></span></p>";
-		}		
+		}
+		
 	}
 	
 	//Experimental auto_menu
@@ -202,14 +213,22 @@ function show_header(){
 	function content_right_contact()
 	{
 		echo "
-		<a href='page.php?p=Impressum' class='button'><p><b>Kontakt</b></p></a>
+		<a href='contact.php' class='button'><p><b>Kontakt</b></p></a>
 		";
 	}
 	
 	function show_credits()
 	{
-		echo "<a href=\"page.php?p=Impressum\" class=\"link\" style=\"margin-right:10%;\">Impressum</a> 
-		<a class=\"link\" style=\"margin-left:10%;\">Powered by FireWeb</a>";
+		if (find_mobile_browser(false)==true){
+			echo "<a href=\"impressum.php\" class=\"link\" style=\"margin-right:10%;\">Impressum</a> 
+		<a class=\"link\" style=\"margin-left:10%;\">Powered by FireWeb</a>"
+			;
+		}
+		else{
+			echo "<a href=\"impressum.php\" class=\"link\" style=\"margin-right:30%;\">Impressum</a> 
+		<a class=\"link\" style=\"margin-left:30%;\">Powered by FireWeb</a>"
+			;
+		}
 	}
 	
 	function show_note()
@@ -219,14 +238,20 @@ function show_header(){
 		English
 FireWeb is a Content Managment System under development.
 
-Copyright (C) 2014-2017 Frederik Mann
+Copyright (C) 2014-2015 Frederik Mann
 
-This program is under the GNU General Public License, see <http://www.gnu.org/licenses/>.
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
 		
-The source code is available via Github@FireWebDev.
+The source code is currently not available to download. To get the sourcecode contact me.
 
 Thanks to the Notepad++ Team!
-Thanks to the XAMPP Team!
+
 -->
 "
 ;
@@ -324,14 +349,34 @@ Thanks to the XAMPP Team!
 		modul_include();
 		///modul is automaticly include by inc/include.php
 		}*/
-
+//Function Modul_include		
+		function modul_include(){
+		global $settings;
+		$modul=$settings['modul'];
+		include_once FW_ROOT."/modul/$modul/include.php";
+		}
 
 		
 //! PHP Include Functions
 
 //STAT Frame start
-include_once (FW_ROOT."/inc/functions/lb_statistics.php");
-
+	function statistics_collector($page = "", $useragent = "", $time="", $parent = "/"){
+		if ($time != ""){
+			if ($time > 9999){
+				$time = 9999;
+			}
+		global $db_my;
+		global $settings; 
+		if (@FW_PAGE_VERSION === null){$page_version = null;}
+		$page_version = @FW_VERSION ." ". @FW_VERSION_STATUS;
+		$page_api = @FW_API;
+		$useragent = $db_my->escape_string($useragent);
+		$core = $settings['core'];
+		$modul = $settings['modul'];
+		$query="INSERT INTO fw_statistic (`id`, `date_time`, `pagename`, `pageparent`, `pageversion`, `pageapi`, `core`, `modul`, `useragent`, `exe_time`) VALUES (0,NULL,'".$page."','".$parent."','".$page_version."','".$page_api."','".$core."','".$modul."','".$useragent."','".$time."')";
+		$db_my->query($query, $hide_errors=0, $write_query=0);
+		}
+	}
 //STAT Frame end
 
 			
@@ -437,8 +482,7 @@ function create_table($type, $name, $menu_entry){
 			elseif($type=="area"){
 				$query="CREATE TABLE`".$db_my->prefix."area_$name` (
 				  `id` int(11) NOT NULL,
-				  `name` varchar(120) NOT NULL,
-				  `title` varchar(120) NOT NULL,
+				  `name` varchar(100) NOT NULL,
 				  `content` text NOT NULL,
 				  `modifiable` int(1) NOT NULL DEFAULT '1'
 				) DEFAULT CHARSET=utf8;";
@@ -508,8 +552,79 @@ function delete_table($type, $name){
 ///Add/Show/Remove/Delete Section End	
 //////////////////////////////////////////
 ///Cookie/Style Section
-include_once (FW_ROOT."/inc/functions/lb_cookie.php");
-///Cookie end
+function cookie_active(){
+	if(isset($_COOKIE['cookie_active']) and $_COOKIE['cookie_active'] == 1){
+		return true;
+	}
+	else{
+		return false;	
+	}
+}
+
+function cookie()
+	{
+	setcookie("cookie_active","1");
+	//cookie style
+	function cookie_stlye_auto(){
+			global $settings;
+			if (isset ($_POST["select_style"])){
+				$style = $_POST["select_style"].".css";
+				$_SESSION["style_set"] = $style;
+				setcookie("style_set", $style, time()+(60*60*24*7));
+			}
+			//
+			$default_style = $settings['default_style'];//<-- analysis if mobile desktop or responsive
+		
+			if (!isset ($_COOKIE["style_set"])){
+				if (@$_GET["new_style"]!="start" and @$_COOKIE["cookie_active"] == 1){
+					header('location:'.$_SERVER['PHP_SELF'].'?new_style=start');
+				}
+				if (@$_GET["new_style"]=="start"){
+					if (find_mobile_browser(false)==true)
+					{
+						setcookie("style_set",$default_style.".css", time()+60*60*24*7);
+					}
+					else{
+						setcookie("style_set",$default_style.".css", time()+60*60*24*7);
+					}		
+					header('location:'.$_SERVER['PHP_SELF']);
+				}	
+			}
+		}
+function cookie_login_token(){
+		if (isset ($_SESSION["loginkey"]) and !isset ($_COOKIE["loginkey"]) and @$_SESSION["loginkey_active"] == 1)
+		{
+			setcookie("loginkey",$_SESSION["loginkey"], time()+60*60*24*14);
+			}
+		elseif (isset ($_SESSION["loginkey"]) AND @$_SESSION["loginkey_active"] == 0)
+			{
+				unset ($_SESSION["loginkey_active"]);
+			}
+		}
+		cookie_login_token();
+		cookie_stlye_auto();
+	}
+		
+function cookie_check()
+	{
+		if (@$_COOKIE["cookie_active"] == 1){
+			echo"<!--Cookies aktiviert-->";
+		}	
+		elseif (@$_GET["cookie_active"]=="false")
+		{
+			echo"<!--Cookies deaktiviert-->
+			";
+			echo"
+			<script type=\"text/javascript\">  
+			alert(\"Deine Cookies sind deaktiviert. Bitte aktiviere die Cookies, da es sonst Probleme geben kann.\") 
+			</script>
+			";
+		}
+		else
+		{
+			echo"<!--Cookies werden geprüft-->";
+		}
+	}
 		
 function style_sub(){
 	global $settings;

@@ -25,7 +25,7 @@ echo"
 				<input type=\"hidden\" value=\"".@$_GET['time_start']."\" name=\"time_start\">
 		Ende: <input  type=\"date\" style=\"padding:2px;border-radius:4px;\" value=\"".@$_GET['date_end']."\" name=\"date_end\" max=\"".date("Y-m-d")."\">
 				<input type=\"hidden\" value=\"".@$_GET['time_end']."\" name=\"time_end\">
-		Version: <input type=\"text\" id=\"version\" value=\"".@$_GET['version']."\" style=\"padding:5px;border-radius:4px;width:100px;\" name=\"version\" placeholder=\"0.7\" onchange=\"select_others()\">
+		Version: <input type=\"text\" id=\"version\" value=\"".@$_GET['version']."\" style=\"padding:5px;border-radius:4px;width:100px;\" name=\"version\" placeholder=\"0.6.9b3\" onchange=\"select_others()\">
 
 		Seite: <input type=\"text\" id=\"page\" value=\"".@$_GET['page']."\" style=\"padding:5px;border-radius:4px;\" name=\"page\" placeholder=\"page.php\" onchange=\"select_others()\">
 
@@ -33,76 +33,74 @@ echo"
 	</form>
 	
 	";
-///set query start
-	//no search
-	if (!isset($_GET['search']) or $_GET['search']==0){
-		$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,sessionid,exe_time FROM fw_statistic ORDER BY id DESC";
-	}
-	//all fields
-	elseif ($_GET['search']==1 and $_GET['page'] != "" and $_GET['date_start'] != ""  and $_GET['date_end'] != "" and $_GET['version'] != ""){
-		$pagename = $_GET['page'];
-		$version = $_GET['version'];
-		$time_start = $_GET['time_start'];
-		$time_end = $_GET['time_end'];
-		if ($time_start=="")$time_start=" 00:00";
-		if ($time_end=="")$time_end=" 23:59";
-		$date_start = $_GET['date_start']." ".$time_start.":00";
-		$date_end = $_GET['date_end']." ".$time_end.":59";
-		echo "Durschnitt: $pagename & $date_start bis $date_end & $version";
-		$db_my->real_escape_string($version);
-		$db_my->real_escape_string($pagename);
-		$db_my->real_escape_string($date_start);
-		$db_my->real_escape_string($date_end);
-		$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,sessionid,exe_time FROM fw_statistic WHERE pagename = '$pagename' pageversion = '$version' AND date_time BETWEEN  '$date_start' AND '$date_end' ORDER BY id DESC";
-	}
-	//no version
-	elseif ($_GET['search']==1 and $_GET['page'] != "" and $_GET['date_start'] != ""  and $_GET['date_end'] != ""){
-		$pagename = $_GET['page'];
-		$time_start = $_GET['time_start'];
-		$time_end = $_GET['time_end'];
-		if ($time_start=="")$time_start=" 00:00";
-		if ($time_end=="")$time_end=" 23:59";
-		$date_start = $_GET['date_start']." ".$time_start.":00";
-		$date_end = $_GET['date_end']." ".$time_end.":59";
-		echo "Durschnitt: $pagename & $date_start bis $date_end";
-		$db_my->real_escape_string($pagename);
-		$db_my->real_escape_string($date_start);
-		$db_my->real_escape_string($date_end);
-		$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,sessionid,exe_time FROM fw_statistic WHERE pagename = '$pagename' AND date_time BETWEEN  '$date_start' AND '$date_end' ORDER BY id DESC";
-	}
-	//only page
-	elseif ($_GET['search']==1 and $_GET['page'] != ""){
-		$pagename = $_GET['page'];
-		echo "Durschnitt: ".$pagename;
-		$db_my->escape_string($pagename);
-		$query="SELECT id,date_time,pagename,pageversion,useragent,sessionid,exe_time FROM fw_statistic WHERE pagename = '$pagename'  ORDER BY id DESC";
-	}
-	//only date
-	elseif ($_GET['search']==1 and $_GET['date_start'] != ""  and $_GET['date_end'] != ""){
-		$time_start = $_GET['time_start'];
-		$time_end = $_GET['time_end'];
-		if ($time_start=="")$time_start=" 00:00";
-		if ($time_end=="")$time_end=" 23:59";
-		$date_start = $_GET['date_start']." ".$time_start.":00";
-		$date_end = $_GET['date_end']." ".$time_end.":59";
-		echo "Durschnitt: $date_start bis $date_end";
-		$db_my->real_escape_string($date_start);
-		$db_my->real_escape_string($date_end);
-		$query="SELECT id,date_time,pagename,pageapi,pageversion,useragent,sessionid,exe_time FROM fw_statistic WHERE date_time BETWEEN '$date_start' AND '$date_end' ORDER BY id DESC";
-	}
-	//only version
-	elseif ($_GET['search']==1  and $_GET['version'] != ""){
-		$version = $_GET['version'];
-		echo "Durschnitt: $version";
-		$db_my->escape_string($version);
-		$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,sessionid,exe_time FROM fw_statistic WHERE pageversion = '$version' ORDER BY id DESC";
-	}
-	//in case
-	else{
-		$query="SELECT `id`,`date_time`,`pagename`,`pageapi`,`pageversion`,`useragent`,`sessionid`,`exe_time` FROM fw_statistic ORDER BY id DESC";
-	}
-//set query end
-//set data
+	
+//no search
+if (!isset($_GET['search']) or $_GET['search']==0){
+	$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,exe_time FROM fw_statistic ORDER BY id DESC";
+}
+//all fields
+elseif ($_GET['search']==1 and $_GET['page'] != "" and $_GET['date_start'] != ""  and $_GET['date_end'] != "" and $_GET['version'] != ""){
+	$pagename = $_GET['page'];
+	$version = $_GET['version'];
+	$time_start = $_GET['time_start'];
+	$time_end = $_GET['time_end'];
+	if ($time_start=="")$time_start=" 00:00";
+	if ($time_end=="")$time_end=" 23:59";
+	$date_start = $_GET['date_start']." ".$time_start.":00";
+	$date_end = $_GET['date_end']." ".$time_end.":59";
+	echo "Durschnitt: $pagename & $date_start bis $date_end & $version";
+	$db_my->real_escape_string($version);
+	$db_my->real_escape_string($pagename);
+	$db_my->real_escape_string($date_start);
+	$db_my->real_escape_string($date_end);
+	$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,exe_time FROM fw_statistic WHERE pagename = '$pagename' pageversion = '$version' AND date_time BETWEEN  '$date_start' AND '$date_end' ORDER BY id DESC";
+}
+//no version
+elseif ($_GET['search']==1 and $_GET['page'] != "" and $_GET['date_start'] != ""  and $_GET['date_end'] != ""){
+	$pagename = $_GET['page'];
+	$time_start = $_GET['time_start'];
+	$time_end = $_GET['time_end'];
+	if ($time_start=="")$time_start=" 00:00";
+	if ($time_end=="")$time_end=" 23:59";
+	$date_start = $_GET['date_start']." ".$time_start.":00";
+	$date_end = $_GET['date_end']." ".$time_end.":59";
+	echo "Durschnitt: $pagename & $date_start bis $date_end";
+	$db_my->real_escape_string($pagename);
+	$db_my->real_escape_string($date_start);
+	$db_my->real_escape_string($date_end);
+	$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,exe_time FROM fw_statistic WHERE pagename = '$pagename' AND date_time BETWEEN  '$date_start' AND '$date_end' ORDER BY id DESC";
+}
+//only page
+elseif ($_GET['search']==1 and $_GET['page'] != ""){
+	$pagename = $_GET['page'];
+	echo "Durschnitt: ".$pagename;
+	$db_my->real_escape_string($pagename);
+	$query="SELECT id,date_time,pagename,pageversion,useragent,exe_time FROM fw_statistic WHERE pagename = '$pagename'  ORDER BY id DESC";
+}
+//only date
+elseif ($_GET['search']==1 and $_GET['date_start'] != ""  and $_GET['date_end'] != ""){
+	$time_start = $_GET['time_start'];
+	$time_end = $_GET['time_end'];
+	if ($time_start=="")$time_start=" 00:00";
+	if ($time_end=="")$time_end=" 23:59";
+	$date_start = $_GET['date_start']." ".$time_start.":00";
+	$date_end = $_GET['date_end']." ".$time_end.":59";
+	echo "Durschnitt: $date_start bis $date_end";
+	$db_my->real_escape_string($date_start);
+	$db_my->real_escape_string($date_end);
+	$query="SELECT id,date_time,pagename,pageapi,pageversion,useragent,exe_time FROM fw_statistic WHERE date_time BETWEEN '$date_start' AND '$date_end' ORDER BY id DESC";
+}
+//only version
+elseif ($_GET['search']==1  and $_GET['version'] != ""){
+	$version = $_GET['version'];
+	echo "Durschnitt: $version";
+	$db_my->escape_string($version);
+	$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,exe_time FROM fw_statistic WHERE pageversion = '$version' ORDER BY id DESC";
+}
+//in case
+else{
+	$query="SELECT `id`,`date_time`,`pagename`,`pageapi`,`pageversion`,`useragent`,`exe_time` FROM fw_statistic ORDER BY id DESC";
+}
 $fetch = $db_my->query($query);
 $total = $fetch->num_rows;
 $average = null;
@@ -113,17 +111,15 @@ $totalpc = null;
 $averagemobile = null;
 $totalmobile = null;
 $incversions = array();
-$incsessionids = array();
 include_once FW_ROOT."/inc/functions/detect_browser.php";
 include_once FW_ROOT."/inc/functions/median.php";
 if ($total==0)exit("<br><br>No results");
-//determ data
 while ($row = mysqli_fetch_assoc($fetch))
 			{
+			
 			$rows[] = $row;
 			}
 $median=array();
-	//median and average
 		foreach($rows as $row){
 			if ($row['exe_time']>=9999){
 				$row['exe_time']=9999;
@@ -136,9 +132,6 @@ $median=array();
 			}
 			if (in_array($row['pageapi'],$incapis) == false){
 				array_push($incapis, $row['pageapi']);
-			}
-			if (in_array($row['sessionid'],$incsessionids) == false){
-				array_push($incsessionids, $row['sessionid']);
 			}
 			$end_datetime_query = $row['date_time'];
 			$average=$average+$row['exe_time'];
@@ -160,10 +153,6 @@ $median=array();
 			$totalpc = $totalpc+1;
 			}
 		}
-		//set data
-			if ($total ==0) $total = 1;
-			if ($totalpc ==0) $totalpc = 1;
-			if ($totalmobile ==0) $totalmobile = 1;
 			$median = array_median($median);
 			$averageapi = $api / $total;
 			$average = $average / $total;
@@ -173,7 +162,6 @@ $median=array();
 			$averagepc = round($averagepc,4);
 			$averagemobile = round($averagemobile,4);
 			$averageapi = round($averageapi,8);
-		//echo result
 		echo"<p>
 		<!-- Query: $query <br> -->
 			Von: $start_datetime_query Bis: $end_datetime_query <br>
@@ -182,10 +170,9 @@ $median=array();
 			Durchschnitt Total= $average ms<br>
 			Durchschnitt PC= $averagepc  ms<br>
 			Durchschnitt Mobile= $averagemobile  ms<br>
-			Durchschnitt API= $averageapi
 			</div>
-			<a href='#' id='extra_button' onclick=\"extra_1.style.display='block';extra_button.style.display='none'\">Mehr Anzeigen</a>
-			<br><br>	
+			<a href='#' id='extra_button' onclick=\"extra_1.style.display='block';extra_button.style.display='none'\">Mehr Anzeigen</a><br>
+			Durchschnitt API= $averageapi<br>
 			APIs=";
 			$count=0;
 			foreach($incapis as $incapi) {
@@ -209,17 +196,8 @@ $median=array();
 				$count++;
 				}
 			}
-			echo "<br><br>min ";
-			$countsession=0;
-			foreach($incsessionids as $incsessionid) {
-				if ($incsessionid != ""){
-				$countsession++;
-				}
-			}
-			echo $countsession;
-		echo " Besuche";
 		echo "<br>
-			$total Aufrufe, davon $totalmobile Mobile und $totalpc Desktop
+			$total , davon $totalmobile Mobile und $totalpc PC
 			</p>
 			
 		";
@@ -227,21 +205,11 @@ $median=array();
 		echo"
 		<a href='#end' class='button' style='float:right;'>Go to End</a>
 		<div style=''>
-		<table style='width:92%;'>
-		<tr>
-		<td>id</td>
-		<td>date time</td>
-		<td>pagename</td>
-		<td>version</td>
-		<td>useragent</td>
-		<td>sessionID</td>
-		<td>time</td>
-		</tr>";
+		<table style='width:92%;'>";
 		foreach($rows as $row){
 			$browsers = array("MSIE", "Android", "Chrome");
 			if ($row['exe_time']>=9999){$row['exe_time']=9999;}
-			echo "<tr>
-			<td><a name='".$row['id']."'></a>".$row['id']."</td>
+			echo "<tr> <td><a name='".$row['id']."'></a>".$row['id']."</td>
 			<td>".$row['date_time']."</td>
 			<td>".$row['pagename']."</td>
 			<td>".$row['pageversion']."</td>
@@ -251,29 +219,26 @@ $median=array();
 		$browser = getBrowser($row['useragent'], true);
 			echo $browser['platform'].": ".$browser['name']." ".$browser['version'];
 			echo"</td>
-			<td>".$row['sessionid']."</td>
-			<td>".$row['exe_time']."</td>
-			</tr>";
+			<td>".$row['exe_time']."</td></tr>";
 			}
 echo"</table></div>";			
 		
-//archive
+
 if 	($_POST['clear']==1 and $_GET['clear']==1 and $_SESSION['admin']==1){
-	$api = round($averageapi, 5);
+	$api = round($api, 5);
 	$query="
 	INSERT INTO fw_statistic_archive (id, date_time_start, date_time_end, total, total_pc, total_mobile,
 	avg_time, avg_time_pc, avg_time_mobile, avg_api)
 	VALUES (null, '$start_datetime_query', '$end_datetime_query', '$total', '$totalpc', '$totalmobile',
 	'$average', '$averagepc', '$averagemobile', '$api')
 	";
-	echo "<br>$query<br>";
-	$result = $db_my->query($query);
-	if ($result){
+	$fetch = $db_my->query($query);
+	if ($fetch){
 	$query="
 	TRUNCATE table fw_statistic
 	";
-	$result = $db_my->query($query);
-	echo"Table archiviert
+	$fetch = $db_my->query($query);
+	echo"Table gesäubert
 	<script type=\"text/javascript\">
 			  setTimeout(function () { location.href = \"./statistics.php\"; }, 2000);
 			</script>
@@ -284,7 +249,7 @@ if 	($_POST['clear']==1 and $_GET['clear']==1 and $_SESSION['admin']==1){
 echo "
 	<form action=\"statistics.php?clear=1\" method=\"post\" onsubmit=\"return confirm('Sicher das Sie die Statistiken saubern wollen?');\">
 	<input type=\"hidden\" name=\"clear\" value=\"1\">
-	<input type=\"submit\" value=\"Statistik archivieren\">
+	<input type=\"submit\" value=\"Statistik säubern\">
 	</form>
 ";
 

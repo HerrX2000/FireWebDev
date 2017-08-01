@@ -3,18 +3,17 @@
 function show_page($table='', $id=''){
 	show_entry($table, $id);
 }
-function page_title($default='')
+function show_page_title($default='')
 {
 	if (isset ($_GET["p"]))
 	{
-	$title = $_GET["p"];
-	$title = ucwords($title);
+	$titel = $_GET["p"];
 	}
 	elseif (isset ($default))
 	{
 	$titel = $default;
 	}
-	return $title;
+	return $titel;
 }	
 function show_pages_list($target){
 		//////////////////////
