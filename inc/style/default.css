@@ -171,6 +171,9 @@
 		
 		
 /*Eigene Classen*/		
+		.mobile{
+			display:none;
+		}
 
 		a.link_accent:link {
 			color:#A4A4A4;

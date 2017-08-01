@@ -1,0 +1,129 @@
+/*
+Sub-Style
+Name: Praxis Physio
+Version: alpha
+FW-Version: 0.7a
+API: 7
+*/
+
+body {
+	height:100%;
+	width:100%;
+	min-width:360px;
+	background-color:#FFFFFF;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	font-family:Helvetica;
+	color:#1C1C1C;
+	margin:0;
+	margin:0 !important;
+	padding:0 !important;
+	background-size: cover;
+	background-image:url("background_wave.jpg");
+}
+.menu{
+	height:78px;
+	width:100%;
+	background:rgba(8,8,138, 0.2);
+	}
+
+#menu_fixed {
+	height:78px;
+	text-align:center;
+	background:rgba(8,8,138,  0.2);
+	width: 100%;
+	position:fixed;
+	display:none;
+	overflow:hidden;
+	z-index: 100;
+	}
+	
+.middle {
+	min-height:90%;
+	background-color: rgba(230,230,230, 0.6);
+	}
+			
+.background{
+/*only for fixed background*/
+/*background-color: #E6E6E6;
+position:fixed;
+top: 94px;
+right: 0;
+bottom: 0;
+left: 0;
+margin: 0;
+padding: 0;
+z-index: -1;*/
+}
+
+a.link_accent:link {
+	color:#A4A4A4;
+}
+a.link_accent:visited {
+	color:#A4A4A4;
+}
+a.link_accent:active {
+	color:#A4A4A4;
+}
+a.link_accent:hover {
+	color:#585858;
+}
+a.link_accent:focus{
+	color:#585858;
+}	
+
+
+a.link:link {
+	color:#444444;
+}
+a.link:visited {
+	color:#444444;
+}
+a.link:active {
+	color:#000000;
+}
+a.link:hover {
+	color:#000000;
+}
+a.link:focus{
+	color:#000000;
+}
+
+a.button{
+text-align:center;
+background-color:#FDFDFD;
+display:inline-block;
+color:#000000;
+line-height:200%;
+width:100%;
+text-decoration:none;
+text-shadow:none;
+}
+a.button:hover {
+	background-color:#424242;
+	}
+a.button:focus{
+	background-color:#424242;
+}	
+	
+a.button_theme {
+	margin-left:0px;
+	margin-right:0px;
+	background-color:rgba(8,8,138, 0.9);
+	text-align:center;
+	display:inline-block;
+	color:#FFFFFF;
+	line-height:400%;
+	text-decoration:none;
+	text-shadow:none;
+	}
+
+a.button_theme:hover {
+	background-color:#585858;
+	color:#FFFFFF;
+	}
+a.button_theme:focus{
+	background-color:#585858;
+	color:#FFFFFF;
+}

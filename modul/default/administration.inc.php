@@ -70,12 +70,12 @@ if ($_SESSION["admin"] == "1")
 	///sends edit_settings
 	elseif($_GET['p']=="edit_settings_submit" and $_GET['submit']==1){
 		//
-		$id = $db_my->escape_string($_POST['id']); 
-		$title = $db_my->escape_string($_POST['title']);
-		$name = $db_my->escape_string($_POST['name']);
-		$value = $db_my->escape_string($_POST["value"]);
+		$id = $_POST['id']; 
+		$title = $_POST['title'];
+		$name = $_POST['name'];
+		$value = $_POST["value"];
 		//
-		if(edit_settings_entry($id=$id,$value=$value)){
+		if(edit_settings_entry($id,$value)){
 			echo"
 			<table id='settings' style='width:100%;border-style:solid;border-color:#D3D3D3;border-collapse: collapse;border-width: 1px;'>
 			<tr>

@@ -62,8 +62,8 @@ echo"<form action=\"index.php?page=2\" method=\"post\" >
 	</table>
 	</form>
 	<p align=\"right\">
-	<a href=\"?lang=en\"><img src=\"../images/lang_en.gif\" alt=\"lang_en\"></a>
-	<a href=\"?lang=de\"><img src=\"../images/lang_de.gif\" alt=\"lang_de\"></a></p>
+	<a href=\"?lang=en\"><img src=\"lang_en.png\" alt=\"lang_en\"></a>
+	<a href=\"?lang=de\"><img src=\"lang_de.png\" alt=\"lang_de\"></a></p>
 	";
 echo$string['INSTALL_WARNING'];
 }

@@ -7,8 +7,9 @@
  *
  */
  
-define("FW_MODUL_VERSION", "0.6.9");
-define("FW_MODUL_API", "8");
+define("FW_MODUL_VERSION", "0.7a");
+define("FW_MODUL_API", "7");
+define("FW_MODUL_MATERIAL_BUTTON", false);
 
 ///Init Include required library start
 include_once(FW_ROOT."/inc/functions/find_mobile_browser.php");
@@ -18,7 +19,14 @@ include_once(FW_ROOT."/inc/functions/find_mobile_browser.php");
 $filename=$_SERVER['SCRIPT_NAME'];  
 $path = pathinfo($filename);
 $filename = $path["filename"].".".$path["extension"];
-include(FW_ROOT."/modul/default/".$path["filename"].".inc.php");
+if(file_exists(FW_ROOT."/modul/default/".$path["filename"].".inc.php")){
+	include(FW_ROOT."/modul/default/".$path["filename"].".inc.php");
+}
+else{;
+	include(FW_ROOT."/modul/core/".$filename.".inc.php");
+	echo FW_ROOT."/modul/core/".$filename.".inc.php";
+	echo "success";
+}
 ///Init Include current selected file end
 function detect_menu_order(){
 	global $settings;
@@ -115,12 +123,9 @@ function container_left()
 	echo"<h3 style='text-align:center;'>"; 
 	if(function_exists('file_title'))
 	{
-		echo file_title();
+		echo file_title($case="head");
 	}
-	elseif (function_exists('datei_titel'))
-	{
-		datei_titel();
-	}
+
 	else
 	{
 		$dateiname=$_SERVER['SCRIPT_NAME'];  
@@ -180,10 +185,10 @@ function container_left()
 	if (find_mobile_browser() == true)
 	{
 		echo"
-		<h3><a href='Kalender.php' class='button'>Event-Kalender</a></h3>";
-		echo"<h3><a href='area.php?p=about_us&r=Beitreten' class='button'>Beitreten</a></h3>";
+		<h3><a href='calendar.php' class='button'>Event-Kalender</a></h3>";
+		echo"<h3><a href='#' class='button'>Fake Button</a></h3>";
 	}
-	else echo"<a href='area.php?p=about_us&r=Beitreten' class='button'><p><b>Beitreten</b></p></a>";
+	else echo"<a href='#' class='button'><p><b>Fake Button</b></p></a>";
 	echo "</div>";
 	echo "<!-- Container_left end -->";
 }
@@ -202,5 +207,16 @@ function container_right(){
 	echo"<div class=\"content_right\">";
 		content_right_contact();
 	echo"</div>";
+}
+
+function modul_show_script($priority){
+	switch ($priority){
+		case 1: ;
+		case 2: ;
+		default: echo "
+<link rel='stylesheet' type='text/css' href='inc/functions/calendar/calendar.css'>
+<script type='text/javascript' src='https://www.google.com/recaptcha/api.js'></script>
+";
+	}
 }
 ?>

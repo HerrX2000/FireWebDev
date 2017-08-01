@@ -2,7 +2,21 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+//////////////
+/*
+ * Updated for Version 0.7beta 31.7.17			
+ *
+ * FireWeb webbased software series
+ * Copyright 2017 Frederik Mann, All Rights Reserved
+ *
+ * License: http://www.gnu.org/licenses/
+ *
+ */
+//////////////
+
+
 $config['title']="FireWeb";
+
 
 function installation(){
 $db_host = $_POST['host'];
@@ -80,8 +94,8 @@ if ($existed ==0){
 	(12, 'meta_keywords', 'Meta Keywords', ''),
 	(13, 'meta_robots', 'Meta Robots', ''),
 	(14, 'default_style', 'Default Style', 'default'),
-	(15, 'version', 'FireWeb Version', '0.7alpha'),
-	(16, 'modul', 'Selected Modul', 'core'),
+	(15, 'version', 'FireWeb Version', '0.7beta'),
+	(16, 'modul', 'Selected Modul', 'default'),
 	(17, 'core', 'Selected Core', 'core'),
 	(18, 'menu_order', 'Menu Order', 'Start=url=index.php');
 	";
@@ -127,7 +141,10 @@ $db_con = new mysqli($db_host, $db_user, $db_psw, $db_name);
 		  `pageparent` varchar(480) NOT NULL DEFAULT '/',
 		  `pageversion` tinytext,
 		  `pageapi` smallint(5) DEFAULT NULL,
+		  `core` tinytext,
+		  `modul` tinytext,
 		  `useragent` text NOT NULL,
+		  `sessionid` id(5),
 		  `exe_time` smallint(5) NOT NULL,
 		   PRIMARY KEY (ID)
 		) CHARSET=utf8;
