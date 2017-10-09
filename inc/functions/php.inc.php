@@ -41,13 +41,7 @@ if (@version_compare(FW_PAGE_VERSION, '0.6.9a1', '<') or  NULL === FW_PAGE_VERSI
 //Online/Offline
 
 function header_script(){
-	if (isset($_COOKIE["loginkey"]) and !isset ($_SESSION["username"])){
-		$loginkey=$_COOKIE["loginkey"];
-		if (class_exists('user_login_token')){
-			$header_loginkey= new user_login_token;
-			$header_loginkey->user_login_token_verify($loginkey);
-		}
-	}
+	header("X-XSS-Protection: 0");
 }
 function head_script(){
 	

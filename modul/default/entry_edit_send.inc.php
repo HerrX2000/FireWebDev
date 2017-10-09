@@ -26,16 +26,21 @@ function fle_titel(){
 		
 	function content_main()
 	{	
-		edit_entry($table=$_POST["table"], $id=$_POST["id"], $content=$_POST["content"]);
-		echo "
-		
-		<div class='content'><h1>Beitrag bearbeitet!</h1>
-		<br><a href='index.php' class='button'><h3>Weiter</h3></a>
-		<br>ID=".$_POST["id"];
-		show_entry($table=$_POST["table"], $id=$_POST["id"]);
-		echo"</a>
-		</div>";
-
+		global $user;
+		if($user->verify(1)===true){
+			edit_entry($table=$_POST["table"], $id=$_POST["id"], $content=$_POST["content"]);
+			echo "
+			
+			<div class='content'><h1>Beitrag bearbeitet!</h1>
+			<br><a href='index.php' class='button'><h3>Weiter</h3></a>
+			<br>ID=".$_POST["id"];
+			show_entry($table=$_POST["table"], $id=$_POST["id"]);
+			echo"</a>
+			</div>";
+		}
+		else{
+			die("403");
+		}
 	}
 
 //Content_left

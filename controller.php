@@ -1,6 +1,6 @@
 <?php
 session_start();
-//include("global.php");
-include("core/core_exp.php");
-core($modul="default");
+require("global.php");
+require("core/core_exp.php");
+core($modul="default", "login","show");
 ?>

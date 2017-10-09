@@ -61,7 +61,7 @@ if ($mode=="simple"){
 	$db_con = new mysqli($db_host, $db_user, $db_psw, $db_name);
 	$sql = "CREATE TABLE `".$db_prefix."settings` (
 		  `id` smallint(5) NOT NULL AUTO_INCREMENT,
-		  `name` varchar(120) NOT NULL,
+		  `name` varchar(120) NOT NULL UNIQUE,
 		  `title` varchar(120) NOT NULL,
 		  `description` text,
 		  `optionscode` text,
@@ -69,7 +69,7 @@ if ($mode=="simple"){
 		  PRIMARY KEY (ID)
 		) DEFAULT CHARSET=utf8;
 		";
-		
+		//uniqu @ name not tested
 	
 if ($db_con->query($sql) === TRUE) {
     echo "Table Settings created successfully<br>";
@@ -94,10 +94,11 @@ if ($existed ==0){
 	(12, 'meta_keywords', 'Meta Keywords', ''),
 	(13, 'meta_robots', 'Meta Robots', ''),
 	(14, 'default_style', 'Default Style', 'default'),
-	(15, 'version', 'FireWeb Version', '0.7beta'),
+	(15, 'version', 'FireWeb Version', '0.7PR'),
 	(16, 'modul', 'Selected Modul', 'default'),
 	(17, 'core', 'Selected Core', 'core'),
-	(18, 'menu_order', 'Menu Order', 'Start=url=index.php');
+	(18, 'menu_order', 'Menu Order', 'Start=url=index.php'),
+	(19, 'lang', 'Language', 'en');
 	";
 
 	//////////////////////

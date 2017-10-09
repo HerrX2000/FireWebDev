@@ -13,11 +13,17 @@ function getBrowser($u_agent, $useronunknown)
     elseif (preg_match('/linux/i', $u_agent)) {
         $platform = 'Linux';
     }
+	elseif (preg_match('/iPhone/i', $u_agent)) {
+        $platform = 'iOS';
+    }
     elseif (preg_match('/macintosh|mac os x/i', $u_agent)) {
         $platform = 'Mac';
     }
     elseif (preg_match('/windows|win32/i', $u_agent)) {
         $platform = 'Windows';
+    }
+	elseif (preg_match('/bot/i', $u_agent) or preg_match('/spider/i', $u_agent)) {
+        $platform = 'Bot';
     }
 	else{
 		$platform = 'Unknown';
@@ -34,6 +40,11 @@ function getBrowser($u_agent, $useronunknown)
         $bname = 'Mozilla Firefox'; 
         $ub = "Firefox"; 
     } 
+	elseif(preg_match('/Mozilla/i',$u_agent) and preg_match('/Trident/i',$u_agent)) 
+    { 
+        $bname = 'Internet Explorer 11'; 
+        $ub = "Trident"; 
+    }
     elseif(preg_match('/Chrome/i',$u_agent)) 
     { 
         $bname = 'Google Chrome'; 
@@ -54,7 +65,11 @@ function getBrowser($u_agent, $useronunknown)
         $bname = 'Netscape'; 
         $ub = "Netscape"; 
     }
-	 else
+	elseif (preg_match('/Google/i', $u_agent)) {
+        $bname = 'Googlebot';
+		$ub = "Googlebot";
+    }
+	else
     { 
         $bname = 'Unknown'; 
         $ub = "Unknown"; 
@@ -90,9 +105,9 @@ function getBrowser($u_agent, $useronunknown)
     if ($version==null || $version=="") {$version="?";}
     
 	if ($useronunknown === true){
-			if($bname == "Unknown" and $version == "?" and $platform == "Unknown"){
+			if($bname == "Unknown" /*and $version == "?" and $platform == "Unknown"*/){
 			$bname = $u_agent;
-			$platform = "?";
+			//$platform = "?";
 			}
 	}
     return array(

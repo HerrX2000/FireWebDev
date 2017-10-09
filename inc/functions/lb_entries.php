@@ -17,10 +17,10 @@ function show_entries($table='',$limit='')
 
 			//
 			if (find_mobile_browser(false)==true){
-				$edit_target="entry_edit.php?exp=0";
+				$edit_target="entry_edit.php?inline=0";
 			}
 			else{
-				$edit_target="entry_edit.php?exp=1";
+				$edit_target="entry_edit.php";
 			}
 				
 			while ($row = $db_my->fetch_assoc($result))
@@ -31,7 +31,8 @@ function show_entries($table='',$limit='')
 			foreach($rows as $row){
 			echo "<div class='content'>";
 			echo $row['content']."<p style='text-align:right;'> von: ".$row['autor'];
-			if (@$_SESSION["moderator"] == "1" or @$_SESSION["admin"] == "1")
+			global $user;
+			if ($user->verify(1)===true)
 			{
 			echo "<br>
 			<div><div style='float:left;'>

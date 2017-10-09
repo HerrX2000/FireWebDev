@@ -2,14 +2,8 @@
 //Titel
 		
 
-function file_titel(){
+function file_title(){
 		$titel="Beitrag ändern";	
-		if ($titel==""){
-		$dateiname=$_SERVER['SCRIPT_NAME'];  
-		$path = pathinfo($dateiname);
-		$path["filename"]= ucfirst($path["filename"]);
-		$titel = $path["filename"];
-		}
 		return $titel;
 		}
 		
@@ -26,7 +20,7 @@ function file_titel(){
 		
 	function content_main()
 	{	
-		if ($_GET['exp']==1){
+	if (!isset ($_GET['inline']) or $_GET['inline']!=0){
 			echo "
 		<script src=\"//cdn.tinymce.com/4/tinymce.min.js\"></script>
 			<script>	tinymce.init({
@@ -44,9 +38,9 @@ function file_titel(){
 		//header and textarea (with hint for other editor)
 		echo"<div class='content'>
 		
-		<form action='entry_edit.php?table=".$_POST["table"]."&id=".$id=$_POST["id"]."&exp=0' method='post'>
-			<input type='image' style='color: #c00 !important; text-transform: uppercase;border: 1px solid #970000;padding-left: 2px;padding-right: 2px;float:right;' alt='switch to old editor'>
-			<input type='hidden' name='name' value='".$_POST["name"]."'>
+		<form action='entry_edit.php?table=".$_POST["table"]."&id=".$_POST["id"]."&inline=0' method='post'>
+			<input type='image' style='color: #c00 !important; text-transform: uppercase;border: 1px solid #970000;padding-left: 2px;padding-right: 2px;float:right;' alt='switch editor'>
+			<input type='hidden' name='table' value='".$_POST["table"]."'>
 			<input type='hidden' name='id' value='".$_POST["id"]."'>
 			</form>
 		
@@ -56,7 +50,7 @@ function file_titel(){
 			<input type='hidden' name='id' value='".$_POST["id"]."'>
 			<div id='content_pure' class='tinymce' style='margin:-7px;padding:4px;border-style:solid;border-width:2px;border-color:grey;'>
 		";
-		echo show_entry($table=$_POST["table"], $id=$_POST["id"]);
+		echo show_entry($table=$_POST["table"], $_POST["id"]);
 		echo"</div>
 		<input type=\"hidden\" id='content_ready' name='content'>
 		
@@ -85,17 +79,13 @@ function file_titel(){
 		</script>";
 		
 		echo"<div class='content'>
-		<form name='change_editor' action='entry_edit.php?table=".$_POST["table"]."&id=".$id=$_POST["id"]."&exp=1' method='post'>
+		<form name='change_editor' action='entry_edit.php?table=".$_POST["table"]."&id=".$id=$_POST["id"]."&inline=1' method='post'>
+			<input type='image' style='color: #c00 !important; text-transform: uppercase;border: 1px solid #970000;padding-left: 2px;padding-right: 2px;float:right;' alt='switch to inline- editor'>
 			<input type='hidden' name='table' value='".$_POST["table"]."'>
-			<input type='hidden' name='id' value='".$id=$_POST["id"]."'>
-			</form>
-			<a href='#' onclick='document.change_editor.submit();' class='button'
-			style='color: #c00 !important; text-transform: uppercase;border: 1px solid #970000;'>
-			<h3>switch to inline-editor</h3></a> 
-		</div>";
+			<input type='hidden' name='id' value='".$_POST["id"]."'>
+			</form>";
 		
 		echo"		
-		<div class='content'>
 		<h1>Beitrag bearbeiten
 		</h1>
 		<form name='aendern' action='entry_edit_send.php?id=".$_POST["id"]."' method='post'>

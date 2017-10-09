@@ -301,17 +301,21 @@
 			}
 			
 		/*Profil*/
-		
+		.profil_entry
+		{
+		max-width:64%;
+		display:inline-block
+		}
 		.profil_menu
 		{
 		height:340px;
 		overflow-y: scroll;
 		max-width:36%;
-		width:230px;
 		border-width:0px;
 		border-style:dotted;
 		border-color:grey;
-		float: right;
+		float: left;
+		display:block;
 		}
 		.profil_menu_entry
 		{

@@ -1,84 +1,74 @@
 <?php 
-//entry		
-function show_entry($table='', $id=''){
-			$S_STARTZEIT = microtime(true);
-			global $db_my;
-			//
-			if ($id=="")
-				{
-			die ('<br>Kein Beitrag ausgewählt');
-			}
-			else{
-			//
-			
-			//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
-			$table = $db_my->escape_string($table);
-			$id = $db_my->escape_string($id);
-			if (ctype_digit($id)==true){
-				$query="SELECT id,content from ". $db_my->prefix ."$table WHERE id = '$id'";
-			}
-			else{
-				$query="SELECT id,content from ". $db_my->prefix ."$table WHERE name = '$id'";
-			}
-			//
-			$result=$db_my->query($query, $hide_errors=1, $write_query=0);
-			//
-			while ($row =  $db_my->fetch_assoc($query=$result))
-			{
-			$rows[] = $row ;
-			}
-			foreach($rows as $row){
-				return $row['content'];
-			}
+//entry
+function entry($table='', $id=''){
+	global $db_my;
+	//
+	if ($id=="")
+		{
+	die ('<br>Kein Beitrag ausgewählt');
+	}
+	else{
+	//
 	
-		}
-		
-		$S_ENDZEIT = microtime(true);
-		$S_LAUFZEIT = $S_ENDZEIT - $S_STARTZEIT;
-		$S_LAUFZEIT = round ($S_LAUFZEIT, 6);
-		$S_LAUFZEIT_MS = $S_LAUFZEIT * 1000;
-		
-		
-		}
+	//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
+	$table = $db_my->escape_string($table);
+	$id = $db_my->escape_string($id);
+	if (ctype_digit($id)==true){
+		$query="SELECT id,content from ". $db_my->prefix ."$table WHERE id = '$id'";
+	}
+	else{
+		$query="SELECT id,content from ". $db_my->prefix ."$table WHERE name = '$id'";
+	}
+	//
+	$result=$db_my->query($query, $hide_errors=1, $write_query=0);
+	//
+	while ($row =  $db_my->fetch_assoc($query=$result))
+	{
+	$rows[] = $row ;
+	}
+	foreach($rows as $row){
+		return $row['content'];
+	}
+	}
+}
 
-function edit_entry($table='', $id='', $name='')
+	
+function show_entry($table='', $id=''){
+	echo entry($table, $id);
+}
+
+function edit_entry($table='', $id='', $content='')
 
 		{
 			global $db_my;
+			global $user;
 			//
-			if ($id=="" or $_SESSION["moderator"] != "1" and $_SESSION["admin"] != "1")
+			if ($user->verify(1)==false)
 			{
 			#
-			if ($_SESSION["moderator"] != "1" and $_SESSION["admin"] != "1"){
 			die ('<br>Keine Admin- oder Moderatorrechte');
-			}
-			
-			if($id=="") {
-					die ('<br>Kein Beitrag ausgewählt');
-			}
+
 			#		
 			}
 			//
-			else{
-					$content=$_POST['content'];
-					//
-					$table = $db_my->escape_string($table);
-					$content = $db_my->escape_string($content);
-					$id = $db_my->escape_string($id);
-					$query="UPDATE ". $db_my->prefix ."$table Set content = '$content' WHERE id = '$id'";
-					//
-					$result=$db_my->query($query, $hide_errors=0, $write_query=0);
-					if ($name != ""){
-						$name = $db_my->escape_string($name);
-						$query="UPDATE ". $db_my->prefix ."$table SET name = '$name' WHERE id = '$id'";
-						//
-						$result=$db_my->query($query, $hide_errors=0, $write_query=0);
-					}
+			elseif($user->verify(1)==true){
+				if($id=="") {
+					die ('<br>Kein Beitrag ausgewählt');
+				}
+				$content=$_POST['content'];
+				//
+				$table = $db_my->escape_string($table);
+				$content = $db_my->escape_string($content);
+				$id = $db_my->escape_string($id);
+				$query="UPDATE ". $db_my->prefix ."$table Set content = '$content' WHERE id = '$id'";
+				//
+				$result=$db_my->query($query, $hide_errors=0, $write_query=0);
 			}
 	}
 function add_entry($table='')
 		{	
 			global $db_my;
+			global $user;
 			if (isset($_POST["content"]) and $_POST["content"] != ""){
 			$content=$_POST["content"];
 			}
@@ -96,7 +86,7 @@ function add_entry($table='')
 
 				
 			//
-			if (isset ($content) and $_SESSION["admin"]==1)
+			if (isset ($content) and $user->verify(2)===true)
 			{
 					$datum =  date("d.m.Y",time());		
 				$content = $db_my->escape_string($content);
@@ -128,13 +118,14 @@ function add_entry($table='')
 function remove_entry($table='', $id='')
 		{
 			global $db_my;
+			global $user;
 			//
 
-			if ($id=="" or $_SESSION["moderator"] != "1" and $_SESSION["admin"] != "1")
+			if ($id=="" or $user->verify(1)==false)
 			{
 			#
 			
-			if ($_SESSION["moderator"] != "1" and $_SESSION["admin"] != "1"){
+			if ($user->verify(1)==false){
 			die ('<br>Keine Admin- oder Moderatorrechte');
 			}
 			
@@ -144,7 +135,7 @@ function remove_entry($table='', $id='')
 			#		
 			}
 			//
-			else{
+			elseif($user->verify(1)===true){
 			//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
 			//
 			$table = $db_my->escape_string($table);
@@ -159,9 +150,10 @@ function remove_entry($table='', $id='')
 function delete_entry($table='', $id='')
 		{
 			global $db_my;
+			global $user;
 			//
-			if (!$id=="") {
-			die ('<br>'.' Error: ');
+			if (!$id=="" or $user->verify(1)==false) {
+			die ('Error: no id or 403');
 			}
 			//
 			else{

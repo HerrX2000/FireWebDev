@@ -11,6 +11,7 @@ function file_title(){
 //Hauptteil	
 	function content_main()
 	{
+		global $user;
 		echo"
 		<div class='content'>";
 		add_comment_mysql($table='bug_report');

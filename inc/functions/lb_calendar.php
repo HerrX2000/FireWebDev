@@ -27,7 +27,8 @@ function show_calendar()
 			$date_aus = date("d.m.y",strtotime($date));
 			echo "<td style='border-style:solid;border-color:#585858;border-width: 1px;'><b>".$date_aus."</b></td>";
 			echo "<td style='border-style:solid;border-color:#585858;border-width: 1px;height:54px;'><b><a href='".$row['Link']."' class='link_accent'>".$row['event']."</a></b></td>";
-			if (isset($_SESSION["username"])){
+			global $user;
+			if ($user->verify(0)===true){
 			echo "<td style='border-style:solid;border-color:#585858;border-width: 1px;width:33px;'>
 			<form name='aendern_start' action='calender_edit.php?event=".$row["event"]."' method='post'>
 			<input type='hidden' name='id' value='".$row['id']."'>
@@ -123,6 +124,7 @@ function add_calendar_entry()
 //		
 function show_calendar_event_next(){
 			global $db_my; 
+			global $user;
 		//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
 			$date = date('Y-m-d');
 			//
@@ -132,7 +134,7 @@ function show_calendar_event_next(){
 			//
 			if ($db_my->num_rows($result) == 0) {
 			echo "<p style='text-align:center;'><b>Nächstes Event: </b></p>";
-			if (@$_SESSION['admin']==1){
+			if ($user->verify(1)===true){
 				echo "
 				<p style='margin-left:2%;'>-Kein Event geplant-</p>
 				<a href='profil.php?p=event_erstellen' class='button'>

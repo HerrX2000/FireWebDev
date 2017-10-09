@@ -14,11 +14,13 @@ function file_title(){
 //Hauptteil	
 	function content_main()
 	{
+		global $user;
 		echo "<div class='content'>";		
-		if (!function_exists('user_logout')) {
+		if (!$user) {
 			echo "Functions are not available.<br />\n";
+			exit;
 		}		
-		user_logout();
+		$user->logout();
 		echo "</div>"; 
 	}
 //Content_left

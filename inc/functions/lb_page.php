@@ -1,7 +1,37 @@
 <?php 
 //page
 function show_page($table='', $id=''){
-	show_entry($table, $id);
+	return entry($table, $id);
+}
+function show_page_edit_button($table='', $p){
+	global $db_my;
+	if (ctype_digit($p)==true){
+		$query="SELECT id,name from ". $db_my->prefix ."$table WHERE id = '$p'";
+	}
+	else{
+		$query="SELECT id,name from ". $db_my->prefix ."$table WHERE name = '$p'";
+	}
+	//
+	$result=$db_my->query($query, $hide_errors=1, $write_query=0);
+	//
+	while ($row =  $db_my->fetch_assoc($query=$result))
+	{
+	$rows[] = $row ;
+	}
+	foreach($rows as $row){
+		$id=$row['id'];
+		$name=$row['name'];
+	}
+	echo"
+	<div class='content' style='float:right;'>
+	<form action='page.php?a=edit&p=".$name."&id=".$id."' method='post'>
+	<input type='hidden' name='table' value='".$table."'>
+	<input type='hidden' name='id' value='".$id."'>
+	<input type='hidden' name='name' value='".$name."'>
+	<input type='image' src='images/icons/entry_edit.png' style='wdith:32px;height:32px;' alt='edit_entry'>
+	</form>
+	</div>
+	";
 }
 function page_title($default='')
 {

@@ -1,14 +1,20 @@
 <?php
 //Content
 //Spezialteil
-	function set_file()
+	function file_title()
 	{
 		return "Registrieren";
+	}
+	function content_top()
+	{
+		echo"
+		";
 	}
 //Hauptteil	
 	function content_main()
 	{ 
-		if (isset($_SESSION["username"])) 
+		global $user;
+		if ($user->verify(0)===true) 
 			{
 			echo"<div class='content'>Du hast bereits ein Account.</div>";
 			}

@@ -36,10 +36,10 @@ function show_area_entry($table='',$default='')
 			}
 			
 			if (find_mobile_browser(false)==true){
-				$edit_target="area_edit.php?exp=0";
+				$edit_target="area_edit.php?inline=0";
 			}
 			else{
-				$edit_target="area_edit.php?exp=1";
+				$edit_target="area_edit.php";
 			}
 			
 			//
@@ -77,7 +77,8 @@ function show_area_entry($table='',$default='')
 				}
 			
 			}
-			if (@$_SESSION["moderator"] == "1" or @$_SESSION["admin"] == "1")
+			global $user;
+			if ($user->verify(1)===true)
 			{
 				if ($row['modifiable']==1){
 					echo "<div><div style='float:left;'>
@@ -137,6 +138,42 @@ function show_area_menu($table='')
 				}
 			}
 		}
+function area_menu($table='')
+		{
+			global $db_my; 
+			//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
+			//
+			$table_n = $table;
+			$table = $db_my->escape_string($table);
+			$table = "area_".$table;
+			$query="SELECT id,name,content from ". $db_my->prefix ."$table ORDER by ID ";
+
+			//
+			$result=$db_my->query($query, $hide_errors=1, $write_query=0);
+			//
+			$num_rows=$db_my->num_rows($result);
+		
+			//
+			
+			$dateiname=$_SERVER['SCRIPT_NAME'];  
+			$path = pathinfo($dateiname);
+			$pfad=$path["filename"].".".$path["extension"];
+		
+			while ($row = $db_my->fetch_assoc($result))
+			{
+			$rows[] = $row ;
+			}
+			$counter=0;
+			$array = array();
+			foreach($rows as $row){
+			$array[$counter] = array();
+			array_push($array[$counter],"?p=".$table_n."&r=".$row['name']);
+			array_push($array[$counter],$row['name']);
+			$counter++;
+			}
+			return $array;
+		}
+		
 function show_area_menu_mobile($table='',$width='98%',$col='1')
 		{
 			global $db_my; 
@@ -166,7 +203,7 @@ function show_area_menu_mobile($table='',$width='98%',$col='1')
 			foreach($rows as $row){
 			
 			echo "<a href='".$pfad."?p=".$table_n."&r=".$row['name']."' style='width:".$width.";height:40%;line-height:200%;font-size:1.0em;' class='button'>".$row['name']."</a>";
-			$counter = $counter + 1;
+			$counter ++;
 				if ($counter==$col){
 					echo"<br>";$counter==0;
 				}
@@ -175,7 +212,6 @@ function show_area_menu_mobile($table='',$width='98%',$col='1')
 			{
 				echo "<a href='#' style='width:".$width.";height:40%;line-height:200%;font-size:1.0em;' class='button'>&nbsp;</a>";
 			}
-			echo "<here>";
 		}
 function area_title($default='', $root=false)
 		{
@@ -205,9 +241,11 @@ function area_title($default='', $root=false)
 	
 function edit_area_entry($table='', $id=''){
 			global $db_my;
+			
 			if (isset ($_POST['content']) and $_POST['content'] != ""){
 				//
 				$content=$_POST['content'];
+				$content = $db_my->escape_string($content);
 				//
 				$query="UPDATE ". $db_my->prefix ."$table SET content = '$content' WHERE id = '$id'";
 				//
@@ -216,6 +254,7 @@ function edit_area_entry($table='', $id=''){
 			if (isset ($_POST['name']) and $_POST['name'] != ""){
 				//
 				$name=$_POST['name'];
+				$name = $db_my->escape_string($name);
 				//
 				$query="UPDATE ". $db_my->prefix ."$table SET name = '$name' WHERE id = '$id'";
 				//
@@ -258,18 +297,18 @@ function show_area_entries($table, $target){
 			<td><input type='text' name='title'' value='".$row['title']."'></td>
 			<td><input type='text' name='name' value='".$row['name']."'></td>
 			<td style='border-style:solid;border-color:#585858;border-width: 1px;width:33px;'>
-			<input type='image' src='images/icons/edit.png' style='width:32px;height:32px;' alt='edit_entry' onclick=\"return confirm('')\">			
+			<input type='image' src='images/icons/edit.png' style='width:32px;height:32px;' alt='edit_entry' onclick=\"return confirm('Ändern?')\">			
 			</form>
 			<form name='delete' action='?t=".$_GET['t']."&id=".$row["id"]."&delete=true' method='post'>
 			<input type='hidden' name='id' value='".$row['id']."'>
 			<td style='border-style:solid;border-color:#585858;border-width: 1px;width:33px;'>
-			<input type='image' src='images/icons/delete.png' style='width:32px;height:32px;' alt='delete_entry' onclick=\"return confirm('')\">		
+			<input type='image' src='images/icons/delete.png' style='width:32px;height:32px;' alt='delete_entry' onclick=\"return confirm('Löschen?')\">		
 			</form>
 			</td>";
 			echo "</tr>";			
 		}			
 		echo"</table>
-		id1 = default
+		Hint: id1 = default
 		";
 }
 function edit_area_entries($table, $id){
@@ -281,7 +320,6 @@ function edit_area_entries($table, $id){
 			$title = $db_my->escape_string($_POST['title']);
 			//
 			if($db_my->query("UPDATE ". $db_my->prefix ."$table SET id='$id_new', title='$title', name='$name' WHERE id='$id'")){
-				echo "Query: UPDATE ". $db_my->prefix ."$table SET id='$id_new', title='$title', name='$name' WHERE id='$id'";
 				return true;
 				//allways returns true 
 			}

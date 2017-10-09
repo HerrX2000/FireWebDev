@@ -1,93 +1,89 @@
 <?php
+
 //Content
 function file_title(){
 		return page_title($default=null);
 		}
 //Spezialteil
-	function content_top()
-	{
-		echo"
-		";
-	}
+function content_top()
+{
+	echo"
+	";
+}
 //Hauptteil
-		
-	function content_main()
-	{	
-		$id=$_GET['p'];
-		echo show_entry($table="pages",$id=$id);
-		//dev image slider
-		if ($_GET['p']=="images"){
-			echo"<div class='content'>
-			<link rel='stylesheet' type='text/css' href='inc/library/diy-slider.css'>
-
-			<div class='diy-slideshow'>";
-			function scan_for_images(){
-						$dir = FW_ROOT."/images/praxis";
-						$dh  = opendir($dir);
-						while (false !== ($filename = readdir($dh))) {
-							$files[] = $filename;
-						}
-						$nmb=0;
-						foreach($files as $file){
-							if (strpos($file,'.jpg') !== false) {
-								$file_value = str_replace(".jpg", "", $file);
-								if(@$xml_file=simplexml_load_file( FW_ROOT."/images/praxis/".$file_value.".xml")){
-									$title = $xml_file->title;
-									$text = $xml_file->text;
-								}
-								else {
-									$title = $file_value;
-									$text = "";
-								}
-								if ($nmb!=0){
-									$class="";
-								}
-								else{
-									$class="class='show'";
-								
-								$nmb = 1;
-								}
-								echo "<figure style='width:100%;' $class>
-									<img src='images/praxis/$file' style='width:80%;position:relative;margin-left:10%;z-index:1;' /> 
-									<img src='images/praxis/$file' style='width:100%;position: absolute;left: 0%;z-index:0;filter: blur(5px);max-height:495px;' /><figcaption style='padding-left:12%;min-height:2.5em;'><b>".$title."</b></br>".$text."</figcaption> 
-								<br>
-								</figure>";
-								
-								
-								/*
-								echo "<figure style='width:100%;' $class>
-									<img src='images/praxis/$file' style='width:100%;' /><figcaption><b>".$title."</b></br>".$text."</figcaption> 
-								</figure>";
-								simple image no blur
-								*/
-							}
-						}
-					}
-					scan_for_images();
+	
+function content_main()
+{	
+	global $user;
+	if (isset($_GET['a']) and $_GET['a']=="edit" and $user->verify(1)===true){
 			echo "
-			<span class='prev'>&laquo;</span>
-			<span class='next'>&raquo;</span>
-			</div>
-			</div>
-			<script src='inc/library/diy-slider.js'></script>";
+			<script src=\"".FW_CLIENT_ROOT."/inc/library/tinymce/tinymce.min.js\"></script>
+			<script>tinymce.init({
+				selector:'.editor',
+				language: '".FW_LANG."',
+				height : 320,
+				width : '100%',
+				min_width: 240,
+				max_width: '100%',
+				resize: 'both',				
+				plugins: [
+				'autolink lists link image charmap print preview hr anchor',
+				'searchreplace visualblocks code fullscreen spellchecker',
+				'insertdatetime media contextmenu paste'
+			  ],
+			  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+			
+			});
+		</script>
+		<div class='content'>
+			<h1 style='text-align:center;'>Seite bearbeiten</h1>
+			<form name='setting_form' id='setting_form' action='administration.php?p=edit_page_submit&submit=1' method='post'>
+				<input type='hidden' name='id' value='".$_POST['id']."'>	
+				<input type='hidden' name='name' value='".$_POST['name']."'>	
+				<textarea name='content' class='editor' type='text' maxlength='1000'>".entry($table="pages",$p=$_POST['name'])."</textarea>
+			</form>
+				
+		<br>
+		<a href='#' onclick='document.setting_form.submit();' class='button'>Senden</a> 
+		<a href='page.php?p=".$_POST['name']."' class='button'>Zurück</a>
+		</div>";
+		
 		}
-		//dev
-	}	
+		else{
+			$p=$_GET['p'];
+			$table="pages";
+			echo show_page($table,$p);
+			echo show_page_edit_button($table,$p);
+			
+			
+			
+			
+			
+			//dev image slider
+			if ($_GET['p']=="index"){
+				include_once (FW_ROOT."/addon/@praxis_grosse/init.php");
+				global $db_my;
+				$praxis_grosse = new praxis_grosse();
+				$praxis_grosse=$praxis_grosse->image_slider();
+			}
+			//dev
+		}
+}	
 
 //Content_left
-	function content_left()
-	{
-		echo "";
-	}
-//Content_right
-	function content_right1()
-	{
-		echo "";
-	}
-	
-//Startscript (onLoad='')
-	function startscript()
-	{
+function content_left()
+{
 	echo "";
-	}
+}
+//Content_right
+function content_right1()
+{
+	echo "";
+}
+
+//Startscript (onLoad='')
+function startscript()
+{
+echo "";
+}
 ?>

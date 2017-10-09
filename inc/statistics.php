@@ -7,11 +7,13 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 <!DOCTYPE html>
 <html>
 <head>
-<title>Statistics</title>
+<title>FireWeb - Statistics</title>
 <meta charset="utf-8">
+<meta name="robots" content="no-index, follow" />
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="style/statistics.css">
 </head>
-<body>
+<body style="width:100%;">
 <a href="../index.php" name="start"><h1>Statistiken</h1></a>
 <a href="#start" class="button" style="position: fixed;top:10px;right:10px;">Go to Start</a>
 <?php
@@ -125,8 +127,8 @@ while ($row = mysqli_fetch_assoc($fetch))
 $median=array();
 	//median and average
 		foreach($rows as $row){
-			if ($row['exe_time']>=9999){
-				$row['exe_time']=9999;
+			if ($row['exe_time']>=999){
+				$row['exe_time']=999;
 				}
 			if ($row['id']==1){
 				$start_datetime_query = $row['date_time'];
@@ -140,7 +142,7 @@ $median=array();
 			if (in_array($row['sessionid'],$incsessionids) == false){
 				array_push($incsessionids, $row['sessionid']);
 			}
-			$end_datetime_query = $row['date_time'];
+			
 			$average=$average+$row['exe_time'];
 			array_push($median,$row['exe_time']);
 			if ($row['pageapi'] != null){
@@ -160,32 +162,35 @@ $median=array();
 			$totalpc = $totalpc+1;
 			}
 		}
+			$end_datetime_query = $row['date_time'];
 		//set data
 			if ($total ==0) $total = 1;
 			if ($totalpc ==0) $totalpc = 1;
 			if ($totalmobile ==0) $totalmobile = 1;
+			$perc = $median;
 			$median = array_median($median);
+			$perc = array_perc($perc, 0.9);
 			$averageapi = $api / $total;
 			$average = $average / $total;
 			$averagepc = $averagepc / $totalpc;
 			$averagemobile = $averagemobile / $totalmobile;
-			$average = round($average,4);
-			$averagepc = round($averagepc,4);
-			$averagemobile = round($averagemobile,4);
-			$averageapi = round($averageapi,8);
+			$average = round($average,1);
+			$averagepc = round($averagepc,1);
+			$averagemobile = round($averagemobile,1);
+			$averageapi = round($averageapi,4);
 		//echo result
 		echo"<p>
 		<!-- Query: $query <br> -->
+			
 			Von: $start_datetime_query Bis: $end_datetime_query <br>
 			Median Total= $median ms<br>
-			<div id='extra_1' style='display:none'>
+			90% Total = $perc ms experimentell<br>
+			<br>			
 			Durchschnitt Total= $average ms<br>
 			Durchschnitt PC= $averagepc  ms<br>
 			Durchschnitt Mobile= $averagemobile  ms<br>
-			Durchschnitt API= $averageapi
-			</div>
-			<a href='#' id='extra_button' onclick=\"extra_1.style.display='block';extra_button.style.display='none'\">Mehr Anzeigen</a>
-			<br><br>	
+			Durchschnitt API= $averageapi<br>
+			<br>
 			APIs=";
 			$count=0;
 			foreach($incapis as $incapi) {
@@ -217,7 +222,7 @@ $median=array();
 				}
 			}
 			echo $countsession;
-		echo " Besuche";
+		echo " Sessions";
 		echo "<br>
 			$total Aufrufe, davon $totalmobile Mobile und $totalpc Desktop
 			</p>

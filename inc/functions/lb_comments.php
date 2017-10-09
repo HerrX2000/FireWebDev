@@ -17,7 +17,7 @@ function show_comments($table='',$limit='',$spalten='')
 			{
 			$anzahl = $anzahl + 1;
 			$gesamt_anzahl = $gesamt_anzahl + 1;
-			echo "<textarea cols='30' rows='5' style='background:#F3F3F3;' readonly>";
+			echo "<textarea cols='26' rows='5' style='background:#F3F3F3;' readonly>";
 			foreach($ausgabe_fertig as $key=>$wert){
 			echo $wert;
 			}

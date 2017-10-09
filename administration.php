@@ -5,6 +5,6 @@ if (isset($_SESSION["username"]))
 include("core/core.php");
 			}	
 else{
-echo"No access rights";
+die("403: No access rights");
 }
 ?>	

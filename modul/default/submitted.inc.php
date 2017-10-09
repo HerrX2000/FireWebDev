@@ -15,8 +15,9 @@ function file_title(){
 //Hauptteil
 function content_main()
 	{ 	
+		global $user;
 		echo"<div class='content'>";
-		if (isset($_SESSION["username"])) {
+		if ($user->verify(0)===true) {
 			switch ($_GET["a"]) {
 				case "status":
 					edit_status();
@@ -30,7 +31,7 @@ function content_main()
 					break;
 				case "edit_profile":
 					if($_POST['profil_password']!=""){
-						user_profil_edit();
+						$user->profil_edit();
 					}
 					break;
 			}

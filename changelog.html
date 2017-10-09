@@ -1,8 +1,7 @@
-<!DOCTYPE>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" >
-<meta http-equiv="content-language" content="de">
 <meta name="robots" content="no-index, follow" />
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="FireWeb - Changelog | FireWeb is a Content Managment System under development | Copyright (C) 2014-2017 Frederik Mann">
@@ -11,7 +10,7 @@
 </head>
 <body>
 <div style="float:right;"><b><a href="disclaimer.html">Disclaimer</a></b></div>
-<h1><a href="index.php" name="Anfang">Changelog</a></h1>
+<h1><a href="index.php" id="Anfang">Changelog</a></h1>
 <p>FireWeb is a Content Managment System under development.
 <br>Copyright (C) 2014-2017 Frederik Mann
 <br>
@@ -19,14 +18,15 @@
 <br>		
 <br>The source code is available via Github@FireWebDev.</p>
 
-<h3>Weiter zum <a>Entwicklerblog</a></h3>
+<h3>To the <a href="">development blog</a></h3>
+<b><a href="changelog.html#Anfang">Table of Contents</a></b>
 <ul>
-<b><a href="changelog.html#Anfang">Inhaltsverzeichnis</a></b>
 <!--
 <li><a href="changelog.html#version0.8">0.8 'Early Bird (Admin)'</a>
 <li><a href="changelog.html#version0.7">0.7 'Early Hatch (CMS)'</a>
 -->
-<li><a href="changelog.html#version0.7">0.7 'Early Hatch'</a>
+<li><a href="changelog.html#version0.8">0.8 'Controller'</a>
+<li><a href="changelog.html#version0.7">0.7 'Studio'</a>
 <li><a href="changelog.html#version0.6">0.6 'Uuser' & 'Burn(V)'</a>
 <li><a href="changelog.html#version0.5">0.5 'Spherix</a>
 <li><a href="changelog.html#version0.4">0.4 'Papa'</a>
@@ -35,38 +35,109 @@
 <li><a href="changelog.html#version0.1">0.1 '1st Step'</a>
 <li><a href="changelog.html#Legende">Legende</a>
 </ul>
-
 <div>
-
-
-Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> Mai 2015
+Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development:  May 2015
 <br>
 <br>
-<b><a name="version0.8">Version 0.8</a></b>
-<br>Beginn of Development: -not planed-
+<b><a id="version0.8">Version 0.8 'Controller'</a></b>
+<br>Beginn of Development: Q4 2017
 <br>
 <br>
-<b><a name="version0.7">Version 0.7 'Early Hatch'</a></b>
+<b><a id="version0.7">Version 0.7 'Studio'</a></b>
 <br>Beginn of Development: 8.2.2017
 <br>Alpha-Release: 18.06.2017
 <br>Beta-Release: 31.07.2017
-<br>Release: Q4 2017
+<br>Release: Q3 2017
+<br>
+<br><b>0.7 PR</b>
+<br>8. October 2017
+<ul>
+<li><b>Editing</b>
+<ul>
+<li>Edit pages directly (experimental)
+<li>In-line and On-line editor supported
+<li>Editor switch reworked and compressed @default modul (only area/experimental)
+<li>TinyMCE included in FireWeb for multiple localisations(1.5MB)
+<li>Inline-Editor slightly improved
+</ul>
+<li><b>Statistics</b>
+<ul>
+<li>Google Analytics support (wip)
+<li>Statistics 90%il added
+<li>Statistics mobile update
+<li>Also collects row parameter
+</ul>
+<li>Profil updated
+<ul>
+<li>Boxing overworked @fw_basic.css
+<li>Greyed out outdated actions
+<li>New Startpage (planned)
+<li>Login logic & security overhault
+</ul>
+<li>Detect Browser updated
+<ul>
+<li>Internet Explorer 11 added
+<li>iOS added
+<li>Bots & Spider added
+</ul>
+<li>Not in default modul
+<ul>
+<li>Commentars
+<li>Bug Report
+<li>Calendar
+</ul>
+<li>Security
+<ul>
+<li>New user class
+<li>user verify function with 3 levels (user/mod/admin)
+<li>basic verify on lib level (experimental)
+<li>logout mcrypt_create_iv replaced by random_bytes
+<li>X-XSS-Protection: 0
+</ul>
+<li>Core
+<ul>
+<li>cleaned up
+<li>modul include logic reworked
+</ul>
+<li>Modul
+<ul>
+<li>advanced verify on modul level
+<li>include and main functions separated (experimental)
+<li>modul can inc libs
+<li>FW_MODUL
+<li>loginkey verify over modul
+<li>modul_header_script
+<li>modul_footer_script
+<li>user function determined by modul
+</ul>
+<li>Others
+<ul>
+<li>lb_users removed
+<li>Google Analytics integration 
+<li>Nav scroll toogle now modul configurable()
+<li>Area edit fixed injection
+<li>Language setting (pre-alpha)
+<li>Area Menu in Nav Menu (canceld)
+</ul>
+</ul>
+<br>
 <br><b>0.7beta</b>
+<br>31. July 2017
 <ul>
 
 <li>Core Modul Error Handler 
-<li>impressum removed
-<li>disclaimer
+<li>Default Impressum removed
+<li>Default Disclaimer added
 <li>Better reCAPTCHA support
-<li>ana.php -> analytics.php
 <li>edit_editor.php removed
 <li>Login Library
-<li>replace fw_users with lb_users
+<li>fw_users to lb_users
 <li>"above the fold" loading
 <li>js compressed
 <li>file_title case for head and title
 <li>Specific Modul Script
-<li>Log Get
+
+<li>Install config updated
 <li><b>Cookie</b>
 <ul>
 <li>Cookie Lib
@@ -86,8 +157,8 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 <li><b>Analytics</b>
 <ul>
 <li>SessionID
+<li>Log p Get
 <li>Visit counter
-<li>Analytics-Panel (planed)
 </ul>
 <li><b>SEO</b>
 <ul>
@@ -108,7 +179,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 </ul>
 <br>
 <br><b>0.7alpha</b>
-<br>18.06.2017
+<br>18. June 2017
 <ul>
 <li><b>Page-System</b>
 	<ul>
@@ -249,7 +320,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 <li>Post in submited werden jetzt nur noch einzeln verarbeitet
 <li>Pre API 7
 <ul>
-<li>Calender update to pre API 7
+<li>Calendar update to pre API 7
 <li>Modul update to pre API 7
 <li>Core uptadted to pre API 7
 <li>FW_Login to pre API 7
@@ -276,7 +347,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 <ul>
 <li>RewriteMod on
 <li>FW_CLIENT_ROOT
-<br>FireWebLink tempöräre entfernt
+<li>FireWebLink tempöräre entfernt
 <li>AMP entfernt
 <li>Minor fix
 </ul>
@@ -295,7 +366,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 <br>
 <ul>
 <li>Statistik überarbeitet
-<br>Mein Profilbild
+<li>Mein Profilbild
 <li>Minor fix
 </ul>
 <br>
@@ -318,7 +389,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 <ul>
 <li>Abfrage ob Nutzer exestiert verhindert
 <li>Neue Passwörter werden deutlich sicherer gespeichert
-<li>Anti-Brute-Force Ma?nahmen
+<li>Anti-Brute-Force Maßnahmen
 <li>Favicon-Standart vereinfacht
 <li>Passwort ändern fix
 </ul>
@@ -360,7 +431,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 <li>Anderes
 <ul>
 <li>Basic-Chaching
-<li>Gz
+<li>Kompression
 <li>Neue Icons
 <li>Header-Element überarbeitet
 <li>Fixed Menu verbessert
@@ -501,7 +572,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 <li>Hintergrundbild fixiert
 <li>Versionsnummer Global
 </ul>
-<br><b><a name="version0.6">0.6 'BurnV'</a></b>
+<br><b><a id="version0.6">0.6 'Burn'</a></b>
 <br>30. Januar 2015
 <ul>
 <li><b>Neue Funktionen</b>
@@ -528,7 +599,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 <li>Bug mit "Nächstes Kalender-Event" behoben
 </ul>
 </ul>
-<br><b>0.6PR 'Burn'</b>
+<br><b>0.6 PR</b>
 <br>30. Dezember 2014
 <ul>
 <li><b>Neue Funktionen</b>
@@ -565,7 +636,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 </ul>
 0.6b einwandfrei in 0.6PR nutzbar
 </ul>
-<br><b>0.6beta 'Burn'</b>
+<br><b>0.6beta</b>
 <br>17. November 2014
 <ul>
 <li><b>Neue Funktionen</b>
@@ -648,7 +719,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 0.5 voll übertragbar zu 0.6a 
 </ul>
 
-<br><b><a name="version0.5">Version 0.5 'Spherix'</a></b>
+<br><b><a id="version0.5">Version 0.5 'Spherix'</a></b>
 <br>Entwicklungsstart: 26.08.2014
 <br>Pre-Release: 29.08.2014
 <br>Release: 1.09.2014
@@ -697,7 +768,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 <li>vieles mehr
 <br>ältere nicht kompatibel
 </ul>
-<br><b><a name="version0.4">Version 0.4 RC 'Papa'</a></b>
+<br><b><a id="version0.4">Version 0.4 RC 'Papa'</a></b>
 <br>[Info: erste FireWeb Version]
 <br>Vor 14.3.2014
 <ul>
@@ -714,7 +785,7 @@ Entwicklungsstart von <a href="http://mocodev.blackburn-division.de/"> Moco</a> 
 
 <h4>&darr; [FireTeam69.net16.net] &darr;</h4>
 <br>
-<b><a name="version0.3">Version 0.3 '3rd Step'</a></b>
+<b><a id="version0.3">Version 0.3 '3rd Step'</a></b>
 <br>[Info: letzte eigene FT69 Version vor Joomla-Nutzung]
 <ul>
 <li>Uhrzeitanzeige statt "back to Google"
@@ -739,7 +810,7 @@ Version 0.3alpha
 <li>Link zu "join use" (oben rechts)
 <li>Link zu "send use"
 </ul>
-<b><a name="version0.2">Version 0.2 '2nd Step'</a></b>
+<b><a id="version0.2">Version 0.2 '2nd Step'</a></b>
 <ul>
 <li>Überarbeitetes Design
 <li>Links zu unseren Platoons
@@ -783,12 +854,12 @@ Version 0.2beta
 <li>Klick zeigt Bild in Vollbild (nicht 100%)
 </ul>
 <br>
-<b><a name="version0.1">Version 0.1 '1st Step'</a></b>
+<b><a id="version0.1">Version 0.1 '1st Step'</a></b>
 <ul>
 <li>Erste Version
 </ul>
 <br>
-<br><h3><a name="Legende">Legende</a></h3>
+<br><h3><a id="Legende">Legende</a></h3>
 <b>Versions-Bezeichnung</b>
 <br>Alpha(0.1a): Erste Veröffentlichung einer neuen Version. Meistens nicht online, da meistens nicht getestet. Erste Vorschau auf neue Funktionen.
 <br>Beta(0.1b): Ein vorgeschrittener Version als die Alpha, oft schon online auf manchen Seiten, Funktionen werden getestet.

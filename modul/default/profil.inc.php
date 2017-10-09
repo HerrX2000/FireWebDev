@@ -15,9 +15,10 @@ function file_title()
 //Hauptteil	
 	function content_main()
 	{ 
-		if (isset($_SESSION["username"])) 
+		global $user;
+		if ($user->verify(0)===true) 
 			{
-		if ($_SESSION["moderator"] == "1" or $_SESSION["admin"] == "1"){
+		if ($user->verify(1)===true){
 		$show_profil="none";
 		}
 		else{
@@ -38,7 +39,7 @@ function file_title()
 			<script>tinymce.init({
 				selector:'.editor',
 				height : 280,
-				width : '62%',
+				width : '99%',
 				min_width: 240,
 				max_width: 700,
 				resize: 'both',				
@@ -59,9 +60,7 @@ function file_title()
 			
 		///profil_list_entries
 		///Level-1
-		echo "<div style='min-height:120px;'>";
 		echo "
-		<p><h2 id=\"profil_title_mobile\" style=\"display:none;\">Mein Profil</h2></p>
 		<div class='profil_menu' id='profil_menu' style='display:$profil_list_display;'>
 		
 	<table id='profil_menu_table'>
@@ -77,13 +76,13 @@ function file_title()
 	</tr>
 	<tr name='profil' style='display:$show_profil;'>
 		<td class='profil_menu_entry'>
-			<a href='?p=profil_bearbeiten' class='button' style='width:100%;height:40px;'>Profil bearbeiten</a>
+			<a href='?p=profil_bearbeiten' class='button' style='width:100%;height:40px;'>Passwort ändern</a>
 		</td>
 	</tr>
 		
 	<tr name='profil' style='display:$show_profil;'>
 		<td class='profil_menu_entry'>
-			<a href='?p=style_auswählen' class='button' style='width:100%;height:40px;'>Style auswählen</a>
+			<a href='?p=style_auswählen' class='button' style='width:100%;color:grey;'>Style auswählen &#10013;</a>
 		</td>
 	</tr>
 	<tr name='profil' style='display:$show_profil;'>
@@ -93,7 +92,7 @@ function file_title()
 	</tr>
 	";
 	//Level-2
-	if ($_SESSION["moderator"] == "1" or $_SESSION["admin"] == "1"){
+	if ($user->verify(1)===true){
 	echo"
 	<tr name='profil' style='display:none;'>
 		<td class='profil_menu_entry'>
@@ -108,17 +107,17 @@ function file_title()
 	</tr>
 	<tr name='moderator' style='display:none;'>
 		<td class='profil_menu_entry'>
-			<a href='?p=news_schreiben' class='button' style='width:100%;height:40px;'>News schreiben</a>
+			<a href='?p=news_schreiben' class='button' style='width:100%;color:grey;'>News schreiben &#10013;</a>
 		</td>
 	</tr>
 	<tr name='moderator' style='display:none;'>
 		<td class='profil_menu_entry'>
-			<a href='?p=event_erstellen' class='button' style='width:100%;height:40px;'>Event erstellen</a>
+			<a href='?p=event_erstellen' class='button' style='width:100%;color:grey;'>Event erstellen &#10013;</a>
 		</td>
 	</tr>
 	";}
 	//Level-3
-	if ($_SESSION["admin"] == "1" ){
+	if ($user->verify(2)===true){
 	echo"
 	<tr>
 		<td class='profil_menu_entry'>
@@ -127,12 +126,12 @@ function file_title()
 	</tr>
 	<tr name='administration' style='display:none;'>
 		<td class='profil_menu_entry'>
-			<a href='?p=kommentare' class='button' style='width:100%;height:40px;'>Kommentare</a>
+			<a href='?p=kommentare' class='button' style='width:100%;color:grey;'>Kommentare 	&#10013;</a>
 		</td>
 	</tr>
 	<tr name='administration' style='display:none;'>
 		<td class='profil_menu_entry'>
-			<a href='?p=bug_report' class='button' style='width:100%;height:40px;'>Bug-Report</a>
+			<a href='?p=bug_report' class='button' style='width:100%;color:grey;'>Bug-Report &#10013;</a>
 		</td>
 	</tr>
 	<tr name='administration' style='display:none;'>
@@ -167,6 +166,9 @@ function file_title()
 	
 
 				</div>
+				<div class='profil_entry' style='min-height:120px;'>";
+		echo "
+		<h2 id=\"profil_title_mobile\" style=\"display:none;\">Mein Profil</h2>
 				<h1 id=\"profil_title\" style=\"display:initial;\">Mein Profil</h1>	
 				
 			
@@ -177,15 +179,12 @@ function file_title()
 	
 		///
 		if (isset($_GET['p']) and $_GET['p']!="start"){
-			///
-			///Normal 
-			///
-			if ($_GET['p']=="profil_bearbeiten")
-			{
-				$profil_title = "Profil bearbeiten";
+			switch ($_GET['p']) {
+				case "profil_bearbeiten":
+					$profil_title = "Profil bearbeiten";
 				echo"
 				<form name='edit_profile' action='submitted.php?a=edit_profile' method='post'>
-				<table>
+				<table style='width:100%;'>
 				<br>
 				<tr>
 					<td>Aktuelles Passwort:</td>
@@ -208,195 +207,171 @@ function file_title()
 				</table>
 				
 				"; 
-			}
-			///
-			if ($_GET['p']=="avatar_upload")
-			{
-			$profil_title = "Avatar upload";
-			echo"<br> <form action=\"addon/@img_upload/init.php\" method=\"post\" enctype=\"multipart/form-data\">
-    Select image to upload (max. 64KB/recommend .jpg):
-	<br>
-    <input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">
-    <input type=\"submit\" value=\"Upload Image\" name=\"submit\">
-			</form>";
-			}
-
-			///
-			if ($_GET['p']=="avatar_show")
-			{
-			$profil_title = "Avatar anzeigen";
-			echo" <img src=\"uploads/avatar/".$_SESSION["uid"].".jpg\" alt=\"No Avatar\" height=\"64\" width=\"64\">"
-			;}
-
-			///
-			if ($_GET['p']=="style_auswählen")
-			{
-				global $settings;
-				function scan_for_style(){
-					$dir = FW_ROOT."/inc/style";
-					$dh  = opendir($dir);
-					while (false !== ($filename = readdir($dh))) {
-						$files[] = $filename;
-					}
-					foreach($files as $file){
-						if (strpos($file,'.css') !== false) {
-							$file_value = str_replace(".css", "", $file);
-							if($xml_file=simplexml_load_file("inc/style/".$file_value.".xml")){
-								$name = $xml_file->name;
-								$version = $xml_file->version;
+					break;
+				case "avatar_upload":
+					$profil_title = "Avatar upload";
+					echo"<br> <form action=\"addon/@img_upload/init.php\" method=\"post\" enctype=\"multipart/form-data\">
+					Select image to upload (max. 64KB/recommend .jpg):
+					<br>
+					<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">
+					<input type=\"submit\" value=\"Upload Image\" name=\"submit\">
+					</form>";
+					break;
+				case "avatar_show":
+					$profil_title = "Avatar anzeigen";
+					echo" <img src=\"uploads/avatar/".$_SESSION["uid"].".jpg\" alt=\"No Avatar\" height=\"64\" width=\"64\">";
+					break;
+				case "style_auswählen":
+					global $settings;
+					function scan_for_style(){
+						$dir = FW_ROOT."/inc/style";
+						$dh  = opendir($dir);
+						while (false !== ($filename = readdir($dh))) {
+							$files[] = $filename;
+						}
+						foreach($files as $file){
+							if (strpos($file,'.css') !== false) {
+								$file_value = str_replace(".css", "", $file);
+								if($xml_file=simplexml_load_file("inc/style/".$file_value.".xml")){
+									$name = $xml_file->name;
+									$version = $xml_file->version;
+								}
+								else{
+									continue;
+								}
+								echo "<option value='$file_value'>".$name." - ".$version."</option>";
 							}
-							else{
-								continue;
-							}
-							echo "<option value='$file_value'>".$name." - ".$version."</option>";
 						}
 					}
-				}
-				/*
-				alte liste
-				<option value='blackburn.css' selected='selected'>bd-Tank-0.6.9(default)</option>
-				  <option value='fw_basic.css'>FW-Basic-0.6.9</option>
-				  <option value='blackburn_braun.css'>bd-Tank-0.6a(braun)</option>
-				  <option value='blackburn_map.css'>bd-Map-0.6a</option>
-				  <option value='style_simple.css' >Simple-0.6</option>
-				  <option value='style_fireweb.css'>FireWeb-0.6</option>
-				  <option value='style_mobile.css' >Mobile-0.6.8</option>
-				  <option value='style_responsive.css' >Responsive-0.6.9</option>
-				*/
-				$profil_title = "Style auswählen";
-				echo"
-				<form action='profil.php' method='post'>
-				<select name='select_style' class='soflow'>
-				<option value='".$settings['default_style']."' selected='selected'>".$settings['default_style']." - Standart</option>
-				";
-				scan_for_style();
-				echo"</select>
-				<input type='submit' value='Wechseln'/>
-				</form>
-				<br><br><br>Manuell:
-				<form action='profil.php' method='post'>
-				<input name='select_style' type='text' value='style'/>
-				<input type='submit' value='Senden'/>
-				</form>
-				";
-				
-			}
-			///
-			if ($_GET['p']=="rechte_anzeigen")
-			{
+					$profil_title = "Style auswählen";
+					echo"
+					<form action='profil.php' method='post'>
+					<select name='select_style' class='soflow'>
+					<option value='".$settings['default_style']."' selected='selected'>".$settings['default_style']." - Standart</option>
+					";
+					scan_for_style();
+					echo"</select>
+					<input type='submit' value='Wechseln'/>
+					</form>
+					<br><br><br>Manuell:
+					<form action='profil.php' method='post'>
+					<input name='select_style' type='text' value='style'/>
+					<input type='submit' value='Senden'/>
+					</form>
+					";
+					break;
+				case "rechte_anzeigen":
 					$profil_title = "Rechte anzeigen";
 					if (isset($_SESSION["mitglied"])){
-					echo "<br>Deine Gruppe: ";
+						echo "<br>Deine Gruppe: ";
 					}
 					else{
-					echo"Keine Rechte";
+						echo"Keine Rechte";
 					}
 					if ($_SESSION["mitglied"]=="0")
 					{
-					echo "Gast";
+						echo "Gast";
 					}
 					if ($_SESSION["mitglied"]=="1")
 					{
-					echo "Freund";
+						echo "Freund";
 					}
 					if ($_SESSION["mitglied"]=="2")
 					{
-					echo "Entwickler";
+						echo "Entwickler";
 					}
 					if (isset($_SESSION["moderator"]) and $_SESSION["moderator"] == 1) 
 					{ 
-					echo "<br> Moderator: Ja";	
+						echo "<br> Moderator: Ja";	
 					}
 					if (isset($_SESSION["admin"]) and $_SESSION["admin"] == 1) 
 					{ 
-					echo "<br> Administrator: Ja";	
+						echo "<br> Administrator: Ja";	
 					}
+					break;
 			}
-			///
+			///			
 			///Moderator 
 			///
-			if ($_SESSION["moderator"] == "1" or $_SESSION["admin"] == "1"){
-			if ($_GET['p']=="news_schreiben")
-			{
-				$profil_title = "News schreiben";
-				echo"&nbsp";
-				echo"<form name='news' action='submitted.php?a=entry' method='Post'>
-				Tabelle: <input type='text' value='news' name='table'>
-				<textarea name='editor' class='editor' type='text' maxlength='1000'></textarea>
-				</form>
-				<a href='#' onclick='document.news.submit();'"; if(find_mobile_browser()==False)echo "style='width:65%;'";echo " class='button'><b>Senden</b></a>
-				";
-				
-			}
-			if ($_GET['p']=="event_erstellen")
-			{
-				$profil_title = "Event erstellen";
-				echo"<form name='calendar' action='submitted.php?a=calendar' method='Post'>
-				<table>
-				<tr>
-				<td>Name:</td>
-				<td><input name='name' type='text' maxlength='30' size='15' required></td>
-				</tr>
-				
-				<tr>
-				<td>Datum:</td>
-				<td><input name='datum' type='date' value='".date('Y-m-d')."' min='2015-01-01' max='2020-01-01' size='15' required></td>
-				</tr>
-				<tr>
-				<td>Link:</td>
-				<td><input name='link' type='text' value='' maxlength='80' size='15'><span id='tooltip'><a href='#' class='link'>[?]<span>In der Form 'link_name.php' für lokales oder 'http://www.domain.de'</span></a></span></td>
-				</tr>
-				</table>
-				<br>
-				</form>
-				<a href='#' onclick='document.calendar.submit();' "; if(find_mobile_browser()==False)echo "style='width:480px;'";echo "class='button'>Erstellen</a> 
-				";
-				
-			}
+			if ($user->verify(1)===true){
+				switch ($_GET['p']) {
+					case "news_schreiben":
+						$profil_title = "News schreiben";
+						echo"&nbsp";
+						echo"<form name='news' action='submitted.php?a=entry' method='Post'>
+						Tabelle: <input type='text' value='news' name='table'>
+						<textarea name='editor' class='editor' type='text' maxlength='1000'></textarea>
+						</form>
+						<a href='#' onclick='document.news.submit();'"; if(find_mobile_browser()==False)echo "style='width:100%;'";echo " class='button'><b>Senden</b></a>
+						";
+						break;
+					///
+					case "event_erstellen":
+						$profil_title = "Event erstellen";
+						echo"<form name='calendar' action='submitted.php?a=calendar' method='Post'>
+						<table>
+						<tr>
+						<td>Name:</td>
+						<td><input name='name' type='text' maxlength='30' size='15' required></td>
+						</tr>
+						
+						<tr>
+						<td>Datum:</td>
+						<td><input name='datum' type='date' value='".date('Y-m-d')."' min='2015-01-01' max='2020-01-01' size='15' required></td>
+						</tr>
+						<tr>
+						<td>Link:</td>
+						<td><input name='link' type='text' value='' maxlength='80' size='15'><span id='tooltip'><a href='#' class='link'>[?]<span>In der Form 'link_name.php' für lokales oder 'http://www.domain.de'</span></a></span></td>
+						</tr>
+						</table>
+						<br>
+						</form>
+						<a href='#' onclick='document.calendar.submit();' "; if(find_mobile_browser()==False)echo "style='width:480px;'";echo "class='button'>Erstellen</a> 
+						";
+						break;
+				}
 			}
 			///
 			///Admin
 			///
-			if ($_SESSION["admin"] == "1"){
-			
-			if ($_GET['p']=="kommentare")
-			{
-				$profil_title = "Kommentare";
-				echo"<br><br>";
-				show_comments($table='comments',$limit='6',$spalten='2');
-			}
-			///
-			if ($_GET['p']=="bug_report")
-			{
-				$profil_title = "Bug Report";
-				echo"<br><br>";
-				show_comments($table='bug_report',$limit='6',$spalten='2');
-			}
-			///
-			if ($_GET['p']=="website_status")
-			{
-				$profil_title = "Website Status";
-				echo"<br><br>";
-				echo"<form name='Status' action='submitted.php?a=status' method='post'>
-				<select name='status'>
-				  <option value='1' selected='selected'>Online</option>
-				  <option value='0'>Offline</option>
-				</select> HTML-Code
-				<br><textarea name='grund' type='text' style='width:60%;' cols='50' rows='10' maxlength='10000'>Grund:<br>Die Website ist zur Zeit wegen Wartungsarbeiten nur f&uuml;r User erreichbar.<br><br>Voraussichtlich
+			if ($user->verify(2)===true){
+				
+				switch ($_GET['p']) {
+					case "kommentare":
+						$profil_title = "Kommentare";
+						echo"<br><br>";
+						show_comments($table='comments',$limit='6',$spalten='2');
+						break;
+					///
+					case "bug_report":
+						$profil_title = "Bug Report";
+						echo"<br><br>";
+						show_comments($table='bug_report',$limit='6',$spalten='2');
+						break;
+					///
+					case "website_status":
+						$profil_title = "Website Status";
+						echo"<br><br>";
+						echo"<form name='Status' action='submitted.php?a=status' method='post'>
+						<select name='status'>
+						  <option value='1' selected='selected'>Online</option>
+						  <option value='0'>Offline</option>
+						</select> HTML-Code
+						<br><textarea name='grund' type='text' style='width:100%;' cols='50' rows='10' maxlength='10000'>Grund:<br>Die Website ist zur Zeit wegen Wartungsarbeiten nur f&uuml;r User erreichbar.<br><br>Voraussichtlich
 <br>Von: 00:00 Uhr
 <br>Bis: 00:00 Uhr</textarea>
-				<br>
-				</form>
-				<a href='#' onclick='document.Status.submit();'"; if(find_mobile_browser()==False)echo "style='width:480px;'";echo " class='button'>Senden</a>";
-				
-			}
+						<br>
+						</form>
+						<a href='#' onclick='document.Status.submit();'"; if(find_mobile_browser()==False)echo "style='width:100%;'";echo " class='button'>Senden</a>";
+						
+						break;
+				}
 			}
 		}
 		else{
 			$profil_title = "Startseite";
-			echo"<h3 style='text-align:center;'>Work in Progress</h3>			
-			
-			
+			echo"		
+			<p>Das User-Panel ist <b>in Entwicklung</b>.</p>
 			";
 		}
 		
