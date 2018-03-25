@@ -20,17 +20,39 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 if ($_SESSION['admin']==1 or $_SESSION['moderator']==1){
 include dirname(dirname((__FILE__)))."/global.php";
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
+$g_date_start=@$_GET['date_start'];
+if (isset($_GET['date_start'])){
+	$g_date_end=$_GET['date_end'];
+}
+else{
+	$g_date_end=date('Y-m-d');
+}
+
 echo"
 	<form action=\"statistics.php\" method=\"GET\">
 		<input type=\"hidden\" name=\"search\" value=\"1\">
-		Start: <input type=\"date\" style=\"padding:2px;border-radius:4px;\" value=\"".@$_GET['date_start']."\"  name=\"date_start\" max=\"".date("Y-m-d")."\">
-				<input type=\"hidden\" value=\"".@$_GET['time_start']."\" name=\"time_start\">
-		Ende: <input  type=\"date\" style=\"padding:2px;border-radius:4px;\" value=\"".@$_GET['date_end']."\" name=\"date_end\" max=\"".date("Y-m-d")."\">
-				<input type=\"hidden\" value=\"".@$_GET['time_end']."\" name=\"time_end\">
-		Version: <input type=\"text\" id=\"version\" value=\"".@$_GET['version']."\" style=\"padding:5px;border-radius:4px;width:100px;\" name=\"version\" placeholder=\"0.7\" onchange=\"select_others()\">
-
-		Seite: <input type=\"text\" id=\"page\" value=\"".@$_GET['page']."\" style=\"padding:5px;border-radius:4px;\" name=\"page\" placeholder=\"page.php\" onchange=\"select_others()\">
-
+	Zeitraum: <select name=\"date_start\" >
+	<option value=\"\">-</option>
+    <option value=\"".date('Y-m-d', strtotime("$g_date_end -1 days"))."\">Tag</option>
+    <option value=\"".date('Y-m-d', strtotime("$g_date_end -7 days"))."\">Woche</option>
+    <option value=\"".date('Y-m-d', strtotime("$g_date_end -30 days"))."\">Monat</option>
+	<option value=\"".date('Y-m-d', strtotime("$g_date_end -90 days"))."\">Quartal</option>
+  </select>
+		Ende: <input  type=\"date\" style=\"padding:2px;border-radius:4px;\" value=\"".$g_date_end."\" name=\"date_end\" max=\"".date("Y-m-d")."\">
+				<!--<input type=\"hidden\" value=\"".@$_GET['time_end']."\" name=\"time_end\">-->
+		
+		Version: <input type=\"text\" list=\"versions\" id=\"version\" value=\"".@$_GET['version']."\" style=\"padding:5px;border-radius:4px;width:100px;\" name=\"version\" placeholder=\"0.7\" onchange=\"select_others()\">
+  <datalist id=\"versions\">
+    <option value='0.7.2'>
+    <option value='0.7.1'>
+    <option value='0.7'>
+  </datalist>
+		Seite: <input type=\"text\" list=\"pages\" id=\"page\" value=\"".@$_GET['page']."\" style=\"padding:5px;border-radius:4px;\" name=\"page\" placeholder=\"page.php\" onchange=\"select_others()\">
+ <datalist id=\"pages\">
+    <option value='page.php'>
+    <option value='index.php'>
+    <option value='area.php'>
+  </datalist>
 		<input type=\"submit\" value=\"Suchen\">
 	</form>
 	
@@ -50,7 +72,7 @@ echo"
 		if ($time_end=="")$time_end=" 23:59";
 		$date_start = $_GET['date_start']." ".$time_start.":00";
 		$date_end = $_GET['date_end']." ".$time_end.":59";
-		echo "Durschnitt: $pagename & $date_start bis $date_end & $version";
+		echo "Eingabe: $pagename & $date_start bis $date_end & $version";
 		$db_my->real_escape_string($version);
 		$db_my->real_escape_string($pagename);
 		$db_my->real_escape_string($date_start);
@@ -66,7 +88,7 @@ echo"
 		if ($time_end=="")$time_end=" 23:59";
 		$date_start = $_GET['date_start']." ".$time_start.":00";
 		$date_end = $_GET['date_end']." ".$time_end.":59";
-		echo "Durschnitt: $pagename & $date_start bis $date_end";
+		echo "Eingabe: $pagename & $date_start bis $date_end";
 		$db_my->real_escape_string($pagename);
 		$db_my->real_escape_string($date_start);
 		$db_my->real_escape_string($date_end);
@@ -75,7 +97,7 @@ echo"
 	//only page
 	elseif ($_GET['search']==1 and $_GET['page'] != ""){
 		$pagename = $_GET['page'];
-		echo "Durschnitt: ".$pagename;
+		echo "Eingabe: ".$pagename;
 		$db_my->escape_string($pagename);
 		$query="SELECT id,date_time,pagename,pageversion,useragent,sessionid,exe_time FROM fw_statistic WHERE pagename = '$pagename'  ORDER BY id DESC";
 	}
@@ -87,15 +109,15 @@ echo"
 		if ($time_end=="")$time_end=" 23:59";
 		$date_start = $_GET['date_start']." ".$time_start.":00";
 		$date_end = $_GET['date_end']." ".$time_end.":59";
-		echo "Durschnitt: $date_start bis $date_end";
-		$db_my->real_escape_string($date_start);
-		$db_my->real_escape_string($date_end);
+		echo "Eingabe: $date_start bis $date_end";
+		$db_my->escape_string($date_start);
+		$db_my->escape_string($date_end);
 		$query="SELECT id,date_time,pagename,pageapi,pageversion,useragent,sessionid,exe_time FROM fw_statistic WHERE date_time BETWEEN '$date_start' AND '$date_end' ORDER BY id DESC";
 	}
 	//only version
 	elseif ($_GET['search']==1  and $_GET['version'] != ""){
 		$version = $_GET['version'];
-		echo "Durschnitt: $version";
+		echo "Eingabe: $version";
 		$db_my->escape_string($version);
 		$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,sessionid,exe_time FROM fw_statistic WHERE pageversion = '$version' ORDER BY id DESC";
 	}

@@ -260,6 +260,27 @@
 		
 		.profil_menu
 		{
+		overflow-y: scroll;
+		border-width:0px;
+		border-style:dotted;
+		border-color:grey;
+		float: right;
+		}
+		.profil_entry
+		{
+		}
+		.profil_menu_entry
+		{
+		min-height:40px;
+		text-align:center;
+		background-color:#FFFFFF;
+		}
+		
+		/*
+		
+		//Old Style before 0.7.2
+		.profil_menu
+		{
 		height:340px;
 		overflow-y: scroll;
 		max-width:36%;
@@ -281,3 +302,5 @@
 		text-align:center;
 		background-color:#FFFFFF;
 		}
+		
+		*/

@@ -1,6 +1,12 @@
 # Default .htaccess for FireWeb 0.7
 # Feel free to edit and customize to your desire
 
+AddDefaultCharset utf-8
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options nosniff
+</IfModule>
+
 # Deflate Compression for all
 <IfModule mod_deflate.c>
 SetOutputFilter DEFLATE
@@ -8,7 +14,7 @@ SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
 </ifModule>
 
 
-# Deflate Compression by Type
+# Deflate Compression by Type (disabled)
 #<IfModule mod_deflate.c>
 # AddOutputFilterByType DEFLATE text/plain
 # AddOutputFilterByType DEFLATE text/html
@@ -47,5 +53,9 @@ SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
   ExpiresByType application/javascript "access plus 1 week" 
 </IfModule>
 
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteRule  ^$ index.php    [L]
+</IfModule>
 
-# Rewrite Experimental
+ErrorDocument 404 /404.html

@@ -1,9 +1,11 @@
 <?php
 
 function show_edit_settings_form(){
+	global $db_my;
 	$id=$_POST['id'];
 	$title=$_POST['title'];
 	$name=$_POST['name'];
+	$value = htmlspecialchars($_POST['value'], ENT_QUOTES);
 	echo "<form name='settings_form' id='settings_form' action='?p=edit_settings_submit&submit=1' method='post'>
 		<input type='hidden' name='id' value='".$_POST['id']."'>
 		<input type='hidden' name='title' value='".$_POST['title']."'>
@@ -34,9 +36,9 @@ function show_edit_settings_form(){
 				</td>";
 			break;
 			
-		case "root_name":
+		case "home_name":	
 			echo "<td style='width:70%;border-style:solid;border-color:#585858;border-width: 1px;'>
-					<input type='text' name='value' value='".$_POST['value']."'>
+					<input type='text' name='value' value=\"".$value."\">
 				</td>";
 			break;
 			
@@ -44,7 +46,7 @@ function show_edit_settings_form(){
 			echo "
 			<tr>
 				<td style='width:70%;border-style:solid;border-color:#585858;border-width: 1px;'>
-					<textarea style='height:160px;width:98%;max-width:100%;resize:vertical;' name='value' form='settings_form'>".$_POST["value"]."</textarea>
+					<textarea style='height:160px;width:98%;max-width:100%;resize:vertical;' name='value' form='settings_form'>".$value."</textarea>
 				</td>
 			</tr>
 			";	
@@ -60,24 +62,15 @@ function show_edit_settings_form(){
 function show_page_form(){
 		echo "
 		<h3 style='text-align:center;'>Eintrag bearbeiten?</h3>
-		<table id='settings' style='width:100%;height:160px;border-style:solid;border-color:#D3D3D3;border-collapse: collapse;border-width: 1px;'>
-		<tr>
-			<form name='setting_form' id='setting_form' action='?p=edit_page_submit&submit=1' method='post'>
-			<td style='width:30%;border-style:solid;border-color:#585858;border-width: 1px;'>
-				<input type='text' name='name' value='".$_POST['name']."'>
-			</td>	
-				<input type='hidden' name='id' value='".$_POST['id']."'>
-			</form>
-			<td style='width:70%;border-style:solid;border-color:#585858;border-width: 1px;'>
-				<textarea style='height:160px;width:98%;max-width:100%;resize:vertical;' name='content' form='setting_form'>".show_entry($table="pages",$id=$_POST['id'])."</textarea>
-			</td>
-		</tr>
-		</table>
+		<form name='setting_form' id='setting_form' action='?p=edit_page_submit&submit=1' method='post'>
+		Name:<input type='text' name='name' value='".$_POST['name']."'>
+		<input type='hidden' name='id' value='".$_POST['id']."'>
+		<textarea style='height:160px;width:98%;max-width:100%;resize:vertical;' name='content' form='setting_form'>".show_page($table="pages",$id=$_POST['id'])."</textarea>
+		</form>
 		<br>
 		<br>
 		<a href='#' onclick='document.setting_form.submit();' class='button'>Senden</a> 
-		<a href='administration.php?p=edit_page' class='button'>Zurück</a>
-		</table>";
+		<a href='administration.php?p=edit_page' class='button'>Zurück</a>";
 		}
 function show_create_table_form($target, $type){
 	echo"

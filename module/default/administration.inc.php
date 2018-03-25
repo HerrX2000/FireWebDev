@@ -26,27 +26,26 @@ function content_main(){
 		
 		echo"<h2 style='text-align:center;'>Administration</h2>
 		
-		<a href='?p=edit_settings' class='button_theme' style='padding:0px 6px 0px 6px;'> Einstellungen </a>
-		<a href='?p=edit_page' class='button_theme' style='padding:0px 6px 0px 6px;'> Seiten verwaltung </a>
-		<a href='?p=manage_table&type=area' class='button_theme' style='padding:0px 6px 0px 6px;'> Bereich Verwalten </a>
-		<a href='?p=manage_table&type=entries' class='button_theme' style='padding:0px 6px 0px 6px;'> Content verwallten</a>
+		<a href='?p=edit_settings' class='button_theme' style='padding:0px 6px 0px 6px;'> -Einstellungen </a>
+		<a href='?p=edit_page' class='button_theme' style='padding:0px 6px 0px 6px;'> -Seiten</a>
+		<a href='?p=manage_table&type=area' class='button_theme' style='padding:0px 6px 0px 6px;'> -Bereiche</a>
+		<a href='?p=manage_table&type=entries' class='button_theme' style='padding:0px 6px 0px 6px;'> -Content</a>
 
 		";	
 			
 		///profil_list_entries
 		///Level-1
-		echo "<div style='min-height:120px;'>";
+		echo "<div style='min-height:120px;max-width:100%'>";
 		///shows settings entries
 		if(!isset($_GET['p'])){
-			echo "Kein Beitrag"; 
+			echo ""; 
 		}
 		elseif($_GET['p']=="edit_settings"){	
 			show_settings_entries($target="edit_settings_form");				
 		}
 		///shows page entries
 		elseif($_GET['p']=="edit_page"){	
-			show_pages_list($target="edit_page_form");				
-			
+			show_pages_list($target="edit_page_form");	
 		}
 		elseif($_GET['p']=="manage_table"){	
 			show_create_table_form($target="create_table_submit",$_GET['type']);
@@ -59,7 +58,6 @@ function content_main(){
 		///show form for edit_settings
 		elseif($_GET['p']=="edit_settings_form" and isset($_GET['id'])){
 			echo "<h3 style='text-align:center;'>Einstellungen bearbeiten?</h3>";
-			
 			show_edit_settings_form();		
 		}
 		elseif($_GET['p']=="add_page"){
@@ -72,7 +70,7 @@ function content_main(){
 			$id = $_POST['id']; 
 			$title = $_POST['title'];
 			$name = $_POST['name'];
-			$value = $_POST["value"];
+			$value = htmlspecialchars($_POST['value'], ENT_QUOTES);
 			//
 			if(edit_settings_entry($id,$value)){
 				echo"

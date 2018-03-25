@@ -200,11 +200,20 @@ function show_area_menu_mobile($table='',$width='98%',$col='1')
 			$rows[] = $row ;
 			}
 			$counter=0;
+			$first=true;
 			foreach($rows as $row){
-			
-			echo "<a href='".$pfad."?p=".$table_n."&r=".$row['name']."' style='width:".$width.";height:40%;line-height:200%;font-size:1.0em;' class='button'>".$row['name']."</a>";
+				if (isset ($_GET['r']) and $_GET['r']===$row['name']){
+					echo "<a href='".$pfad."?p=".$table_n."&r=".$row['name']."' style='width:".$width.";font-size:1.0em;margin:0;outline-style: solid;outline-width: 1px;outline-color: #848484;color:black;background-color:rgba(244,164,96, 0.75);' class='button_theme'>".$row['name']."</a>";
+				}
+				elseif (!isset ($_GET['r']) and $first){
+					echo "<a href='".$pfad."?p=".$table_n."&r=".$row['name']."' style='width:".$width.";font-size:1.0em;margin:0;outline-style: solid;outline-width: 1px;outline-color: #848484;color:black;background-color:rgba(244,164,96, 0.75);' class='button_theme'>".$row['name']."</a>";
+					$first = false;
+				}
+				else{
+					echo "<a href='".$pfad."?p=".$table_n."&r=".$row['name']."' style='width:".$width.";font-size:1.0em;' class='button'>".$row['name']."</a>";
+				}			
 			$counter ++;
-				if ($counter==$col){
+					if ($counter==$col){
 					echo"<br>";$counter==0;
 				}
 			}

@@ -17,14 +17,9 @@
 <br>This program is under the GNU General Public License, see http://www.gnu.org/licenses/.
 <br>		
 <br>The source code is available via Github@FireWebDev.</p>
-
 <h3>To the <a href="">development blog</a></h3>
 <b><a href="changelog.html#Anfang">Table of Contents</a></b>
 <ul>
-<!--
-<li><a href="changelog.html#version0.8">0.8 'Early Bird (Admin)'</a>
-<li><a href="changelog.html#version0.7">0.7 'Early Hatch (CMS)'</a>
--->
 <li><a href="changelog.html#version0.8">0.8 'Controller'</a>
 <li><a href="changelog.html#version0.7">0.7 'Studio'</a>
 <li><a href="changelog.html#version0.6">0.6 'Uuser' & 'Burn(V)'</a>
@@ -33,21 +28,84 @@
 <li><a href="changelog.html#version0.3">0.3 '3rd Step'</a>
 <li><a href="changelog.html#version0.2">0.2 '2nd Step'</a>
 <li><a href="changelog.html#version0.1">0.1 '1st Step'</a>
-<li><a href="changelog.html#Legende">Legende</a>
+<li><a href="changelog.html#Legende">Key note</a>
 </ul>
 <div>
-Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development:  May 2015
+Start of <a href="#"> Moco</a>'s development:  May 2015
 <br>
 <br>
 <b><a id="version0.8">Version 0.8 'Controller'</a></b>
-<br>Beginn of Development: Q4 2017
+<br>Start of Development: Q4 2017
 <br>
 <br>
 <b><a id="version0.7">Version 0.7 'Studio'</a></b>
-<br>Beginn of Development: 8.2.2017
+<br>Start of Development: 8.2.2017
 <br>Alpha-Release: 18.06.2017
 <br>Beta-Release: 31.07.2017
-<br>Release: Q3 2017
+<br>Release: 31.10.2017
+<br>Support up to: Q2 2018
+<br>
+<br>
+<b>0.7.2</b>
+<br>March 2018
+<br>
+<ul>
+<li>New global constant FW_USER_NAME, FW_USER_ID
+<li>New user-panel(experimental)
+<ul>
+<li>better mobile support
+<li>visually more appealing
+</ul>
+<li>better statistics search
+<li>new icons
+</ul>
+<br>
+<b>0.7.1</b>
+<br>30. November 2017
+<br>
+<ul>
+<li>Bug fixed with include order in modul
+<li>Various bug fixes
+</ul>
+<br>
+<br><b>0.7</b>
+<br>31. October 2017
+<ul>
+<li><b>Improvements</b>
+<ul>
+<li>Cookie hint repositioned
+<li>Style HTML hint improved
+<li>Queries reduced
+<li>Favicon integration improved
+<li>core and settings moved out of php.inc.php
+</ul>
+<li><b>JavaScript</b>
+<ul>
+<li>js-cookie included
+<li>js.inc cleaned up
+</ul>
+<li><b>Bug fixes</b>
+<ul>
+<li>fonts moved inside of style
+<li>charset for css
+<li>Cookie check hidden hint removed
+<li>lb cookie bugs fiex
+<li>find mobile style_pres disabled
+<li>FW_PAGE_VERSION removed
+<li>Parameter fixed
+<li>Administration page list fixed
+<li>Administration page edit fixed
+<li>Administration setting escape fixed
+<li>HTML tags fixed
+<li>Module priority removed
+<li>SEO fix for area mobile
+<li>Compatibility fixes for IE9 and above
+<li>Few compatibility fixes for IE 8 and below
+<li>Fixed header already sent by "load from default module" warning
+<li>about_us_exp removed
+<li>Modul to module
+</ul>
+</ul>
 <br>
 <br><b>0.7 PR</b>
 <br>8. October 2017
@@ -56,13 +114,13 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <ul>
 <li>Edit pages directly (experimental)
 <li>In-line and On-line editor supported
-<li>Editor switch reworked and compressed @default modul (only area/experimental)
+<li>Editor switch reworked and compressed @default module (only area/experimental)
 <li>TinyMCE included in FireWeb for multiple localisations(1.5MB)
 <li>Inline-Editor slightly improved
 </ul>
 <li><b>Statistics</b>
 <ul>
-<li>Google Analytics support (wip)
+<li>Google Analytics support (experimental)
 <li>Statistics 90%il added
 <li>Statistics mobile update
 <li>Also collects row parameter
@@ -71,7 +129,6 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <ul>
 <li>Boxing overworked @fw_basic.css
 <li>Greyed out outdated actions
-<li>New Startpage (planned)
 <li>Login logic & security overhault
 </ul>
 <li>Detect Browser updated
@@ -80,9 +137,9 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <li>iOS added
 <li>Bots & Spider added
 </ul>
-<li>Not in default modul
+<li>Not in default module
 <ul>
-<li>Commentars
+<li>Comments
 <li>Bug Report
 <li>Calendar
 </ul>
@@ -92,29 +149,29 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <li>user verify function with 3 levels (user/mod/admin)
 <li>basic verify on lib level (experimental)
 <li>logout mcrypt_create_iv replaced by random_bytes
-<li>X-XSS-Protection: 0
+<li>X-XSS-Protection set to 0
 </ul>
 <li>Core
 <ul>
 <li>cleaned up
-<li>modul include logic reworked
+<li>module include logic reworked
 </ul>
-<li>Modul
+<li>Module
 <ul>
-<li>advanced verify on modul level
+<li>advanced verify on module level
 <li>include and main functions separated (experimental)
-<li>modul can inc libs
+<li>module can inc libs
 <li>FW_MODUL
-<li>loginkey verify over modul
+<li>loginkey verify over module
 <li>modul_header_script
 <li>modul_footer_script
-<li>user function determined by modul
+<li>user function determined by module
 </ul>
 <li>Others
 <ul>
 <li>lb_users removed
 <li>Google Analytics integration 
-<li>Nav scroll toogle now modul configurable()
+<li>Nav scroll toggle now module configurable()
 <li>Area edit fixed injection
 <li>Language setting (pre-alpha)
 <li>Area Menu in Nav Menu (canceld)
@@ -125,7 +182,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <br>31. July 2017
 <ul>
 
-<li>Core Modul Error Handler 
+<li>Core Module Error Handler 
 <li>Default Impressum removed
 <li>Default Disclaimer added
 <li>Better reCAPTCHA support
@@ -135,7 +192,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <li>"above the fold" loading
 <li>js compressed
 <li>file_title case for head and title
-<li>Specific Modul Script
+<li>Specific Module Script
 
 <li>Install config updated
 <li><b>Cookie</b>
@@ -151,7 +208,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <li>Area tables reorganized
 <li>Area add entry
 <li>Area Lib extended
-<li>Area html tilte reworked
+<li>Area html title reworked
 <li>Area title function page parameter
 </ul>
 <li><b>Analytics</b>
@@ -163,7 +220,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <li><b>SEO</b>
 <ul>
 <li>Hreftag
-<li>Addon meta updated -> sub name for area
+<li>Add on meta updated -> sub name for area
 </ul>
 <li><b>Fixes</b>
 <ul>
@@ -172,7 +229,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <li>area mobile menu fix
 <li>lb_area fix
 <li>Statistics search fix
-<li>Adminstration escaping fix
+<li>Administration escaping fix
 <li>statistics archive fix
 </ul>
 
@@ -185,7 +242,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 	<ul>
 		<li>Page with Name, Title and Content
 		<li>Page Title recognitionn (beta)
-		<li>Pages are editable via Adminstration
+		<li>Pages are editable via Administration
 	</ul>
 	<li><b>Administration</b>
 	<ul>
@@ -202,7 +259,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 		<li>Default Meta
 		<li>Default Style
 		<li>Selected Core
-		<li>Selected Modul
+		<li>Selected Module
 		<li>Menu Order
 		<li>Current Version
 	</ul>
@@ -214,14 +271,14 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 		<li>FW_User supports now "no-algo" as option for default passwords
 		<li>Fixed redirecting and other Bugs about the Login-Token
 		<li>Various security Improvements
-		<li>Security Profil Submit (wip)
+		<li>Security Profile Submit (wip)
 	</ul>
 	
 	<li><b>Design</b>
 	<ul>
 		<li>New Container Center
 		<li>Material Design
-		<li>Viewport Minimum Scale definend
+		<li>Viewport Minimum Scale defined
 		<li>Responsive Design improved
 		<li>Sub-Styles
 		<li>Styles
@@ -253,7 +310,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 			<li>Mobile-Browser-Detection Libs unified (wip)
 			<li>lb1 deprecated
 		</ul>
-		<li>Modul extends the default/'core' modul
+		<li>Module extends the default/'core' module
 		<li>Prefix Support
 		<li>Function return instead of echo
 		<li>Added errno function to db_mysqli
@@ -261,14 +318,14 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 		<li>New pre-installed Fonts
 		<li>Better Font integration
 		<li>Header splited (show_title->show_header)
-		<li>Comments universall
+		<li>Comments universal
 		<li>Bug_report now part of comments
 		<li>Bug_report not core part but addon(wip/experimental)
 		<li>Moduls can edit/create Cookies
 		<li>Tests on PHP 7.1
 		<li>Style Set reworked (wip/experimental)
 		<li>entry/_edit/_edit_send/_remove/_remove_send all in one(wip/experimental)
-		<li>Modul XML
+		<li>Module XML
 		<li>Title & Name for Area
 	</ul>
 	<li><b>Other features</b>
@@ -286,7 +343,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 	<ul>
 		<li>Fixed First Loading Issue
 		<li>Fixed Mobile Area View
-		<li>Fixed Title for Praxis Modul
+		<li>Fixed Title for Praxis Module
 		<li>Status Massage now gets Status Value from Settings
 		<li>!Meta Addon uses 3 Queries, not 1
 		<li>Reworked default .htaccess
@@ -321,7 +378,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <li>Pre API 7
 <ul>
 <li>Calendar update to pre API 7
-<li>Modul update to pre API 7
+<li>Module update to pre API 7
 <li>Core uptadted to pre API 7
 <li>FW_Login to pre API 7
 </ul>
@@ -332,7 +389,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <li>Mindest Größe 1000px
 <li>Menu_modul funktion
 <li>Dynamische Menu Link
-<li>modul/include.php -> modul/name/include
+<li>module/include.php -> module/name/include
 <li>Fix bei Profilscalierung
 <li>Fix bei Editorscalierung
 </ul>
@@ -375,7 +432,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <br>31. Juli 2016
 <br>
 <ul>
-<!--<li>Vorbereitung um Core-Modul global zu definieren-->
+<!--<li>Vorbereitung um Core-Module global zu definieren-->
 <!--<li>Wordpress Brace Style-->
 <li>Spamschutz Sicherheitslücke behoben
 <li>PHP Prepared Statements (experimental)
@@ -404,7 +461,7 @@ Begin of <a href="http://mocodev.blackburn-division.de/"> Moco</a>'s development
 <li>Neues Verbindungs-System
 <li>Functions-API-System
 <li>Library-System
-<li>Modul-System
+<li>Module-System
 <li>Basic-Style
 <li>Manueller Addon Support
 <li>Global Definitionen
@@ -860,9 +917,27 @@ Version 0.2beta
 </ul>
 <br>
 <br><h3><a id="Legende">Legende</a></h3>
+<b>Versions-Description</b>
+<br>Alpha(0.1a): Initial release of a new version. First preview on new features.
+<br>Beta(0.1b): An advanced version of the alpha.
+<br>PR(pre-release)(0.1PR): A pre-release before the release. Few changes compared to release. Comprehensive test to fix bugs.
+<br>Release(0.1): The finished version.
+<br>Support(0.1+): The supportv ersion. Therefore bug fixes and a few new features. 
+<br>
+<br><b>Versions-Status</b>
+<br>Work in Progress(0.1(wip)): This version under development.
+<br>Testphase(0.1(test)): This version is in the testphase. 
+<br>
+<br><b>Funktions-Status</b>
+<br>Geplant(&#10007;): A planned feature but not under development.
+<br>Begonnen(&#9998;): A feature that is work in progress.
+<br>Bug(!): Labbeling for a bug.
+<br>
+<br>
+<br>
 <b>Versions-Bezeichnung</b>
 <br>Alpha(0.1a): Erste Veröffentlichung einer neuen Version. Meistens nicht online, da meistens nicht getestet. Erste Vorschau auf neue Funktionen.
-<br>Beta(0.1b): Ein vorgeschrittener Version als die Alpha, oft schon online auf manchen Seiten, Funktionen werden getestet.
+<br>Beta(0.1b): Ein forgeschrittener Version als die Alpha, oft schon online auf manchen Seiten, Funktionen werden getestet.
 <br>PR(pre-release)(0.1PR): Ein Vorabversion des Releases, zur Release Version nur minimale Änderung. Umfangreiche Testphase um Bugs beheben.
 <br>Release(0.1): Die fertige Version, auf allen Seiten online.
 <br>Support(0.1+): Dies ist die Supportversion, das heißt Bugs werden entfernt und kleinere neue Funktionen hinzugefügt. 
@@ -878,7 +953,7 @@ Version 0.2beta
 <br>
 <br>
 <br><b>Kompatibilität</b>
-<br>0.4RC-!>0.5-->0.6a-*>0.6b-->0.6PR-*>0.6-->0.6.1-*>0.6.3-->0.6.8-*>0.6.9
+<br>0.4RC-!>0.5-->0.6a-*>0.6b-->0.6PR-*>0.6-->0.6.1-*>0.6.3-->0.6.8-*>0.6.9-*>0.7a-*>0.7b-->0.7PR
 <br>! = Nicht Kompatibel; * = Teilweiße Kompatibel; - = Kompatibel; 
 <br>
 <h3><a href="changelog.html#Anfang">Seiten Anfang</a></h3>

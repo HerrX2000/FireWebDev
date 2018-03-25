@@ -20,8 +20,8 @@ session_start();
 	
 		<link rel="stylesheet" type="text/css" href="inc/functions/calendar/calendar.css" />
 
-<?php include("inc/functions/php.inc.php"); ?>
-<title><?php show_file_title(); ?></title>
+<?php include("inc/functions/lb_calendar.php"); ?>
+<title>Calendar</title>
 </head>
 <body width="100%" style="background-color:#F1F1F1;">
 

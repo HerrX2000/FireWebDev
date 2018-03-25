@@ -34,6 +34,10 @@ class cookie
 			$default_style = $settings['default_style'];//<-- analysis if mobile desktop or responsive
 		
 			if (!isset ($_COOKIE["style_set"])){
+				/*
+				
+				disabled
+				
 				if (@$_GET["new_style"]!="start" and @$_COOKIE["cookie_active"] == 1){
 					//header('location:'.$_SERVER['PHP_SELF'].'?new_style=start');
 				}
@@ -47,6 +51,7 @@ class cookie
 					}		
 					//header('location:'.$_SERVER['PHP_SELF']);
 				}
+				*/
 				
 			}
 		}
@@ -70,21 +75,15 @@ class cookie
 	function check()
 	{
 		if (@$_COOKIE["cookie_active"] == 1){
-			echo"<!--Cookies aktiviert-->";	
+			return true;
 		}	
 		elseif (@$_GET["cookie_active"]=="false")
 		{
-			echo"<!--Cookies deaktiviert-->
-			";
-			echo"
-			<script type=\"text/javascript\">  
-			alert(\"Deine Cookies sind deaktiviert. Bitte aktiviere die Cookies, da es sonst Probleme geben kann.\") 
-			</script>
-			";
+			return false;
 		}
 		else
 		{
-			echo"<!--Cookies werden geprüft-->";
+			return NULL;
 		}
 	}
 	
@@ -92,7 +91,7 @@ class cookie
 		if (@$_COOKIE["cookie_active"] == 1){
 			if (!isset ($_COOKIE["cookie_warning"])){
 				echo"
-				<div id='cookie_hint' style='background-color: rgba(190, 190, 190, 0.3);'>
+				<div id='cookie_hint' style='background-color: rgba(190, 190, 190, 0.92);position:fixed;bottom: 0;z-index: 10;width: 100%;'>
 				<b>Verwendung von Cookies</b>
 				<br>Da in Ihren Browser-Einstellungen Cookies aktiviert sind und Sie die Webseite weiter nutzen, stimmen Sie der Verwendung von Cookies zu.
 				<br><a href='disclaimer.html' class='link' target='_blank'>Weitere Informationen</a>

@@ -18,11 +18,15 @@ define("FW_PAGE_VERSION", "0.6.9b4");
 define("FW_PAGE_API", "7");
 //Include
 require_once("global.php");
-require("inc/functions/fw_users.inc.php");
+require("inc/functions/fw_users.php");
 require(FW_ROOT."/inc/include.php");
+if(!include_once FW_ROOT."/modul/".FW_MODUL."/include.php"){
+	require_once FW_ROOT."/modul/core/include.php";
+}
 ?>
 <?php
-		cookie();
+		$cookie = new cookie;
+$cookie->run();
 		header_script();
 //HEADER_SEND
 ?>
@@ -31,12 +35,12 @@ require(FW_ROOT."/inc/include.php");
 <head>
 <?php
 		head_script();
-		check_cookie();
+		$cookie->check();
 		?>
 <meta charset="utf-8">
-<meta name="description" content="<?php	meta_description(); ?>">
-<meta name="keywords" content="<?php meta_keywords(); ?>">
-<meta name="robots" content="<?php meta_robots(); ?>">
+<meta name="description" content="<?php	echo meta_description(); ?>">
+<meta name="keywords" content="<?php echo meta_keywords(); ?>">
+<meta name="robots" content="<?php echo meta_robots(); ?>">
 <link rel="manifest" href="/icon/manifest.json">
 <!--[if IE]><link rel="shortcut icon" href="/icon/favicon.ico"><![endif]-->
 <!-- Touch Icons - iOS and Android 2.1+ 180x180 pixels in size. --> 
@@ -48,11 +52,10 @@ require(FW_ROOT."/inc/include.php");
 <meta name="theme-color" content="#0F2104">
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="inc/calendar.css">
-<link rel="stylesheet" type="text/css" href="<?php style_set();?>">
+<link rel="stylesheet" type="text/css" href="inc/style/style.css">
 <!--[if lt IE 7]>
 <style type="text/css">@import url(style_simple.css);</style>
 <![endif]-->
-<?php modul_include(); ?>
 <title>7.bd/<?php
 if (function_exists('datei_titel'))
 		{

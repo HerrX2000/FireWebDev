@@ -35,16 +35,24 @@ if (!function_exists('base_url')) {
 Script end
 */
 //PHP_Bibilothek
-$settings['version'] = "0.7";
+
+/*
+default settings (overwriteable)
+*/
+$settings['version'] = "0.7.2";
 $settings['api'] = "7";
-$settings['core'] = "core";
+$settings['module'] = "default";
+$settings['lang'] = "en";
 define("FW_VERSION", $settings['version']);
-define("FW_VERSION_STATUS", "PR");
+define("FW_VERSION_STATUS", "");
 define("FW_API", $settings['api']);
 define('FW_ROOT', dirname(__FILE__));
 define('FW_SERVER_ROOT', dirname(__FILE__));
 define('FW_CLIENT_ROOT', base_url());
-
+if (isset($_SESSION["username"])){
+	define('FW_USER_NAME', $_SESSION["username"]);
+	define('FW_USER_ID', $_SESSION["uid"]);
+}
 
 require_once 'inc/config.php';
 require_once 'inc/db_base.php';
@@ -71,7 +79,7 @@ foreach($rows as $row){
 			$settings[$name]=$row['value'];
 			}
 define('FW_LANG', $settings['lang']);
-define("FW_MODUL", $settings['modul']);
+define('FW_MODULE', $settings['module']);
 $name = null;
 $result = null;
 $query = null;
@@ -81,9 +89,4 @@ $row = null;
 $settings ['recaptcha'] = 0;
 $settings ['recaptcha_key'] = "6LfriyETAAAAADZQ65lKV9zcinpwPsdUWhcicdvp";
 
-			
-			
-			
-			
-	
 ?>

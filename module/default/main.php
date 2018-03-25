@@ -31,7 +31,7 @@ function detect_menu_order(){
 	return $menu_order;
 }
 
-function show_menu_modul(){
+function show_menu_module(){
 	$menu_order = detect_menu_order();
 	$menu_order_count = count($menu_order);
 	if (find_mobile_browser(false)==false){$element_width = 80/$menu_order_count;}
@@ -106,7 +106,7 @@ function container_left()
 		content_left();
 	}
 	
-	echo "<!-- Container_left modul/include -->";
+	echo "<!-- Container_left module/include -->";
 	echo "<div class=\"content_left\">";
 	if (isset($_SESSION["username"])) 
 	{
@@ -175,14 +175,14 @@ function container_right(){
 		content_right_contact();
 	echo"</div>";
 }
-function modul_header_script(){
+function module_header_script(){
 		if (isset($_COOKIE["loginkey"]) and !isset ($_SESSION["username"])){
 		$loginkey=$_COOKIE["loginkey"];
 			$header_loginkey= new user_token;
 			$header_loginkey->login_verify($loginkey);
 	}
 }
-function modul_footer_script(){
+function module_footer_script(){
 echo "
 <script>window.onscroll = function() {scroll_toogle ('menu_fixed',174);};</script>
 <link rel='stylesheet' type='text/css' href='inc/functions/calendar/calendar.css'>

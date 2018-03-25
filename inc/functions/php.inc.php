@@ -34,54 +34,16 @@ $path = realpath(dirname(dirname(__FILE__)). '/../');
 require_once $path."/global.php";
 //!Global-Werte
 
-if (@version_compare(FW_PAGE_VERSION, '0.6.9a1', '<') or  NULL === FW_PAGE_VERSION	){
+/*if (@version_compare(FW_PAGE_VERSION, '0.6.9a1', '<') or  NULL === FW_PAGE_VERSION	){
 	define ('FW_PAGE_VERSION_OLD', true);
-}
+}*/
 
 //Online/Offline
 
-function header_script(){
-	header("X-XSS-Protection: 0");
-}
-function head_script(){
-	
-}
-function show_status($disabled = ''){
-		if($disabled != true){
-			global $db_my;
-			global $settings;
-			//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
-			$status=$settings['status'];
-			
-			if($settings['status'] == 0 and isset ($_SESSION["username"])){ 
-				echo "<p style='text-align:center;'>Wartungsarbeiten</p>";
-			}
-			elseif($settings['status'] == 0 and !isset ($_SESSION["username"])){
-				$status_reason=$db_my->query("SELECT name, value FROM ". $db_my->prefix ."settings WHERE name LIKE 'status_reason'", $hide_errors=0, $write_query=0);
-				$status_reason = $db_my->fetch_assoc($status_reason); 
-				echo "<div class='background'></div><div class='content' style='height:300px;overflow-y:auto;margin-top:40px;'><div style='text-align:center;'><h1>Offline</h1></div>";
-				echo $status_reason ['value'];
-				echo "<h4>Es kann zum Totalausfall der Website kommen</h4>
-				";
-				echo "</div><div class='content' style='text-align:center;'><h3>Login</h3>
-				<form name='login' action='login.php?processed=1' method='post'>
-				<input type='text' placeholder='Benutzername' size='24' maxlength='150'
-				name='username'><br>
-				<input placeholder='Passwort' type='password' size='24' maxlength='50'
-				name='password'><br>
-				<p class='nodisplay'>
-				<label for='email2'>E-Mailbestätigung (leer lassen):</label>
-				<input id='email2' name='email2' size='60' value='' />
-				</p>
-				<input type='submit' style='position: absolute; left: -9999px; width: 1px; height: 1px;'/>
-				<br></form>
-				<a href='#' onclick='document.login.submit();' class='button'>Login</a> 
-				<a href='#'  onClick='alert('Nicht verfügbar') class='button'>Registrieren</a>
-				</div>";
-				exit;
-			}
-		}
-	}
+//CORE Frame start
+include_once (FW_ROOT."/inc/functions/lb_core.php");
+//CORE Frame end
+
 function edit_status(){
 		global $db_my;
 		//
@@ -109,39 +71,7 @@ function edit_status(){
 	
 
 
-//Titel
-function show_header(){
-	global $settings;
-		$page_name = $settings['page_name'];
-		$home_name = $settings['home_name'];
-		$home_url = $settings['home_url']; 
-		if($home_name != "" and $page_name == $home_name){
-			echo"<p><span style='font-size:x-large;margin-left:10%;'><a href='index.php' class='link'><b>".$page_name."</b></a></span></p>";
-		}
-		else{
-			echo"<p><span style='font-size:x-large;margin-left:10%;'>
-			<a href='".$home_url."'>
-			<img hreflang='de' src='images/icons/home.png' alt='Home' style='height:22px;width:22px'/></a>
-			<a href='index.php' class='link'><b>".$page_name."</b></a></span></p>";
-		}
-}
-	function show_title()
-	{
-		global $settings;
-		$page_name = $settings['page_name'];
-		$home_name = $settings['home_name'];
-		$home_url = $settings['home_url']; 
-		if($home_name != "" and $page_name == $home_name){
-			echo"<p><span style='font-size:x-large;margin-left:10%;'><a href='index.php' class='link'><b>".$page_name."</b></a></span></p>";
-		}
-		else{
-			echo"<p><span style='font-size:x-large;margin-left:10%;'>
-			<a href='".$home_url."'>
-			<img src='images/icons/home.png' alt='Home' style='height:22px;width:22px'/></a>
-			<a href='index.php' class='link'><b>".$page_name."</b></a></span></p>";
-		}		
-	}
-	
+
 	//Experimental auto_menu
 	function detect_tables($table=""){
 			global $db_my;
@@ -157,153 +87,6 @@ function show_header(){
 			return $table_area_list;		
 		}
 	
-	function show_menu()
-	{
-		if (function_exists('show_menu_modul')){
-			show_menu_modul();
-		}
-		else{
-		$area = detect_tables($table="area_");
-		$area = str_replace("area_","",$area);
-		$entries = detect_tables($table="entries_");
-		$entries = str_replace("entries_","",$entries);
-		if (find_mobile_browser(false)==true)echo "
-		
-		<a href='entries.php?p=".$entries [0]."' style='width:33%;height:100%;line-height:78px;font-size:1.1em;' class='button_theme'>News</a>
-		<a href='area.php?p=".$area [0]."' style='width:33%;height:100%;line-height:78px;font-size:1.1em;' class='button_theme'>Über uns</a>
-		<a href='area.php?p=".$area [0]."&r=Discord' style='width:33%;height:100%;line-height:78px;font-size:1.1em;' class='button_theme'>Support</a>
-		<!--<a href='http://fireweb.blackburn-division.de/' style='width:25%;height:100%;line-height:78px;font-size:1.1em;' class='button_theme'>FireWeb</a>-->
-";
-		else echo "
-		<a href='entries.php?p=".$entries [0]."' style='width:20%;height:100%;line-height:78px;font-size:1.1em;' class='button_theme'>News</a>
-		<a href='area.php?p=".$area [0]."' style='width:20%;height:100%;line-height:78px;font-size:1.1em;' class='button_theme'>Über uns</a>
-		<a href='area.php?p=".$area [0]."&name=Discord' style='width:20%;height:100%;line-height:78px;font-size:1.1em;' class='button_theme'>Support</a>
-		<!--<a href='http://fireweb.blackburn-division.de/' style='width:15%;height:100%;line-height:78px;font-size:1.1em;' class='button_theme'>FireWeb</a>-->
-		";
-		}
-	}
-	
-
-	
-	function content_right_calender()
-	{
-		echo "
-		<h5><a class='link' href='calendar.php'>Event-Kalender</a></h5>";
-		show_calendar_js();
-		echo "<br>";
-	}
-	
-	function content_right_contact()
-	{
-		echo "
-		<a href='page.php?p=Impressum' class='button'><p><b>Kontakt</b></p></a>
-		";
-	}
-	
-	function show_credits()
-	{
-		echo "<a href=\"page.php?p=Impressum\" class=\"link\" style=\"margin-right:10%;\">Impressum</a> 
-		<a class=\"link\" style=\"margin-left:10%;\">Powered by FireWeb</a>";
-	}
-	
-	function show_note()
-	{
-		echo "
-<!--
-		English
-FireWeb is a Content Managment System under development.
-
-Copyright (C) 2014-2017 Frederik Mann
-
-This program is under the GNU General Public License, see <http://www.gnu.org/licenses/>.
-		
-The source code is available via Github@FireWebDev.
-
-Thanks to the Notepad++ Team!
-Thanks to the XAMPP Team!
--->
-"
-;
-	}
-//Stand not in use
-		function footer_show_modified()
-		{
-		global $fw_modified;
-		echo "Stand: $fw_modified";
-		}
-//Stand
-		function footer_show_version()
-		{
-			if (version_compare(FW_VERSION, FW_CORE_VERSION, '=')){
-			$fw_version= FW_VERSION;
-			}
-			elseif (version_compare(FW_VERSION, FW_CORE_VERSION, '<')){
-			$fw_version= "<font color='green'>". FW_VERSION ."</font>";
-			}
-			elseif (version_compare(FW_VERSION, FW_CORE_VERSION,  '>')){
-			$fw_version= "<font color='red'>". FW_VERSION ."</font>";
-			}
-			
-			else {
-				$fw_version="undefined";
-			}
-			
-			if(FW_VERSION_STATUS!="")
-			{
-				$fw_version = $fw_version."(".FW_VERSION_STATUS.")";
-			}				
-	
-		echo "Version <a href='changelog.html' class='link_accent'>$fw_version</a> ";
-		}		
-
-//Style
-	function footer_show_style(){
-		if (isset($_COOKIE["style_set"])){
-			$style=$_COOKIE["style_set"];
-			$style=basename($style,".css");
-		}
-		else{
-			global $settings;
-			$style=$settings['default_style'];
-		}
-		
-		if (file_exists ("inc/style/".$style.".xml")){
-			$xml_file=simplexml_load_file("inc/style/".$style.".xml");
-			echo "Style: ".	$xml_file->name ."<!-- ". $xml_file->version . "Under FireWeb:". $xml_file->fwversion . " API" . $xml_file->api .  "-->";
-		}
-		else{
-				 echo "Style: ".$style;
-		}
-	}		
-	
-
-//Function w3c
-		function footer_show_w3c(){
-		$dateiname=$_SERVER['SCRIPT_NAME'];  
-		$path = pathinfo($dateiname);
-		echo "
-		<a style='float:left;' class='link' href='http://validator.w3.org/check?uri=http://".$_SERVER['SERVER_NAME']."/".$path["basename"]."' target='_blank'>
-		<img src='images/icons/html5.png' alt='W3C'> 
-		</a> "
-		;
-		}
-//Function Titel	use unknown
-	
-		function show_head_title(){
-		global $settings;
-		if (function_exists('file_title'))
-		{
-		$file_title = file_title();
-		}
-		else{
-		$dateiname=$_SERVER['SCRIPT_NAME'];  
-		$path = pathinfo($dateiname);
-		$path["filename"]= ucfirst($path["filename"]);
-		$file_title = $path["filename"];
-		}
-		echo $settings['page_name']." - ".$file_title;
-		}
-		
 	
 		
 //Function Datei_include
@@ -325,7 +108,6 @@ Thanks to the XAMPP Team!
 
 //STAT Frame start
 include_once (FW_ROOT."/inc/functions/lb_statistics.php");
-
 //STAT Frame end
 
 			
@@ -348,55 +130,10 @@ include_once (FW_ROOT."/inc/functions/lb_calendar.php");
 //page 
 include_once (FW_ROOT."/inc/functions/lb_page.php");
 //page end
-function show_settings_entries($target){
-		//////////////////////
-		//					//
-		//	List Settings	//
-		//					//
-		//////////////////////
-		global $db_my;
-		// 
-		//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
-		//
-		$query="SELECT id,name,title,value from ". $db_my->prefix ."settings ORDER BY id ASC";
+//settings 
+include_once (FW_ROOT."/inc/functions/lb_settings.php");
+//settigns end
 
-		//
-		$result=$db_my->query($query, $hide_errors=0, $write_query=0);			
-		//
-		
-		echo "<table id='settings' style='width:100%;border-style:solid;border-color:#D3D3D3;border-collapse: collapse;border-width: 1px;'>";
-			
-		while ($row = $db_my->fetch_assoc($result)){
-			$rows[] = $row ;
-		}
-		foreach($rows as $row){
-			echo "<tr>";
-			echo "<td style='border-style:solid;border-color:#585858;border-width: 1px;'><span id='tooltip'><a href='#' class='link'><b>".$row['title']."</b><span>".$row['name']."</span></span></td>";
-			echo "<td style='border-style:solid;border-color:#585858;border-width: 1px;height:54px;'>".$row['value']."</td>";
-			echo "<td style='border-style:solid;border-color:#585858;border-width: 1px;width:33px;'>
-			<form name='aendern_start' action='?p=$target&id=".$row["id"]."' method='post'>
-			<input type='hidden' name='id' value='".$row['id']."'>
-			<input type='hidden' name='name' value='".$row["name"]."'>
-			<input type='hidden' name='title' value='".$row["title"]."'>
-			<input type='hidden' name='value' value='".$row["value"]."'>
-			<input type='image' src='images/icons/edit.png' style='wdith:32px;height:32px;' alt='edit_event'>			
-			</form>
-			</a></b></td>";
-			echo "</tr>";			
-		}			
-		echo"</table>";
-}
-function edit_settings_entry($id,$value){
-			global $db_my;
-			//
-			$id = $db_my->escape_string($id); 
-			$value = $db_my->escape_string($value);
-			//
-			if($db_my->query("UPDATE ". $db_my->prefix ."settings SET value='$value' WHERE id='$id' or name='$id'")){
-				return true;
-				//allways returns true 
-			}
-}
 function create_table($type, $name, $menu_entry){
 			global $db_my;
 			if($type=="" or $name==""){

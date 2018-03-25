@@ -169,7 +169,8 @@ class user{
 			}
 			elseif ($row->algo != "bcrypt"){
 			$profil_password_hashed = hash($row->algo, md5($row->salt).md5($profil_password)); 
-			}	else{
+			}
+			else{
 				if (password_verify($profil_password, $row->password)) {
 					$profil_password_hashed = $row->password;
 				}
@@ -202,7 +203,7 @@ class user{
 			
 			///
 	function verify($lvl=0){
-		if($lvl=0){
+		if($lvl==0){
 			if(isset($_SESSION["username"])){
 				return true;
 			}
@@ -210,7 +211,7 @@ class user{
 				return false;
 			}
 		}
-		elseif($lvl=1){
+		elseif($lvl==1){
 			if(@$_SESSION["moderator"] == 1 or @$_SESSION["admin"] == 1){
 				return true;
 			}
@@ -218,7 +219,7 @@ class user{
 				return false;
 			}
 		}
-		elseif($lvl=2){
+		elseif($lvl==2){
 			if(@$_SESSION["admin"] == 1){
 				return true;
 			}

@@ -14,7 +14,6 @@ function file_title(){
 		global $user;
 		echo"
 		<div class='content'>
-		<br>
 		";
 		if($user->verify(0)===false)
 		{

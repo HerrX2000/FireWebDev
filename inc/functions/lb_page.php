@@ -28,7 +28,7 @@ function show_page_edit_button($table='', $p){
 	<input type='hidden' name='table' value='".$table."'>
 	<input type='hidden' name='id' value='".$id."'>
 	<input type='hidden' name='name' value='".$name."'>
-	<input type='image' src='images/icons/entry_edit.png' style='wdith:32px;height:32px;' alt='edit_entry'>
+	<input type='image' src='images/icons/entry_edit.png' style='width:32px;height:32px;' alt='edit_entry'>
 	</form>
 	</div>
 	";
@@ -62,7 +62,9 @@ function show_pages_list($target){
 		$result=$db_my->query($query, $hide_errors=0, $write_query=0);			
 		//
 		
-		echo "<table id='settings' width='400px' style='border-style:solid;border-color:#D3D3D3;border-collapse: collapse;border-width: 1px;'>
+		echo "<table id='settings' style='width:100%;border-style:solid;border-color:#D3D3D3;border-collapse: collapse;border-width: 1px;'>
+
+		<tbody>
 		<tr><td></td><td></td><td>
 		<form name='aendern_start' action='?p=add_page' method='post'>
 			<input type='image' src='images/icons/entry_add.png' style='margin-top:4px;width:32px;height:32px;' alt='edit_event'>			
@@ -76,16 +78,16 @@ function show_pages_list($target){
 			echo "<tr>";
 			echo "<td style='border-style:solid;border-color:#585858;border-width: 1px;'><b>".$row['name']."</b></td>";
 			echo "<td style='border-style:solid;border-color:#585858;border-width: 1px;height:54px;'>".$row['content']."</td>";
-			echo "<td style='border-style:solid;border-color:#585858;border-width: 1px;width:33px;'>
+			echo "<td style='border-style:solid;border-color:#585858;border-width: 1px;'>
 			<form name='aendern_start' action='?p=$target&id=".$row["id"]."' method='post'>
 			<input type='hidden' name='id' value='".$row['id']."'>
 			<input type='hidden' name='name' value='".$row["name"]."'>
 			<input type='image' src='images/icons/edit.png' style='width:32px;height:32px;' alt='edit_event'>			
 			</form>
-			</a></b></td>";
+			</td>";
 			echo "</tr>";			
 		}			
-		echo"</table>";
+		echo"</tbody></table>";
 }
 function edit_page($id,$name,$content){
 			global $db_my;
