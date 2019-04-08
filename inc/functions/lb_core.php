@@ -14,6 +14,9 @@ function header_script(){
 	}
 	ini_set('session.cookie_httponly', '1');
 }
+function header_end(){
+	session_start();
+}
 function head_script(){
 	
 }

@@ -11,6 +11,7 @@
  //old DB_MySQLi
 class DB implements DB_Base
 {
+	
 	/**
 	 * The title of this layer.
 	 *

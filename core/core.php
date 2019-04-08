@@ -22,13 +22,17 @@ require(FW_ROOT."/inc/include.php");
 $cookie = new cookie;
 $cookie->run();
 
-//HEADER_SEND
 
-if(!include_once FW_ROOT."/module/".FW_MODULE."/include.php"){
-	require_once FW_ROOT."/module/core/include.php";
+try {
+    if(!@include_once(FW_ROOT."/module/".FW_MODULE."/include.php")) throw new Exception(FW_MODULE+"not found");
+} catch (Exception $e) {
+    echo 'Fehler: ',  $e->getMessage(), "\n";
+    require_once FW_ROOT."/module/core/include.php";
 }
 header_script();
 module_header_script();
+header_end();
+//HEADER_SEND
  ?>
 <!doctype html>
 <html <?php echo "lang='".FW_LANG."'"; ?>>

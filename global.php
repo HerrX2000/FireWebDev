@@ -39,7 +39,7 @@ Script end
 default settings (overwriteable)
 */
 $settings['version'] = "0.8";
-$settings['version_status'] = "beta";
+$settings['version_status'] = "wip";
 $settings['api'] = "8";
 $settings['module'] = "default";
 $settings['lang'] = "en";
@@ -53,13 +53,13 @@ if (isset($_SESSION["username"])){
 	define('FW_USER_NAME', 'deprecated');
 	define('FW_USER_ID', 'deprecated');
 }
+try {
+    if(!@include("inc/config.php")) throw new Exception("Config.php not found");
+} catch (Exception $e) {
+    echo 'Fehler: ',  $e->getMessage(), "\n";
+    die;
+}
 
-if(file_exists('inc/config.php')){
-    require_once 'inc/config.php';
-}
-else{
-    header('Location: 500.html');
-}
 require_once 'inc/db_base.php';
 require_once 'inc/db_mysqli.php';
 $db_my = new DB;

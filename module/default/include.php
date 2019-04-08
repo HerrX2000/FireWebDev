@@ -21,7 +21,12 @@ $filename=$_SERVER['SCRIPT_NAME'];
 $path = pathinfo($filename);
 $filename = $path["filename"].".".$path["extension"];
 if (defined('FW_C_ACTION')){
-	include(FW_ROOT."/module/default/".FW_C_ACTION.".inc.php");
+	try {
+		$FW_C_ACTION=FW_C_ACTION;
+		if(!@include(FW_ROOT."/module/default/".FW_C_ACTION.".inc.php")) throw new Exception("{$FW_C_ACTION} not found");
+	} catch (Exception $e) {
+		include(FW_ROOT."/module/default/404.inc.php");
+	}
 }
 else{
 	if(file_exists(FW_ROOT."/module/default/".$path["filename"].".inc.php")){
@@ -33,6 +38,8 @@ else{
 		echo "success";
 	}
 }
+
+
 
 ///Init Include current selected file end
 ?>

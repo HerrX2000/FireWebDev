@@ -1,5 +1,5 @@
 <?php
-session_start();
+#removed because session starts to
 define('FW_C', true);
 require("global.php");
 if (!isset($_GET['a'])){

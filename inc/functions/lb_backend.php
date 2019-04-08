@@ -1,5 +1,5 @@
 <?php 
-function fw_detect_tables($mode="default"){
+function fw_detect_tables($mode="default",$clear_prefix=false){
 	if ($mode=="default"){
 		global $db_my;
 		$return = array();
@@ -60,7 +60,10 @@ function fw_detect_tables($mode="default"){
 		}
 		foreach($rows as $row){
 
-		if (strpos($row[0],$mode)=== $prelen){
+		if (strpos($row[0],$mode)=== $prelen){	
+				if($clear_prefix==true){
+					$row[0] = str_replace($db_my->prefix,"",$row[0]);
+				}
 				$row_c = str_replace($mode."_","",$row[0]);
 				$res=array($mode,$row[0],$row_c);
 				array_push($return,$res);
@@ -73,10 +76,18 @@ function fw_detect_tables($mode="default"){
 	}
 }
 function fw_detect_tables_render($in,$style=null){
+	global $c;
 	echo"<table style=".$style."><tr>";
 	foreach($in as $entry){
-
-		echo "<tr><td>".$entry[0]."</td><td>".$entry[1]."</td></tr>";
+		echo "<tr><td>".$entry[0]."</td>";
+		switch ($entry[0]){
+			case "pages":
+				echo"<td><a href=".$c->ref("administration","edit_page").">Bearbeiten</a></td>";
+				break;
+			default:
+				echo"<td></td>";
+		}
+		echo "<td>".$entry[1]."</td></tr>";
 	}
 	echo"</table>";
 }

@@ -1,7 +1,7 @@
 <?php	
 $STARTTIME = microtime(true);
-session_start();
 header("Content-Type: text/html; charset=utf-8");
+session_start();
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ?>
 <!DOCTYPE html>
@@ -248,10 +248,6 @@ $median=array();
 		echo "<br>
 			$total Aufrufe, davon $totalmobile Mobile und $totalpc Desktop
 			</p>
-			
-		";
-		
-		echo"
 		<a href='#end' class='button' style='float:right;'>Go to End</a>
 		<div style=''>
 		<script src=\"".FW_CLIENT_ROOT."library/sorttable.js\"></script>

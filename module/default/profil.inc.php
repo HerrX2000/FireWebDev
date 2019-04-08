@@ -204,18 +204,26 @@ function file_title()
 				switch ($_GET['p']) {
 					case "area_exp":
 						$profil_title = "Area-Manager (experimentell)";
-						$array_tables_area=fw_detect_tables($mode="area", 1);
+						$array_tables_area=fw_detect_tables($mode="area", true);
 						echo "<table style='width:100%;border-collapse: collapse;'>";
 						
-						foreach($array_tables_area as $entry){
+						
+						if (count($array_tables_area)>0){
+							foreach($array_tables_area as $entry){
+								echo "<tr style='border-style:solid;border-color:#585858;border-width: 1px;height:54px;'>
+								<td style='font-size:2em;'>".$entry[2]."</td>
+								<td style='width:42px;'>
+								<a href='".$c->a("area_manager").$c->get('t',$entry[2])."' style='padding:2px;'><img alt='edit' src='".FW_CLIENT_ROOT."images/icons/edit.png' style='width:32px;height:32px;'></a>
+								</td>
+								<td style='width:42px;'>
+								<a href='".$c->ref('administration','manage_table').$c->get('type','area')."'><img src='".FW_CLIENT_ROOT."images/icons/remove.png' style='width:32px;height:32px;' alt='add_entry'></a>
+								</td>
+								";
+							}
+						}
+						else{
 							echo "<tr style='border-style:solid;border-color:#585858;border-width: 1px;height:54px;'>
-							<td style='font-size:2em;'>".$entry[2]."</td>
-							<td style='width:42px;'>
-							<a href='".$c->a("area_manager").$c->get('t',$entry[2])."' style='padding:2px;'><img alt='edit' src='".FW_CLIENT_ROOT."images/icons/edit.png' style='width:32px;height:32px;'></a>
-							</td>
-							<td style='width:42px;'>
-							<a href='".$c->ref('administration','manage_table').$c->get('type','area')."'><img src='".FW_CLIENT_ROOT."images/icons/remove.png' style='width:32px;height:32px;' alt='add_entry'></a>
-							</td>
+							<td style='font-size:2em;'>Keine Bereiche gefunden</td>
 							";
 						}
 						echo "<tr>

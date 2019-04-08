@@ -113,7 +113,7 @@ if ($existed ==0){
 	(15, 'version', 'FireWeb Version', '0.8alpha'),
 	(16, 'module', 'Selected Module', 'default'),
 	(17, 'core', 'Selected Core', 'core'),
-	(18, 'menu_order', 'Menu Order', 'Start=url=index.php'),
+	(18, 'menu_order', 'Menu Order', 'Start=page=fw_quickstart'),
 	(19, 'lang', 'Language', 'en'),
 	(20, 'recaptcha_key', 'Recaptcha Key', ''),
 	(22, 'index_fun', 'Start Page Function', 'page'),
@@ -159,7 +159,11 @@ if ($existed ==0){
 	$sql = "INSERT INTO `".$db_prefix."pages`
 	(`id`, `name`, `title`, `content`, `modifiable`)
 	VALUES
-	(NULL, 'index', 'index', '<div class=''content'';><h1>FireWeb installed</h1></div>', '1');
+	(NULL, 'fw_quickstart', 'Quickstart', '<div class=\'content\'>
+	<h1>FireWeb installed</h1> <p>You can now login and start customizing your website.</p>
+	<p>We have created an admin account.</p>
+	<p>Name: admin<br />Password: admin</p>
+	</div>', '1');
 	";
 
 	//////////////////////

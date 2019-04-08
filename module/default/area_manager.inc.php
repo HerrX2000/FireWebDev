@@ -15,6 +15,7 @@ function file_title(){
 
 	function content_main()
 	{
+		global $c;
 		global $user;
 		if($user->verify(1)===true){
 			$table=$_GET['t'];
@@ -25,7 +26,7 @@ function file_title(){
 			if (isset ($_GET['add']) and $_GET['add']=="true"){
 				if(add_area_entry($table=$table)){
 					echo"<script type=\"text/javascript\">
-					  location.href = \"./profil.php\";
+					  location.href = \"{$c->a("area_manager")}{$c->get("t","fireweb")}\";
 					</script>";
 				}
 			}

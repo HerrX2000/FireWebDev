@@ -51,8 +51,10 @@ function show_menu_module(){
 			
 		}
 	
+	/*
+	dependend on comment module will be toggable after 0.9
 	echo "<a href='".$c->a('comment').$c->get('r','bug_report').$c->get('site',basename($_SERVER['PHP_SELF']))."' onclick=\"alert('Bugreport');\">
-		<img src='".FW_CLIENT_ROOT."images/icons/bug_report.png' alt='Bugreport' style='height:39px;width:39px'/></a>";
+		<img src='".FW_CLIENT_ROOT."images/icons/bug_report.png' alt='Bugreport' style='height:39px;width:39px'/></a>";*/
 	//echo "<a href='administration.php?p=edit_settings' style='float:right;'><img src='images/icons/settings.png' style='width:78px;height:78px;' alt='manager_area'></a>";
 	/*
 	$area = detect_tables($table="area_");
@@ -172,9 +174,12 @@ function container_right(){
 		show_calendar_event_next();
 	echo"</div>";
 	*/
+	/*
+	disabled will become a module later
 	echo"<div class=\"content_right\">";
 		content_right_calender();
 	echo"</div>";
+	*/
 	
 	if (function_exists('content_right')) {
 		content_right();

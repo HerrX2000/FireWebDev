@@ -435,24 +435,28 @@ function show_area_entries($table, $target){
 		while ($row = $db_my->fetch_assoc($result)){
 			$rows[] = $row ;
 		}
-		foreach($rows as $row){
-			echo "<tr style='border-style:solid;border-color:#585858;border-width: 1px;height:54px;'>
-			<form name='edit' action='".$c->get('t',$_GET['t'],1).$c->get('t',$_GET['t']).$c->get('edit','true')."' method='post'>
-			<input type='hidden' name='id' value='".$row['id']."'>
-			<td><input type='text' name='id_new' value='".$row['id']."'></td>
-			<td><input type='text' name='title'' value='".$row['title']."'></td>
-			<td><input type='text' name='name' value='".$row['name']."'></td>
-			<td style='border-style:solid;border-color:#585858;border-width: 1px;width:33px;'>
-			<input type='image' src='".FW_CLIENT_ROOT."images/icons/edit.png' style='width:32px;height:32px;' alt='edit_entry' onclick=\"return confirm('Ändern?')\">			
-			</form>
-			<form name='delete' action='".$c->get('t',$_GET['t'],1).$c->get('t',$_GET['t']).$c->get('delete','true')."' method='post'>
-			<input type='hidden' name='id' value='".$row['id']."'>
-			<td style='border-style:solid;border-color:#585858;border-width: 1px;width:33px;'>
-			<input type='image' src='".FW_CLIENT_ROOT."images/icons/delete.png' style='width:32px;height:32px;' alt='delete_entry' onclick=\"return confirm('Löschen?')\">		
-			</form>
-			</td>";
-			echo "</tr>";			
-		}			
+		if(isset($rows)){		
+			foreach($rows as $row){
+				echo "<tr style='border-style:solid;border-color:#585858;border-width: 1px;height:54px;'>
+				<form name='edit' action='".$c->get('t',$_GET['t'],1).$c->get('t',$_GET['t']).$c->get('edit','true')."' method='post'>
+				<input type='hidden' name='id' value='".$row['id']."'>
+				<td><input type='text' name='id_new' value='".$row['id']."'></td>
+				<td><input type='text' name='title'' value='".$row['title']."'></td>
+				<td><input type='text' name='name' value='".$row['name']."'></td>
+				<td style='border-style:solid;border-color:#585858;border-width: 1px;width:33px;'>
+				<input type='image' src='".FW_CLIENT_ROOT."images/icons/edit.png' style='width:32px;height:32px;' alt='edit_entry' onclick=\"return confirm('Ändern?')\">			
+				</form>
+				<form name='delete' action='".$c->get('t',$_GET['t'],1).$c->get('t',$_GET['t']).$c->get('delete','true')."' method='post'>
+				<input type='hidden' name='id' value='".$row['id']."'>
+				<td style='border-style:solid;border-color:#585858;border-width: 1px;width:33px;'>
+				<input type='image' src='".FW_CLIENT_ROOT."images/icons/delete.png' style='width:32px;height:32px;' alt='delete_entry' onclick=\"return confirm('Löschen?')\">		
+				</form>
+				</td>
+				</tr>";			
+			}
+		}else{
+			echo "<tr><td>Keine Einträge</td></tr>";
+		}
 		echo"</table>
 		Hint: id1 = default
 		";
