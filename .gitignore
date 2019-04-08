@@ -19,3 +19,5 @@ config.php
 !/addon/@user_pictures
 !/addon/@kayalshri-tableExport/
 /addon/*
+
+documentation.html
