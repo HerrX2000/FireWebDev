@@ -11,3 +11,10 @@ config.php
 ###
 !/images/icons/
 /images/*
+
+!/addon/@meta/
+!/addon/@joomla1_5/
+!/addon/@offline/
+!/addon/@user_pictures
+!/addon/@kayalshri-tableExport/
+/addon/*
