@@ -1,9 +1,13 @@
 ###> FireWeb ###
-**/config.php
-/inc/editor/
+config.php
+/inc/editor/*
 /uploads/avatar/
 
 ###> FireWeb Personalization ###
 !/module/core/
 !/module/default/
 /module/*
+
+###
+!/images/icons/
+/images/*
