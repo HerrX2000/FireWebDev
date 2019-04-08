@@ -12,12 +12,13 @@ function content_top()
 }
 //Hauptteil
 	
-function content_main()
-{	
+function content_main(){	
 	global $user;
-	if (isset($_GET['a']) and $_GET['a']=="edit" and $user->verify(1)===true){
+	global $c;
+	
+	if (isset($_GET['action']) and $_GET['action']=="edit" and $user->verify(1)===true){
 			echo "
-			<script src=\"".FW_CLIENT_ROOT."/inc/library/tinymce/tinymce.min.js\"></script>
+			<script src=\"".FW_CLIENT_ROOT."inc/editor/tinymce/tinymce.min.js\"></script>
 			<script>tinymce.init({
 				selector:'.editor',
 				language: '".FW_LANG."',
@@ -37,35 +38,45 @@ function content_main()
 		</script>
 		<div class='content'>
 			<h1 style='text-align:center;'>Seite bearbeiten</h1>
-			<form name='setting_form' id='setting_form' action='administration.php?p=edit_page_submit&submit=1' method='post'>
+			<form name='setting_form' id='setting_form' action='".$c->ref('administration','edit_page_submit').$c->get('submit',1)."' method='post'>
 				<input type='hidden' name='id' value='".$_POST['id']."'>	
 				<input type='hidden' name='name' value='".$_POST['name']."'>	
 				<textarea name='content' class='editor' type='text' maxlength='1000'>".entry($table="pages",$p=$_POST['name'])."</textarea>
 			</form>
 				
 		<br>
-		<a href='#' onclick='document.setting_form.submit();' class='button'>Senden</a> 
-		<a href='page.php?p=".$_POST['name']."' class='button'>Zurück</a>
+		<a href='#' onclick='document.setting_form.submit();' class='button' style='width:100%;'>Senden</a> 
+		<a href='".$c->p($_POST['name'])."' class='button' style='width:100%;'>Zurück</a>
 		</div>";
 		
 		}
 		else{
 			$p=$_GET['p'];
 			$table="pages";
-			echo show_page($table,$p);
-			echo show_page_edit_button($table,$p);
-			
-			
-			
-			
-			
-			//dev image slider
-			if ($_GET['p']=="index"){
-				include_once (FW_ROOT."/addon/@praxis_grosse/init.php");
-				global $db_my;
-				$praxis_grosse = new praxis_grosse();
-				$praxis_grosse=$praxis_grosse->image_slider();
+			$page = new page();
+			if($page->init($table,$p)){
+				$page->show();
+			}else{
+				echo "<div class='content'><h3>Seite exisitiert nicht</h3>";
+				if($user->verify(1)===true){
+					echo "<a class='button' style='width:100%;' href='".$c->ref('administration', 'add_page').$c->get('name',$_GET['p'])."'>Seite jetzt erstellen</a>";
+				}
+				echo"</div>";
 			}
+			if ($user->verify(1)===true){
+				echo"
+				<div style='text-align:right;'>
+				<form action='".$c->ref('page',$page->cur['name']).$c->get('action','edit').$c->get('id',$page->cur['id'])."' method='post'>
+				<input type='hidden' name='table' value='".$page->cur['table']."'>
+				<input type='hidden' name='id' value='".$page->cur['id']."'>
+				<input type='hidden' name='name' value='".$page->cur['name']."'>
+				<input type='image' src='".FW_CLIENT_ROOT."images/icons/entry_edit.png' style='width:32px;height:32px;' alt='edit_entry'>
+				</form>
+				</div>
+				";
+			}
+		
+			//dev image slider
 			//dev
 		}
 }	

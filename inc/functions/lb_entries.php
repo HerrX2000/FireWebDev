@@ -4,6 +4,7 @@ function show_entries($table='',$limit='')
 
 		{
 			global $db_my;
+			global $c;
 			//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
 			//
 			$table=$table; 
@@ -17,10 +18,10 @@ function show_entries($table='',$limit='')
 
 			//
 			if (find_mobile_browser(false)==true){
-				$edit_target="entry_edit.php?inline=0";
+				$inline=false;
 			}
 			else{
-				$edit_target="entry_edit.php";
+				$inline=null;
 			}
 				
 			while ($row = $db_my->fetch_assoc($result))
@@ -36,19 +37,19 @@ function show_entries($table='',$limit='')
 			{
 			echo "<br>
 			<div><div style='float:left;'>
-			<form action='$edit_target?id=".$row['id']."' method='post'>
+			<form action='".$c->a('entry_edit').$c->get('id',$row['id']).$c->get('inline',$inline)."' method='post'>
 			<input type='hidden' name='table' value='".$table."'>
 			<input type='hidden' name='id' value='".$row['id']."'>
-			<input type='image' src='images/icons/entry_edit.png' style='wdith:32px;height:32px;' alt='edit_entry'>
+			<input type='image' src='".FW_CLIENT_ROOT."images/icons/entry_edit.png' style='wdith:32px;height:32px;' alt='edit_entry'>
 			</form>
 			
 			
 			</div><div style='float:right;'>
 
-			<form action='entry_remove.php?table=".$table."&id=".$row['id']."' method='post'>
+			<form action='".$c->a('entry_remove').$c->get('table',$table).$c->get('id',$row['id'])."' method='post'>
 			<input type='hidden' name='table' value='".$table."'>
 			<input type='hidden' name='id' value='".$row['id']."'>
-			<input type='image' src='images/icons/entry_remove.png' style='wdith:32px;height:32px;' alt='remove_entry'>
+			<input type='image' src='".FW_CLIENT_ROOT."images/icons/entry_remove.png' style='wdith:32px;height:32px;' alt='remove_entry'>
 			</form></div>&nbsp;</div>
 			";
 			}

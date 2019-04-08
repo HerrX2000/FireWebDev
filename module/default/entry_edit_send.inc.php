@@ -28,14 +28,17 @@ function fle_titel(){
 	{	
 		global $user;
 		if($user->verify(1)===true){
+			global $c;
 			edit_entry($table=$_POST["table"], $id=$_POST["id"], $content=$_POST["content"]);
 			echo "
 			
-			<div class='content'><h1>Beitrag bearbeitet!</h1>
-			<br><a href='index.php' class='button'><h3>Weiter</h3></a>
-			<br>ID=".$_POST["id"];
+			<div class='content'><h1>Beitrag(".$_POST["id"].") bearbeitet!</h1>
+			<br>
+			<hr>";
 			show_entry($table=$_POST["table"], $id=$_POST["id"]);
 			echo"</a>
+			<hr>
+			<a href='".$c->a('index')."' class='button' style='width:100%;'><h3>Weiter</h3></a>
 			</div>";
 		}
 		else{

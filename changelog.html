@@ -11,8 +11,8 @@
 <body>
 <div style="float:right;"><b><a href="disclaimer.html">Disclaimer</a></b></div>
 <h1><a href="index.php" id="Anfang">Changelog</a></h1>
-<p>FireWeb is a Content Managment System under development.
-<br>Copyright (C) 2014-2017 Frederik Mann
+<p>FireWeb is a Content Managment System/Framework  under development.
+<br>Copyright (C) 2014-2018 Frederik Mann
 <br>
 <br>This program is under the GNU General Public License, see http://www.gnu.org/licenses/.
 <br>		
@@ -20,6 +20,7 @@
 <h3>To the <a href="">development blog</a></h3>
 <b><a href="changelog.html#Anfang">Table of Contents</a></b>
 <ul>
+<li><a href="changelog.html#version0.9">0.9</a>
 <li><a href="changelog.html#version0.8">0.8 'Controller'</a>
 <li><a href="changelog.html#version0.7">0.7 'Studio'</a>
 <li><a href="changelog.html#version0.6">0.6 'Uuser' & 'Burn(V)'</a>
@@ -34,9 +35,120 @@
 Start of <a href="#"> Moco</a>'s development:  May 2015
 <br>
 <br>
-<b><a id="version0.8">Version 0.8 'Controller'</a></b>
-<br>Start of Development: Q4 2017
+<b><a id="version0.9">Version 0.9</a></b>
+<br>Start of Development: Q4 2018
 <br>
+<br>
+<b><a id="version0.8">Version 0.8 'Controller'</a></b>
+<br>Start of Development: 20.03.2018
+<br>Alpha-Release: 30. April 2018
+<br>Beta-Release: 28. May 2018
+<br>Release: April 2019
+<br>
+<br><b>0.8beta</b>
+<br>28. Mai 2018
+<br>
+<ul>
+<li><b>Improvements</b>
+<ul>
+<li>New error 404 page
+<li>Bug Report revived
+</ul>
+<li><b>Profil</b>
+<ul>
+<li>Kommentar removed
+<li>Show database tables added (experimental)
+<li>Area-Manager added (experimental)
+</ul>
+<li>API
+<ul>
+<li>user class includes return ID and NAME
+<li>global constant FW_USER deprecated
+</ul>
+<li>Adaption for GDPR
+<li>Cookie Hint overhauled
+</ul>
+<br><b>0.8alpha</b>
+<br>30. April 2018
+<br>
+<ul>
+<li><b>Controller</b>
+<ul>
+<li>PrettyURL support
+<li>Controller lib with interface
+<li>Controller API
+<li>Modes: Old/Core/Dynamic/Hard
+<li>Cookie Domain/path support
+<li><b>Supported:</b>
+<ul>
+<li>administration (security flaws)
+<li>profil_new
+<li>Module 'default' (wip):
+<ul>
+<li>administration(test)
+<li>entry_edit
+<li>entry_edit_send
+<li>login
+<li>main(wip)
+<li>page
+<li>(new) profil
+</ul>
+<li>core 'core'
+<li>Librarys (wip):
+<ul>
+<li>fw_users
+<li>lb_administration
+<li>lb_area
+<li>lb_cookie(wip)
+<li>lb_core
+<li>lb_entries
+<li>lb_entry
+<li>lb_page
+<li>lb_statistics (wip)
+</ul>
+</ul>
+</ul>
+<li><b>Improvements</b>
+<ul>
+<li>version compare overworked
+</ul>
+<li><b>API</b>
+<ul>
+<li>Client Root added to links
+<li>button width 100% removed
+<li>button_theme line-height removed
+<li>Menu order now in core lb
+<li>Librarys overhauled
+<ul>
+<li>Pages class
+<li>Area class
+<li>Entry class
+</ul>
+<li>Action meta
+</ul>
+<li><b>Installer</b>
+<ul>
+<li>Repaire mode
+<li>Advanced installation (WIP/alpha)
+</ul>
+<li><b>Statistics</b>
+<ul>
+<li>Statistics sortable
+<li>Statistics sessionid includes month
+<li>Statistics updated to support controller
+</ul>
+<li><b>Others</b>
+<ul>
+<li>old profil deprecated
+<li>Mail removed from comments
+<li>Loginkey redirect loop preventen
+<li>Compatibility update for &lt; 7.0PHP
+<li>Create page now if doesn't exist
+<li>page edit button fixed
+<li>joomla1_5 content addon
+<li>HTML5 fixes
+</ul>
+</ul>
 <br>
 <b><a id="version0.7">Version 0.7 'Studio'</a></b>
 <br>Start of Development: 8.2.2017
@@ -45,13 +157,12 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <br>Release: 31.10.2017
 <br>Support up to: Q2 2018
 <br>
-<br>
-<b>0.7.2</b>
-<br>March 2018
+<br><b>0.7.2</b>
+<br>27. February 2018
 <br>
 <ul>
-<li>New global constant FW_USER_NAME, FW_USER_ID
-<li>New user-panel(experimental)
+<li>new global constant FW_USER_NAME, FW_USER_ID
+<li>new user-panel(experimental)
 <ul>
 <li>better mobile support
 <li>visually more appealing
@@ -59,8 +170,7 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <li>better statistics search
 <li>new icons
 </ul>
-<br>
-<b>0.7.1</b>
+<br><b>0.7.1</b>
 <br>30. November 2017
 <br>
 <ul>
@@ -358,6 +468,7 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <br>Beta-Release: 17.11.2014
 <br>Pre-Release: 30.12.2014
 <br>Release: 30.01.2015
+<br>Supportende: Januar 2017
 <br>
 <br>
 <b>0.6.9 V  RC</b>
@@ -394,7 +505,7 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <li>Fix bei Editorscalierung
 </ul>
 <li>Statistik gesammelte Version jetzt Core Version + Status, statt Page Version
-<li>FW_PAGE_VERSION durch FW_CORE_VERSION erstätzt
+<li>FW_PAGE_VERSION durch FW_CORE_VERSION ersetzt
 </ul>
 <br>
 <br>
@@ -404,7 +515,7 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <ul>
 <li>RewriteMod on
 <li>FW_CLIENT_ROOT
-<li>FireWebLink tempöräre entfernt
+<li>FireWebLink temporäre entfernt
 <li>AMP entfernt
 <li>Minor fix
 </ul>
@@ -502,7 +613,7 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <ul>
 <li>Profil
 <ul>
-<li>Profilversion nicht mehr unabhänging von Version
+<li>Profilversion nicht mehr unabhängig von Version
 <li>Wechsel von MyBB Accounts zu eigenen Accounts
 <li>Eigene Benutzeraccounts überarbeitet
 <li>Neues überarbeitetes 'Mein Profil'
@@ -604,8 +715,8 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <li>Sicherheit
 <ul>
 <li>MySQL durch MySQLi ersetzen
-<li>Sichere Datenbankinformationensweitergabe bei neuen Einträgen in der DB
-<li>Sichere Datenbankinformationensweitergabe an anderen Stellen
+<li>Sichere Datenbank Informationensweitergabe bei neuen Einträgen in der DB
+<li>Sichere Datenbank Informationensweitergabe an anderen Stellen
 </ul>
 <li>Beitrag geändert überarbeitet
 <li>Entwicklerblog schreiben
@@ -698,7 +809,7 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <ul>
 <li><b>Neue Funktionen</b>
 <ul>
-<li>Java-Php Kalender Hybrid, Benutzer können jetzt dort Events erstellen
+<li>JS-PHP Kalender Hybrid, Benutzer können jetzt dort Events erstellen
 <li>Mitglieder-Anzeigen-Funktion
 <li>Nächstes-Event Anzeige
 </ul>
@@ -736,7 +847,7 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 
 <li><b>Mein Profil-Bereich</b>
 <ul>
-<li>User muss Nutzerbedinungen akzeptieren
+<li>User muss Nutzerbedingungen akzeptieren
 <li>Ändern von Passwort und E-Mail möglich
 <li>Moderatoren können Events erstellen
 <li>Admins können News schreiben mit TinyMCE#
@@ -767,7 +878,7 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <li>iframe Event-Kalender via PHP oder JavaScript Kalender
 <li>Kalender Vollbild-Funktion
 <li>Multi-Styling
-<li>Ordner für Globalesettings
+<li>Ordner für globale Settings
 <li>W3C Link ist jetzt immer für die aktuelle Seite
 <li>Forum-Software einbindbar
 <li>Notiz im Code wie lange die Seite zum Aufbau braucht
@@ -787,8 +898,8 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <li>Content leicht durchsichtig(95%Sichtbar)
 <li>Automatische Verlinkung von PHP
 <li>"Stand" wird global aktualisiert 
-<li>Tabelen Format nun vollkommen entfernt
-<li>W3C anpassungen
+<li>Tabellen Format nun vollkommen entfernt
+<li>W3C Anpassungen
 <li>UTF-8 ist jetzt Charset und kodierung
 <li>Automatischer Seiten Titel(FireWeb/beispiel)
 <li>Admin-Bereich(noch ohne Funktion)
@@ -818,7 +929,7 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <li>Anzeige von Kommentaren geändert
 <li>neues E-Mailfeld
 </ul>
-<li>Seitenenspezifische Funktionen sind nun extern
+<li>Seitenspezifische Funktionen sind nun extern
 <li>Navigationsleistenbreite jetzt 100%
 <li>(!)Alle Seiten sind jetzt ANSI und die neuen Seiten sind Charset=windows-1252 statt ISO-8859-1
 <li>bug fix
@@ -832,8 +943,8 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 <li>Erstmals PHP
 <li>Neues Leistendesign
 <li>Buttons unten anstatt Links(beta)
-<li>Zeit und Datum sind jetzt PHP nicht mehr JavaS(schneller)
-<li>JavaS extern nicht inline
+<li>Zeit und Datum sind jetzt PHP nicht mehr JS(schneller)
+<li>JS extern nicht inline
 <li>Texte sind nun Serverseitig(PHP)
 <li>Sicherheitslücke beim Einloggen gefixt
 <li>Menüleiste überarbeitet
@@ -856,7 +967,7 @@ Start of <a href="#"> Moco</a>'s development:  May 2015
 Version 0.3beta
 <ul>
 <li>Überarbeiteter Tabname
-<li>Ein Zurück Button (Aplha)
+<li>Ein Zurück Button (alpha)
 <li>Google per Klick auf OK
 <li>Uhrzeitanzeige statt "back to Google"
 </ul>
@@ -900,7 +1011,7 @@ Version 0.2beta
 <li>Links und rechts Bilder mit Links
 <li>Verbessertes Design 
 <li>Anpassung der Website auf die Größe des Bildschirmes
-<li>Hindergrundbild 
+<li>Hintergrundbild 
 <li>Style Sheets (.CSS)
 </ul>
 <br>Version 0.2alpha
@@ -922,22 +1033,22 @@ Version 0.2beta
 <br>Beta(0.1b): An advanced version of the alpha.
 <br>PR(pre-release)(0.1PR): A pre-release before the release. Few changes compared to release. Comprehensive test to fix bugs.
 <br>Release(0.1): The finished version.
-<br>Support(0.1+): The supportv ersion. Therefore bug fixes and a few new features. 
+<br>Support(0.1+): The support version. Bug fixes and a few new features. 
 <br>
 <br><b>Versions-Status</b>
 <br>Work in Progress(0.1(wip)): This version under development.
-<br>Testphase(0.1(test)): This version is in the testphase. 
+<br>Test phase(0.1(test)): This version is in the test phase. 
 <br>
 <br><b>Funktions-Status</b>
 <br>Geplant(&#10007;): A planned feature but not under development.
 <br>Begonnen(&#9998;): A feature that is work in progress.
-<br>Bug(!): Labbeling for a bug.
+<br>Bug(!): Labeling for a bug.
 <br>
 <br>
 <br>
 <b>Versions-Bezeichnung</b>
 <br>Alpha(0.1a): Erste Veröffentlichung einer neuen Version. Meistens nicht online, da meistens nicht getestet. Erste Vorschau auf neue Funktionen.
-<br>Beta(0.1b): Ein forgeschrittener Version als die Alpha, oft schon online auf manchen Seiten, Funktionen werden getestet.
+<br>Beta(0.1b): Ein fortgeschrittener Version als die Alpha, oft schon online auf manchen Seiten, Funktionen werden getestet.
 <br>PR(pre-release)(0.1PR): Ein Vorabversion des Releases, zur Release Version nur minimale Änderung. Umfangreiche Testphase um Bugs beheben.
 <br>Release(0.1): Die fertige Version, auf allen Seiten online.
 <br>Support(0.1+): Dies ist die Supportversion, das heißt Bugs werden entfernt und kleinere neue Funktionen hinzugefügt. 
@@ -953,7 +1064,11 @@ Version 0.2beta
 <br>
 <br>
 <br><b>Kompatibilität</b>
-<br>0.4RC-!>0.5-->0.6a-*>0.6b-->0.6PR-*>0.6-->0.6.1-*>0.6.3-->0.6.8-*>0.6.9-*>0.7a-*>0.7b-->0.7PR
+<br>0.4RC-!>
+0.5-->
+0.6a-*>0.6b-->0.6PR-*>
+0.6-->0.6.1-*>0.6.3-->0.6.8-*>0.6.9-*>
+0.7a-*>0.7b-->0.7PR-->0.7-*>0.7.2-->0.8
 <br>! = Nicht Kompatibel; * = Teilweiße Kompatibel; - = Kompatibel; 
 <br>
 <h3><a href="changelog.html#Anfang">Seiten Anfang</a></h3>

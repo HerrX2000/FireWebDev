@@ -27,8 +27,6 @@ function file_title(){
 	function content_main()
 	{	
 		echo show_entry($table="pages",$id="index");
-		echo show_entries($table="news",$limit="5");
-
 	}
 
 //Content_left

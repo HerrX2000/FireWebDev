@@ -97,16 +97,16 @@ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 <p>Moco (More Control) ist eine Terminkalender Software in Entwicklung und Teil der "FireWeb" webbasierten Softwareserie.
 <br>Copyright (C) 2014-2015 Frederik Mann</p>
 
-<p>Dieses Programm ist freie Software. Sie können es unter den Bedingungen der GNU General Public License,
-wie von der Free Software Foundation veröffentlicht, weitergeben und/oder modifizieren,
-entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.</p>
+<p>Dieses Programm ist freie Software. Sie kï¿½nnen es unter den Bedingungen der GNU General Public License,
+wie von der Free Software Foundation verï¿½ffentlicht, weitergeben und/oder modifizieren,
+entweder gemï¿½ï¿½ Version 3 der Lizenz oder (nach Ihrer Option) jeder spï¿½teren Version.</p>
 
-<p>Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, daß es Ihnen von Nutzen sein wird,
+<p>Die Verï¿½ffentlichung dieses Programms erfolgt in der Hoffnung, daï¿½ es Ihnen von Nutzen sein wird,
 aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der MARKTREIFE oder
-der VERWENDBARKEIT FüR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.</p>
+der VERWENDBARKEIT Fï¿½R EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License.</p>
 
 <p>Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Programm erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.</p>
 
-<p>Der Quellcode ist zur Zeit nicht verfügbar zum Download. Um den Quellcode zu bekommen kontaktiere mich.</p>
+<p>Der Quellcode ist zur Zeit nicht verfï¿½gbar zum Download. Um den Quellcode zu bekommen kontaktiere mich.</p>
 
 <p>Thanks to the Notepad++ Team!</p>-->

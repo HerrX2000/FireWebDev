@@ -17,6 +17,7 @@ function file_title()
 function content_main(){ 
 	global $db_my;
 	global $user;
+	global $c;
 	if($user->verify(2)===true){
 		echo"<div class='content' style='min-height:240px;'>";
 		if (find_mobile_browser()===true){
@@ -26,10 +27,10 @@ function content_main(){
 		
 		echo"<h2 style='text-align:center;'>Administration</h2>
 		
-		<a href='?p=edit_settings' class='button_theme' style='padding:0px 6px 0px 6px;'> -Einstellungen </a>
-		<a href='?p=edit_page' class='button_theme' style='padding:0px 6px 0px 6px;'> -Seiten</a>
-		<a href='?p=manage_table&type=area' class='button_theme' style='padding:0px 6px 0px 6px;'> -Bereiche</a>
-		<a href='?p=manage_table&type=entries' class='button_theme' style='padding:0px 6px 0px 6px;'> -Content</a>
+		<a href='".$c->p('edit_settings')."' class='button_theme' style='padding:0px 6px 0px 6px;'> -Einstellungen </a>
+		<a href='".$c->p('edit_page')."' class='button_theme' style='padding:0px 6px 0px 6px;'> -Seiten</a>
+		<a href='".$c->p('manage_table').$c->get('type','area')."' class='button_theme' style='padding:0px 6px 0px 6px;'> -Bereiche</a>
+		<a href='".$c->p('manage_table').$c->get('type','entries')."' class='button_theme' style='padding:0px 6px 0px 6px;'> -Content</a>
 
 		";	
 			
@@ -84,7 +85,7 @@ function content_main(){
 					</td>
 				</tr>
 				</table>
-				<a href='administration.php?p=edit_settings' class='button'>Weiter</a> 	
+				<a href='".$c->p('edit_settings')."' style='width:100%;' class='button'>Weiter</a> 	
 				";
 			}
 		}
@@ -101,9 +102,12 @@ function content_main(){
 				$menu_entry=false;
 			}
 			//
-			create_table($type,$name,$menu_entry);
+			if(create_table($type,$name,$menu_entry)){
+				echo "<br>Tabelle erfolgreich erstellt";
+			}
 			echo"
-				<a href='administration.php' class='button'>Weiter</a> 	
+				<a href='".$c->a('area_manager').$c->get('t',$name)."' class='button' style='width:100%;'>Verwalten</a> 	
+				<a href='".$c->a('administration')."' class='button' style='width:100%;'>Weiter</a> 	
 				";
 		}
 		elseif($_GET['p']=="delete_table_submit" and $_GET['submit']==1){
@@ -119,10 +123,10 @@ function content_main(){
 			//
 			if(remove_table($type,$name,$delete)){
 				echo"
-				<a href='administration.php' class='button'>Weiter</a> 	
+				<br>Tabelle erfolgreich entfernt ($delete)
+				<a href='".$c->a('administration')."' class='button' style='width:100%;'>Weiter</a> 	
 				";
 			}
-			echo "<a href='administration.php?p=edit_page' class='button'>Weiter</a> ";
 		}
 		elseif($_GET['p']=="edit_page_submit" and $_GET['submit']==1){
 			//
@@ -142,7 +146,7 @@ function content_main(){
 					</td>
 				</tr>
 				</table>
-				<a href='administration.php?p=edit_page' class='button'>Weiter</a> 	
+				<a href='".$c->ref('administration','edit_page')."' class='button' style='width:100%;' style='width:100%;'>Weiter</a> 	
 				";
 			}
 		}
@@ -151,7 +155,7 @@ function content_main(){
 			$name = $_POST['name'];
 			$content = $_POST['content'];
 			add_page($name,$content);
-			echo "<a href='administration.php?p=edit_page' class='button'>Weiter</a> ";
+			echo "<a href='".$c->ref('administration','edit_page')."' class='button' style='width:100%;'>Weiter</a> ";
 		}
 		else{
 			echo"Nichts ausgewählt";
@@ -165,7 +169,7 @@ function content_main(){
 		///bottom
 		echo "</div>	
 		<div class='content'>
-		<a href='logout.php?historyback=profil' class='button'><h3>Auslogen</h3></a>
+		<a href='logout.php?historyback=profil' class='button' style='width:100%;'><h3>Auslogen</h3></a>
 		</div>			
 		";		
 		//title edit javascript

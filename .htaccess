@@ -55,7 +55,10 @@ SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
 
 <IfModule mod_rewrite.c>
 	RewriteEngine on
-	RewriteRule  ^$ index.php    [L]
+	RewriteRule  ^index.php controller.php    [L]
+	RewriteRule  ^$ controller.php    [L]
+	RewriteRule   ^c/([A-Za-z0-9-\+-_]+)/(.*)?$ controller.php?a=$1&$2
+	RewriteRule   ^c/(.*)?$ controller.php$1
 </IfModule>
 
 ErrorDocument 404 /404.html

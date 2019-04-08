@@ -35,7 +35,7 @@ function show_calendar()
 			<input type='hidden' name='Event' value='".$row["event"]."'>
 			<input type='hidden' name='Datum' value='".$row["date"]."'>
 			<input type='hidden' name='Link' value='".$row["Link"]."'>	
-			<input type='image' src='images/icons/edit.png' style='wdith:32px;height:32px;' alt='edit_event'>			
+			<input type='image' src='".FW_CLIENT_ROOT."images/icons/edit.png' style='wdith:32px;height:32px;' alt='edit_event'>			
 			</form>
 			</a></b></td>";
 			}
@@ -46,7 +46,7 @@ function show_calendar()
 function show_calendar_js(){
 		echo"
 		
-		<script type='text/javascript' src='inc/functions/calendar/calendar.php'></script>
+		<script type='text/javascript' src='".FW_CLIENT_ROOT."inc/functions/calendar/calendar.php'></script>
 		
 		<table style='margin-left:-2px;width:102.5%;border:2px solid gray; text-align: center;font-size: 12px;background-color:rgba(176,176,176, 0.3) ; ' id='calendar'>
 		<tr style='visibility:collapse;' hidden>

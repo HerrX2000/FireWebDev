@@ -18,7 +18,7 @@ function content_main()
 		global $user;
 		echo"<div class='content'>";
 		if ($user->verify(0)===true) {
-			switch ($_GET["a"]) {
+			switch ($_GET["action"]) {
 				case "status":
 					edit_status();
 					break;

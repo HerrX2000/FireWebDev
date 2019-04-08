@@ -9,7 +9,7 @@
 
 //require_once(FW_ROOT."/modul/include.php");
 
- 
+
 require_once(FW_ROOT."/inc/functions/php.inc.php");
 include_once(FW_ROOT."/inc/functions/find_mobile_browser.php");
 

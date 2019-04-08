@@ -2,8 +2,8 @@
 	Style 
 	Name: FireWeb Style Advanced
 	Version: alpha
-	FW-Version: 0.7a
-	API: 7
+	FW-Version: 0.8a
+	API: 8
 	*/
 	@font-face {
     font-family: Monofonto;
@@ -70,7 +70,7 @@
 		}
 	
 	.middle {
-		min-height:90%;
+		min-height:100%;
 		background-color: #E6E6E6;
 		}
 				
@@ -214,7 +214,6 @@
 		display:inline-block;
 		color:#000000;
 		line-height:200%;
-		width:100%;
 		text-decoration:none;
 		text-shadow:none;
 		}
@@ -226,13 +225,11 @@
 		}	
 			
 		a.button_theme {
-			margin-left:-3px;
-			margin-right:-3px;
 			background-color:#000000;
 			text-align:center;
 			display:inline-block;
 			color:#DCDCDC;
-			line-height:400%;
+			line-height:200%;
 			text-decoration:none;
 			text-shadow:none;
 			}
@@ -322,4 +319,18 @@
 		height:40px;
 		text-align:center;
 		background-color:#FFFFFF;
+		}
+		.profil_user_entry
+		{
+		background-color:#F2F2F2;
+		display:inline-block;
+		color:#000000;
+		line-height:200%;
+		width:100%;
+		text-decoration:none;
+		text-shadow:none;
+		outline-style:solid;
+		outline-width:1px;
+		outline-color:#D8D8D8;
+		cursor:point;
 		}

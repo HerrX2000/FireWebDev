@@ -20,7 +20,8 @@ function file_title(){
 
 		
 	function content_main()
-	{	
+	{
+	global $c;
 	echo "<div class='content' >
 	<script src=\"//cdn.tinymce.com/4/tinymce.min.js\"></script>
 	";
@@ -59,6 +60,7 @@ function file_title(){
 		";
 		$switch_target = "area_edit.php?table=".$_POST["table"]."&id=".$id=$_POST["id"]."&inline=1";
 	}
+
 	echo"
 		<form name='change_editor' action='".$switch_target."' method='post'>
 			<input type='image' style='color: #c00 !important; text-transform: uppercase;border: 1px solid #970000;padding-left: 2px;padding-right: 2px;float:right;' alt='switch editor'>
@@ -74,13 +76,13 @@ function file_title(){
 			<input type='hidden' name='id' value='".$_POST["id"]."'>
 			<div id='content_pure' class='tinymce' style='margin:-2px;padding:1px;border-style:solid;border-width:2px;border-color:grey;'>
 		";
-		echo show_entry($table=$_POST["table"], $id=$_POST["id"]);
+		$table="area_".$_POST["table"];
+		echo show_entry($table, $id=$_POST["id"]);
 		echo"</div>
 		<input type=\"hidden\" id='content_ready' name='content'>
 		</form>
 		<br>
-		<a href='#' onclick=\"document.getElementById('content_ready').value = document.getElementById('content_pure').innerHTML; document.aendern.submit();\" class='button'><h3>Senden</h3></a> 
-		<a href='index.php' class='button'><h3>Zurück</h3></a> 		
+		<a href='#' onclick=\"document.getElementById('content_ready').value = document.getElementById('content_pure').innerHTML; document.aendern.submit();\" class='button' style='width:50%;'><h3>Senden</h3></a><a href='".$c->a('index')."' class='button' style='width:50%;'><h3>Zurück</h3></a> 		
 		</div>
 		";
 	}

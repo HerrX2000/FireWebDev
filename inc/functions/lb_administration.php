@@ -2,15 +2,16 @@
 
 function show_edit_settings_form(){
 	global $db_my;
+	global $c;
 	$id=$_POST['id'];
 	$title=$_POST['title'];
 	$name=$_POST['name'];
 	$value = htmlspecialchars($_POST['value'], ENT_QUOTES);
-	echo "<form name='settings_form' id='settings_form' action='?p=edit_settings_submit&submit=1' method='post'>
+	echo "<form name='settings_form' id='settings_form' action='".$c->p('edit_settings_submit').$c->get('submit',1)."' method='post'>
 		<input type='hidden' name='id' value='".$_POST['id']."'>
 		<input type='hidden' name='title' value='".$_POST['title']."'>
 		<input type='hidden' name='name' value='".$_POST['name']."'>
-		<table id='settings' style='border-style:solid;border-color:#D3D3D3;border-collapse: collapse;border-width: 1px;'>
+		<table id='settings' style='width:100%;border-style:solid;border-color:#D3D3D3;border-collapse: collapse;border-width: 1px;'>
 		<tr>
 		<td style='border-style:solid;border-color:#585858;border-width: 1px;'>
 					<b>".$_POST['title']."</b><br>$id: '$name'
@@ -52,29 +53,30 @@ function show_edit_settings_form(){
 			";	
 	}
 	echo"
-	</tr>
 	</table>
 	</form>
-	<a href='#' onclick='document.settings_form.submit();' class='button'>Senden</a> 
-	<a href='administration.php?p=edit_settings' class='button'>Zurück</a> 	";
+	<a href='#' onclick='document.settings_form.submit();' style='width:100%;' class='button'>Senden</a> 
+	<a href='".$c->ref('administration','edit_settings')."' style='width:100%;' class='button'>Zurück</a> 	";
 }
 
 function show_page_form(){
+	global $c;
 		echo "
 		<h3 style='text-align:center;'>Eintrag bearbeiten?</h3>
-		<form name='setting_form' id='setting_form' action='?p=edit_page_submit&submit=1' method='post'>
+		<form name='setting_form' id='setting_form' action='".$c->p('edit_page_submit').$c->get('submit',1)."' method='post'>
 		Name:<input type='text' name='name' value='".$_POST['name']."'>
 		<input type='hidden' name='id' value='".$_POST['id']."'>
 		<textarea style='height:160px;width:98%;max-width:100%;resize:vertical;' name='content' form='setting_form'>".show_page($table="pages",$id=$_POST['id'])."</textarea>
 		</form>
 		<br>
 		<br>
-		<a href='#' onclick='document.setting_form.submit();' class='button'>Senden</a> 
-		<a href='administration.php?p=edit_page' class='button'>Zurück</a>";
+		<a href='#' onclick='document.setting_form.submit();' class='button' style='width:100%;'>Senden</a> 
+		<a href='".$c->p('edit_page')."' class='button' style='width:100%;'>Zurück</a>";
 		}
 function show_create_table_form($target, $type){
+	global $c;
 	echo"
-	<form name='create_table' id='create_table' action='?p=$target&submit=1' method='post'>
+	<form name='create_table' id='create_table' action='".$c->p($target).$c->get('submit',1)."' method='post'>
 	<input type='hidden' name='type' value='$type'>
 	<br>
 	<fieldset>
@@ -94,8 +96,9 @@ function show_create_table_form($target, $type){
 	</form>";
 }
 function show_delete_table_form($target, $type){
+	global $c;
 	echo"
-	<form name='create_table' id='create_table' action='?p=$target&submit=1' method='post'>
+	<form name='create_table' id='create_table' action='".$c->p($target).$c->get('submit',1)."' method='post'>
 	<input type='hidden' name='type' value='$type'>
 	<br>
 	<fieldset>
@@ -113,9 +116,14 @@ function show_delete_table_form($target, $type){
 	</form>";
 }	
 function show_add_page_form($target){
+	global $c;
 	echo"
-	<form name='add_page' id='add_page' action='?p=$target&submit=1' method='post'>
-	<input type='text' name='name' placeholder='name' required>
+	<form name='add_page' id='add_page' action='".$c->p($target).$c->get('submit',1)."' method='post'>
+	<input type='text' name='name' ";
+	if(isset($_GET['name'])){
+		echo "value='".$_GET['name']."'";
+	}
+	echo"placeholder='name' required>
 	<textarea style='height:160px;width:98%;max-width:100%;resize:vertical;' name='content' form='add_page'></textarea>
 	<input type='submit' value='Submit' onclick=\"confirm('Finished?')\">	
 	</form>

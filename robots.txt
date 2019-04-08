@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /modul/
+Disallow: /addon/
+Disallow: /images/
+
+Sitemap: /sitemaps/sitemap.xml

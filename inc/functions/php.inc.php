@@ -43,7 +43,6 @@ require_once $path."/global.php";
 //CORE Frame start
 include_once (FW_ROOT."/inc/functions/lb_core.php");
 //CORE Frame end
-
 function edit_status(){
 		global $db_my;
 		//
@@ -133,7 +132,8 @@ include_once (FW_ROOT."/inc/functions/lb_page.php");
 //settings 
 include_once (FW_ROOT."/inc/functions/lb_settings.php");
 //settigns end
-
+include_once (FW_ROOT."/inc/functions/lb_backend.php");
+//settigns end
 function create_table($type, $name, $menu_entry){
 			global $db_my;
 			if($type=="" or $name==""){
@@ -186,13 +186,13 @@ function create_table($type, $name, $menu_entry){
 					exit;
 				}
 			}
-			echo "<br>Tabelle erfolgreich erstellt";
 			if($menu_entry==true){
 				global $settings;
 				$value= $settings['menu_order'].",$name=$type=$name ";
 				if(edit_settings_entry("menu_order",$value)){
 					echo "<br>Menü-Eintrag erfolgreich erstellt";
 				}
+			return true;
 			}
 }
 function remove_table($type, $name, $delete){
@@ -207,6 +207,7 @@ function remove_table($type, $name, $delete){
 			//
 			if($delete==true){
 				delete_table($type, $name);
+				return true;
 			}
 			else{
 				$query="RENAME TABLE `".$db_my->prefix."$type"."_$name` TO `".$db_my->prefix."removed_".$type."_$name`;";
@@ -214,10 +215,8 @@ function remove_table($type, $name, $delete){
 					echo "<br>Remove Table failed: (" . $db_my->errno() . ") " . $db_my->error_string();
 					exit;
 				}
-				echo "<br>Tabelle erfolgreich entfernt";
 				return true;
-			}
-			
+			}			
 	}
 
 function delete_table($type, $name){
@@ -234,7 +233,7 @@ function delete_table($type, $name){
 				echo "<br>Delete Table failed: (" . $db_my->errno() . ") " . $db_my->error_string();
 				exit;
 			}
-			echo "<br>Tabelle erfolgreich gelöscht";
+			return true;
 }
 ///Add/Show/Remove/Delete Section End	
 //////////////////////////////////////////

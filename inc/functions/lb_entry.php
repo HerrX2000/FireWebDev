@@ -1,4 +1,50 @@
 <?php 
+
+class entry{
+	function init($table='', $id=''){
+		global $db_my;
+		//
+		if ($id=="")
+			{
+		die ('<br>Kein Beitrag ausgewählt');
+		}
+		else{
+			//
+			
+			//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
+			$table = $db_my->escape_string($table);
+			$id = $db_my->escape_string($id);
+			if (ctype_digit($id)==true){
+				$query="SELECT * from ". $db_my->prefix ."$table WHERE id = '$id'";
+			}
+			else{
+				$query="SELECT * from ". $db_my->prefix ."$table WHERE name = '$id'";
+			}
+			//
+			$result=$db_my->query($query, $hide_errors=1, $write_query=0);
+			//
+			if($db_my->num_rows($result)!=0){
+				while ($row =  $db_my->fetch_assoc($query=$result))
+				{
+				$rows[] = $row ;
+				}
+				foreach($rows as $row){
+					$content=$row['content'];
+				}
+				$return = array("table" => $table,"id" => $id, "content" => $content);
+				$this->cur=$return;
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+	}
+	function show(){
+		echo $this->cur['content'];
+	}
+	
+}
 //entry
 function entry($table='', $id=''){
 	global $db_my;
@@ -69,13 +115,13 @@ function add_entry($table='')
 		{	
 			global $db_my;
 			global $user;
+			global $c;
 			if (isset($_POST["content"]) and $_POST["content"] != ""){
 			$content=$_POST["content"];
 			}
 			elseif	(isset($_POST["editor"]) and $_POST["editor"] != ""){
 			$content=$_POST["editor"];
 			}	
-			$spam_protection = $_POST["email2"];			
 			
 			//
 			/* check connection */
@@ -91,7 +137,7 @@ function add_entry($table='')
 					$datum =  date("d.m.Y",time());		
 				$content = $db_my->escape_string($content);
 			//
-			if ($spam_protection != '') {
+			if ($_POST["email2"] != '') {
 			die ('<br>'.'Spam');
 			}
 			//
@@ -99,7 +145,7 @@ function add_entry($table='')
 			$query="insert into ". $db_my->prefix ."$table values (0,'".$content.$datum."','".$_SESSION["username"]."','0')";
 			$result=$db_my->query($query, $hide_errors=0, $write_query=0);
 			echo "
-			<script src='/tinymce/tinymce.min.js'></script>
+			<script src='".FW_CLIENT_ROOT."/tinymce/tinymce.min.js'></script>
 			<script>tinymce.init({
 				selector:'.tinymce',
 				height : 400,
@@ -111,7 +157,7 @@ function add_entry($table='')
 
 			".$content."
 			</div>
-			<a href='index.php' class='button'><h3>Weiter</h3></a>
+			<a href='".$c->a('index')."' class='button' style='width:100%;'><h3>Weiter</h3></a>
 			";
 			}	
 		}

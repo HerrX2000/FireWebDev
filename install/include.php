@@ -17,13 +17,15 @@ include("strings-en.php");
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-function initialize(){
-global $string;
 if (file_exists('BOLT'))
 {
 	echo $string['BOLT'];
 	exit;
 }
+
+function initialize(){
+global $string;
+
 if (version_compare(PHP_VERSION, '5.6', '<'))
 {
 	echo $string['OLD_PHP_VERSION'];
@@ -130,6 +132,13 @@ else echo "<fieldset style=\"min-height:220px;\">
 	<fieldset>
 	<legend>".$string['INSTALL_ADVANCED_TITLE']."</legend>
 	<input type=\"submit\" value=\"".$string['INSTALL_ADVANCED_SEND']."\">
+	</fieldset>
+	</form>
+	<form action=\"index.php?page=3\" method=\"post\" >
+	<input type=\"hidden\" name=\"mode\" value=\"advanced\">
+	<fieldset>
+	<legend>".$string['REPAIR_TITLE']."</legend>
+	<input type=\"submit\" value=\"".$string['REPAIR_SEND']."\">
 	</fieldset>
 	</form>
 	</fieldset>";

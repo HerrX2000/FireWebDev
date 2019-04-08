@@ -30,7 +30,6 @@ if (!function_exists('base_url')) {
     }
 }
 
-
 /*
 Script end
 */
@@ -39,22 +38,28 @@ Script end
 /*
 default settings (overwriteable)
 */
-$settings['version'] = "0.7.2";
-$settings['api'] = "7";
+$settings['version'] = "0.8";
+$settings['version_status'] = "beta";
+$settings['api'] = "8";
 $settings['module'] = "default";
 $settings['lang'] = "en";
 define("FW_VERSION", $settings['version']);
-define("FW_VERSION_STATUS", "");
+define("FW_VERSION_STATUS", $settings['version_status']);
 define("FW_API", $settings['api']);
 define('FW_ROOT', dirname(__FILE__));
 define('FW_SERVER_ROOT', dirname(__FILE__));
 define('FW_CLIENT_ROOT', base_url());
 if (isset($_SESSION["username"])){
-	define('FW_USER_NAME', $_SESSION["username"]);
-	define('FW_USER_ID', $_SESSION["uid"]);
+	define('FW_USER_NAME', 'deprecated');
+	define('FW_USER_ID', 'deprecated');
 }
 
-require_once 'inc/config.php';
+if(file_exists('inc/config.php')){
+    require_once 'inc/config.php';
+}
+else{
+    header('Location: 500.html');
+}
 require_once 'inc/db_base.php';
 require_once 'inc/db_mysqli.php';
 $db_my = new DB;
@@ -62,6 +67,10 @@ $db_my->connect($config);
 $db_my->initiate();
 $db_my->prefix;
 //outdate but in calendar
+
+if(!defined('FW_C')){
+	define('FW_C', false);
+}
 
 $db_link_i = new DB;
 
@@ -80,6 +89,8 @@ foreach($rows as $row){
 			}
 define('FW_LANG', $settings['lang']);
 define('FW_MODULE', $settings['module']);
+define('FW_COOKIE_PATH', $settings['cookiepath']);
+define('FW_COOKIE_DOMAIN', $settings['cookiedomain']);
 $name = null;
 $result = null;
 $query = null;

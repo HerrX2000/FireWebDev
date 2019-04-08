@@ -199,6 +199,14 @@ class user{
 		}	else {
 			echo "Hallo ".$db_username.": Keine Änderung am Profil.";
 		}
+	
+	}
+	function uid(){
+		return $_SESSION["uid"];
+	}
+	
+	function uname(){
+		return $_SESSION["username"];
 	}
 			
 			///
@@ -243,17 +251,18 @@ class user{
 		$row = $db->fetch_object($result);
 		$id=$row->id;
 		//loginkey
-		$loginkey = random_bytes(50);
+		if (version_compare(PHP_VERSION, '7.0.0') >= 0){
+				$loginkey = random_bytes(50);
+							}
+			else{
+				$loginkey = rand(1000000000, 9999999999);
+			}		
 		$loginkey = substr(bin2hex($loginkey), 0, 50);
 		$loginkey = $id."_".$loginkey;
 		$query = "UPDATE ". $db_my->prefix ."users SET loginkey='$loginkey'	WHERE username='$username'";
 		$result = $db->query($query);
 		if($result and session_destroy()){
-		echo"
-		<h2>Ihre Sessions wurden gelöscht</h2>
-		<!--Neuen Key erhalten-->
-		<br><a class='button' href='index.php'>Weiter</a>
-		";
+		return true;
 		}
 	}
 }
@@ -262,15 +271,20 @@ class user{
 class user_token{
 		function login_verify($loginkey){
 			global $db_my;
-			if($loginkey != "" or $loginkey == "false"){
+			
+			if($loginkey != "" or $loginkey != "false" or !isset ($_SESSION["username"])){
 				$loginkey = $db_my->escape_string($loginkey);
 				$query = "SELECT id,username,loginkey,email,usergroup,moderator,admin FROM ". $db_my->prefix ."users WHERE loginkey LIKE '$loginkey' LIMIT 1";
 				$result = $db_my->query($query);		
 				$row = $result->fetch_object();
 				
 				if($result->num_rows == 0) {
-					setcookie("loginkey", "false", time() - 3600);
-					header( 'Location: ?loginkey=false' ) ;
+					setcookie("loginkey", "false", time() - 3600, FW_COOKIE_PATH, FW_COOKIE_DOMAIN);
+					global $c;
+					$location = $c->get('loginkey','false',1);
+					if(isset($_GET['loginkey']) and $_GET['loginkey']!="false"){
+						header( 'Location: '.$location);
+					}	
 				}	elseif(!isset ($_SESSION["username"])){
 					//Gruppen
 					//Gast
@@ -309,12 +323,12 @@ class user_token{
 $user = new user();
 ///
 function login_form() {
-	
+	global $c;
 	echo"
 	
 <!--nicht ?processed=1 daher keine Login-->
 	<div style='text-align:center;'><h3>Login</h3>
-	<form name='fwlogin' action='login.php?processed=1' method='post'>
+	<form name='fwlogin' action='".$c->a('login').$c->get('processed',1)."' method='post'>
 		<input type='text' placeholder='Benutzername' size='24' maxlength='150'
 		name='username'><br>
 		<input placeholder='Passwort' type='password' size='24' maxlength='50'
@@ -327,9 +341,9 @@ function login_form() {
 		</p>
 	</form></div>	
 	<br>
-	<a href='#' onclick='document.fwlogin.submit();' class='button'>Login</a> 
-	<!--<a href='' class='button'>Passwort vergessen?</a>-->
-	<a href='register.php' class='button'>Registrieren</a>
+	<a href='#' onclick='document.fwlogin.submit();' class='button' style='width:100%;'>Login</a> 
+	<!--<a href='' class='button' style='width:100%;'>Passwort vergessen?</a>-->
+	<a href='".$c->a('register')."' class='button' style='width:100%;'>Registrieren</a>
 	";	
 	}
 		

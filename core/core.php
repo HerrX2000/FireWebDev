@@ -9,13 +9,16 @@
 $STARTTIME = microtime(true);
 header("Content-Type: text/html; charset=utf-8");
 //define Page Values
-define("FW_CORE_VERSION", "0.7.2");
-define("FW_CORE_VERSION_STATUS", "");
-define("FW_CORE_API", "7");
+define("FW_CORE_VERSION", "0.8");
+define("FW_CORE_VERSION_STATUS", "alpha");
+define("FW_CORE_API", "8");
 //Include
+
 require_once("global.php");
+
 require(FW_ROOT."/inc/include.php");
 //Cookie
+
 $cookie = new cookie;
 $cookie->run();
 
@@ -39,16 +42,16 @@ module_header_script();
 	<meta name="keywords" content="<?php echo meta_keywords(); ?>">
 	<meta name="robots" content="<?php	echo meta_robots(); ?>">
 	<meta http-equiv="x-ua-compatible" content="IE=EDGE"> 
-	<link rel="shortcut icon" type="image/x-icon" href="images/favicon/favicon.ico">
-	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
-	<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-	<link rel="manifest" href="images/favicon/manifest.json">
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo FW_CLIENT_ROOT;?>images/favicon/favicon.ico">
+	<link rel="icon" type="image/x-icon" href="<?php echo FW_CLIENT_ROOT;?>images/favicon/favicon.ico">
+	<link rel="apple-touch-icon" href="<?php echo FW_CLIENT_ROOT;?>images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo FW_CLIENT_ROOT;?>images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo FW_CLIENT_ROOT;?>images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="<?php echo FW_CLIENT_ROOT;?>images/favicon/site.webmanifest">
 	<meta name="theme-color" content="#a06429">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!--high priority scripts-->
-	<link rel="stylesheet" type="text/css" href="inc/style/fw_basic.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo FW_CLIENT_ROOT;?>inc/style/fw_basic.css">
 	<?php 
 	if(!isset($_SESSION["username"])){
 	echo"<!-- Global Site Tag (gtag.js) - Google Analytics -->
@@ -148,7 +151,7 @@ module_header_script();
 	}
 	echo module_footer_script();
 	?>
-	<script type="text/javascript" src="inc/library/js.inc.js"></script>
+	<script type="text/javascript" src="<?php echo FW_CLIENT_ROOT;?>inc/library/js.inc.js"></script>
 <?php
 show_note();
 $ENDTIME = microtime(true);
@@ -156,24 +159,21 @@ $RUNTIME = $ENDTIME - $STARTTIME;
 $RUNTIME = round ($RUNTIME, 3);
 $RUNTIME_MS = $RUNTIME * 1000;
 $USERAGENT = $_SERVER['HTTP_USER_AGENT'];
-$SCRIPT_NAME = basename($_SERVER['SCRIPT_NAME']);
-$SCRIPT_PARENT = dirname($_SERVER['SCRIPT_NAME']);
-
-if(isset ($_GET['p'])){
-	$SCRIPT_NAME = $SCRIPT_NAME."?p=".$_GET['p'];
-}
+$SCRIPT_ACTION = $c->cur()['a'];
+$SCRIPT_PAGE = $c->cur()['p'];
+//
 if(isset ($_GET['r'])){
-	$SCRIPT_NAME = $SCRIPT_NAME."&r=".$_GET['r'];
+	$SCRIPT_PAGE = $SCRIPT_PAGE."&r=".$_GET['r'];
 }
 //
-statistics_collector($SCRIPT_NAME, $USERAGENT, $RUNTIME_MS, $SCRIPT_PARENT);
+statistics_collector($SCRIPT_ACTION, $USERAGENT, $RUNTIME_MS, $SCRIPT_PAGE);
 //
 print "
 <!--
 Build-up time: $RUNTIME_MS ms
 Useragent: $USERAGENT
-Page: $SCRIPT_NAME
-Parent: $SCRIPT_PARENT
+Action: $SCRIPT_ACTION
+Page: $SCRIPT_PAGE
 
 Statistics are anonymously saved in a local database and are not shared automatically with any 3rd parties.
 If cookies are enabled an anonymous SessionID is created for less than an hour.

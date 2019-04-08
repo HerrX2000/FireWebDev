@@ -27,6 +27,8 @@ $string['INSTALL_PREFIX_HINT'] = "Some hosts allow only a certain DB name per si
 
 $string['INSTALL_FINISHED_HINT'] = "We recommend to delete the 'install' folder due to security reasons!";
 
+$string['REPAIR_TITLE'] = "Repair?";
+$string['REPAIR_SEND'] = "repair";
 
 $string['$CON_TITLE'] = "<h2>Check Connection</h2>";	
 

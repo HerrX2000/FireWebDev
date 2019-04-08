@@ -20,6 +20,10 @@ function file_title(){
 //Hauptteil	
 	function content_main()
 	{
+		$comments = new comments;
+		$table=$_GET['r'];
+		$comments->init($table);
+		$comments->show();/*
 		echo"
 		<div class='content'>
 		<div style='text-align:center'>
@@ -67,7 +71,7 @@ function file_title(){
 		<input name='kommentar_submit' type='submit' value='Senden'>
 		</form>
 		</div>
-		</div>";
+		</div>"*/;
 	}	
 
 //Content_left

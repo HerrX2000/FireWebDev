@@ -23,6 +23,9 @@ $string['INSTALL_DATABASENAME'] = "Datenbankname";
 $string['INSTALL_PREFIX'] = "Tabellenpräfix";
 $string['INSTALL_PREFIX_HINT'] = "Einige Webhoster erlauben nur eine Datenbank pro Website. In diesem Fall sollte ein eindeutiger Tabellenpräfix für Moco gewählt werden.";
 
+$string['REPAIR_TITLE'] = "Reparieren?";
+$string['REPAIR_SEND'] = "reparieren";
+
 $string['$CON_TITLE'] = "<h2>Überprüfe Verbindung</h2>";	
 
 $string['INSTALL_SIMPLE_TITLE'] = "Einfache Installation";

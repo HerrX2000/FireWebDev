@@ -32,6 +32,7 @@ function detect_menu_order(){
 }
 
 function show_menu_module(){
+	global $c;
 	$menu_order = detect_menu_order();
 	$menu_order_count = count($menu_order);
 	if (find_mobile_browser(false)==false){$element_width = 80/$menu_order_count;}
@@ -40,14 +41,18 @@ function show_menu_module(){
 			if($menu_item[1]=="url"){
 				echo"<a href='".$menu_item[2]."' style='width:$element_width%;height:100%;line-height:78px;font-size:1.1em;margin:0px;' class='button_theme'>".$menu_item[0]."</a>";	
 			}
+			elseif(defined('FW_C') and FW_C){
+				echo"<a href='".$c->ref($menu_item[1],$menu_item[2])."' style='width:$element_width%;height:100%;line-height:78px;font-size:1.1em;' class='button_theme'>".$menu_item[0]."</a>";
+			}
+			
 			else{
 				echo"<a href='".$menu_item[1].".php?p=".$menu_item[2]."' style='width:$element_width%;height:100%;line-height:78px;font-size:1.1em;' class='button_theme'>".$menu_item[0]."</a>";
 			}
+			
 		}
 	
-	
-	echo "<a href='comment.php?r=bug_report&site=".basename($_SERVER['PHP_SELF'])."' onclick=\"alert('Bugreport');\">
-		<img src='images/icons/bug_report.png' alt='Bugreport' style='height:39px;width:39px'/></a>";
+	echo "<a href='".$c->a('comment').$c->get('r','bug_report').$c->get('site',basename($_SERVER['PHP_SELF']))."' onclick=\"alert('Bugreport');\">
+		<img src='".FW_CLIENT_ROOT."images/icons/bug_report.png' alt='Bugreport' style='height:39px;width:39px'/></a>";
 	//echo "<a href='administration.php?p=edit_settings' style='float:right;'><img src='images/icons/settings.png' style='width:78px;height:78px;' alt='manager_area'></a>";
 	/*
 	$area = detect_tables($table="area_");
@@ -86,6 +91,7 @@ function meta_robots(){
 
 function container_left()
 {
+	global $c;
 	echo "<div class=\"content_left\">";
 	echo"<h3 style='text-align:center;'>"; 
 	if(function_exists('file_title'))
@@ -116,23 +122,31 @@ function container_left()
 		echo "</div>";
 		echo"
 		<br>Hallo: <b>".$_SESSION["username"]."</b><br>";
-		echo"<br>
-			<a href='profil.php' class='button'>Mein Profil</a>
-			<a href='logout.php' class='button'>Ausloggen</a>
-			";	
+		if(defined('FW_C') and FW_C){
+			echo"<br>
+			<a href='".$c->a('profil')."' class='button' style='width:100%;'>Mein Profil</a>
+			<a href='".$c->a('logout')."' class='button' style='width:100%;'>Ausloggen</a>
+			";
+			}
+		else{
+			echo"<br>
+			<a ".$c->href_a('profil')." class='button' style='width:100%;'>Mein Profil</a>
+			<a ".$c->href_a('logout')." class='button' style='width:100%;'>Ausloggen</a>
+			";
+		}	
 	}
 	
 	elseif (isset($_COOKIE["loginkey"]))
 	{			
 		echo"
-		<a href='profil.php' class='button'>Mein Profil</a>
-		<a href='logout.php' class='button'>Ausloggen</a>
+		<a ".$c->href_a('profil')." class='button' style='width:100%;'>Mein Profil</a>
+		<a ".$c->href_a('logout')." class='button' style='width:100%;'>Ausloggen</a>
 		";
 	}
 	else{
 		echo"		
 		<h3>Login</h3>
-		<form name='login' action='login.php?processed=1' method='post'>
+		<form name='login' action='".$c->a('login').$c->get('processed',1)."' method='post'>
 		<input type='text' placeholder='Benutzername' size='14' maxlength='150'
 		name='username'><br>
 		<input placeholder='Passwort' type='password' size='14' maxlength='50'
@@ -144,26 +158,21 @@ function container_left()
 		<input type='submit' style='position: absolute; left: -9999px; width: 1px; height: 1px;'/>
 		</p>
 		<br></form>
-		<a href='#' onclick='document.login.submit();' class='button'>Login</a> 
-		<a href='register.php' class='button'>Registrieren</a>
+		<a href='#' onclick='document.login.submit();' class='button' style='width:100%;'>Login</a> 
+		<a href='register.php' class='button' style='width:100%;'>Registrieren</a>
 		";	
 	}
-	echo "</div><div class=\"content_left\">";	
-	if (find_mobile_browser() == true)
-	{
-		echo"
-		<h3><a href='calendar.php' class='button'>Event-Kalender</a></h3>";
-		echo"<h3><a href='#' class='button'>Fake Button</a></h3>";
-	}
-	else echo"<a href='#' class='button'><p><b>Fake Button</b></p></a>";
-	echo "</div>";
+	echo "</div>";	
 	echo "<!-- Container_left end -->";
 }
 function container_right(){
+	/*
+	calender event next broken
 	echo"<div class=\"content_right\">";
-		//show_calendar_event_next();
-	echo"</div>
-	<div class=\"content_right\">";
+		show_calendar_event_next();
+	echo"</div>";
+	*/
+	echo"<div class=\"content_right\">";
 		content_right_calender();
 	echo"</div>";
 	
@@ -176,16 +185,16 @@ function container_right(){
 	echo"</div>";
 }
 function module_header_script(){
-		if (isset($_COOKIE["loginkey"]) and !isset ($_SESSION["username"])){
+	if (isset($_COOKIE["loginkey"]) and !isset ($_SESSION["username"])){
 		$loginkey=$_COOKIE["loginkey"];
-			$header_loginkey= new user_token;
-			$header_loginkey->login_verify($loginkey);
+		$header_loginkey= new user_token;
+		$header_loginkey->login_verify($loginkey);
 	}
 }
 function module_footer_script(){
 echo "
 <script>window.onscroll = function() {scroll_toogle ('menu_fixed',174);};</script>
-<link rel='stylesheet' type='text/css' href='inc/functions/calendar/calendar.css'>
+<link rel='stylesheet' type='text/css' href='".FW_CLIENT_ROOT."inc/functions/calendar/calendar.css'>
 <script type='text/javascript' src='https://www.google.com/recaptcha/api.js'></script>
 ";
 }

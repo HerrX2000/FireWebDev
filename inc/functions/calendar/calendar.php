@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
- header('Content-Type: application/javascript');?>
+ header('Content-Type: application/javascript; charset=utf-8');?>
 /**
 * Ist ein Datum gültig
 * @param y: Jahr

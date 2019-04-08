@@ -60,11 +60,11 @@ echo"
 ///set query start
 	//no search
 	if (!isset($_GET['search']) or $_GET['search']==0){
-		$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,sessionid,exe_time FROM fw_statistic ORDER BY id DESC";
+		$query="SELECT id,date_time,action,page,version,api,useragent,sessionid,exe_time FROM fw_statistic ORDER BY id DESC";
 	}
 	//all fields
 	elseif ($_GET['search']==1 and $_GET['page'] != "" and $_GET['date_start'] != ""  and $_GET['date_end'] != "" and $_GET['version'] != ""){
-		$pagename = $_GET['page'];
+		$action = $_GET['page'];
 		$version = $_GET['version'];
 		$time_start = $_GET['time_start'];
 		$time_end = $_GET['time_end'];
@@ -72,34 +72,34 @@ echo"
 		if ($time_end=="")$time_end=" 23:59";
 		$date_start = $_GET['date_start']." ".$time_start.":00";
 		$date_end = $_GET['date_end']." ".$time_end.":59";
-		echo "Eingabe: $pagename & $date_start bis $date_end & $version";
+		echo "Eingabe: $action & $date_start bis $date_end & $version";
 		$db_my->real_escape_string($version);
-		$db_my->real_escape_string($pagename);
+		$db_my->real_escape_string($action);
 		$db_my->real_escape_string($date_start);
 		$db_my->real_escape_string($date_end);
-		$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,sessionid,exe_time FROM fw_statistic WHERE pagename = '$pagename' pageversion = '$version' AND date_time BETWEEN  '$date_start' AND '$date_end' ORDER BY id DESC";
+		$query="SELECT id,date_time,action,page,version,api,useragent,sessionid,exe_time FROM fw_statistic WHERE action = '$action' version = '$version' AND date_time BETWEEN  '$date_start' AND '$date_end' ORDER BY id DESC";
 	}
 	//no version
 	elseif ($_GET['search']==1 and $_GET['page'] != "" and $_GET['date_start'] != ""  and $_GET['date_end'] != ""){
-		$pagename = $_GET['page'];
+		$action = $_GET['page'];
 		$time_start = $_GET['time_start'];
 		$time_end = $_GET['time_end'];
 		if ($time_start=="")$time_start=" 00:00";
 		if ($time_end=="")$time_end=" 23:59";
 		$date_start = $_GET['date_start']." ".$time_start.":00";
 		$date_end = $_GET['date_end']." ".$time_end.":59";
-		echo "Eingabe: $pagename & $date_start bis $date_end";
-		$db_my->real_escape_string($pagename);
+		echo "Eingabe: $action & $date_start bis $date_end";
+		$db_my->real_escape_string($action);
 		$db_my->real_escape_string($date_start);
 		$db_my->real_escape_string($date_end);
-		$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,sessionid,exe_time FROM fw_statistic WHERE pagename = '$pagename' AND date_time BETWEEN  '$date_start' AND '$date_end' ORDER BY id DESC";
+		$query="SELECT id,date_time,action,page,version,api,useragent,sessionid,exe_time FROM fw_statistic WHERE action = '$action' AND date_time BETWEEN  '$date_start' AND '$date_end' ORDER BY id DESC";
 	}
 	//only page
 	elseif ($_GET['search']==1 and $_GET['page'] != ""){
-		$pagename = $_GET['page'];
-		echo "Eingabe: ".$pagename;
-		$db_my->escape_string($pagename);
-		$query="SELECT id,date_time,pagename,pageversion,useragent,sessionid,exe_time FROM fw_statistic WHERE pagename = '$pagename'  ORDER BY id DESC";
+		$action = $_GET['page'];
+		echo "Eingabe: ".$action;
+		$db_my->escape_string($action);
+		$query="SELECT id,date_time,action,page,version,useragent,sessionid,exe_time FROM fw_statistic WHERE action = '$action'  ORDER BY id DESC";
 	}
 	//only date
 	elseif ($_GET['search']==1 and $_GET['date_start'] != ""  and $_GET['date_end'] != ""){
@@ -112,18 +112,18 @@ echo"
 		echo "Eingabe: $date_start bis $date_end";
 		$db_my->escape_string($date_start);
 		$db_my->escape_string($date_end);
-		$query="SELECT id,date_time,pagename,pageapi,pageversion,useragent,sessionid,exe_time FROM fw_statistic WHERE date_time BETWEEN '$date_start' AND '$date_end' ORDER BY id DESC";
+		$query="SELECT id,date_time,action,page,api,version,useragent,sessionid,exe_time FROM fw_statistic WHERE date_time BETWEEN '$date_start' AND '$date_end' ORDER BY id DESC";
 	}
 	//only version
 	elseif ($_GET['search']==1  and $_GET['version'] != ""){
 		$version = $_GET['version'];
 		echo "Eingabe: $version";
 		$db_my->escape_string($version);
-		$query="SELECT id,date_time,pagename,pageversion,pageapi,useragent,sessionid,exe_time FROM fw_statistic WHERE pageversion = '$version' ORDER BY id DESC";
+		$query="SELECT id,date_time,action,page,version,api,useragent,sessionid,exe_time FROM fw_statistic WHERE version = '$version' ORDER BY id DESC";
 	}
 	//in case
 	else{
-		$query="SELECT `id`,`date_time`,`pagename`,`pageapi`,`pageversion`,`useragent`,`sessionid`,`exe_time` FROM fw_statistic ORDER BY id DESC";
+		$query="SELECT `id`,`date_time`,`action`,`api`,`version`,`useragent`,`sessionid`,`exe_time` FROM fw_statistic ORDER BY id DESC";
 	}
 //set query end
 //set data
@@ -155,11 +155,11 @@ $median=array();
 			if ($row['id']==1){
 				$start_datetime_query = $row['date_time'];
 				}
-			if (in_array($row['pageversion'],$incversions) == false){
-				array_push($incversions , $row['pageversion']);
+			if (in_array($row['version'],$incversions) == false){
+				array_push($incversions , $row['version']);
 			}
-			if (in_array($row['pageapi'],$incapis) == false){
-				array_push($incapis, $row['pageapi']);
+			if (in_array($row['api'],$incapis) == false){
+				array_push($incapis, $row['api']);
 			}
 			if (in_array($row['sessionid'],$incsessionids) == false){
 				array_push($incsessionids, $row['sessionid']);
@@ -167,9 +167,9 @@ $median=array();
 			
 			$average=$average+$row['exe_time'];
 			array_push($median,$row['exe_time']);
-			if ($row['pageapi'] != null){
-			$api=$api+$row['pageapi'];
-			$prev_api = $row['pageapi'];
+			if ($row['api'] != null){
+			$api=$api+$row['api'];
+			$prev_api = $row['api'];
 			}
 			else{
 			$api=$api+$prev_api;
@@ -254,15 +254,17 @@ $median=array();
 		echo"
 		<a href='#end' class='button' style='float:right;'>Go to End</a>
 		<div style=''>
-		<table style='width:92%;'>
+		<script src=\"".FW_CLIENT_ROOT."library/sorttable.js\"></script>
+		<table style='width:92%;' class='sortable'>
 		<tr>
-		<td>id</td>
-		<td>date time</td>
-		<td>pagename</td>
-		<td>version</td>
-		<td>useragent</td>
-		<td>sessionID</td>
-		<td>time</td>
+		<td style='cursor:pointer;font-weight: bold;'>id</td>
+		<td style='cursor:pointer;font-weight: bold;'>date time</td>
+		<td style='cursor:pointer;font-weight: bold;'>action</td>
+		<td style='cursor:pointer;font-weight: bold;'>page</td>
+		<td style='cursor:pointer;font-weight: bold;'>version</td>
+		<td style='cursor:pointer;font-weight: bold;'>useragent</td>
+		<td style='cursor:pointer;font-weight: bold;'>sessionID</td>
+		<td style='cursor:pointer;font-weight: bold;'>time</td>
 		</tr>";
 		foreach($rows as $row){
 			$browsers = array("MSIE", "Android", "Chrome");
@@ -270,8 +272,9 @@ $median=array();
 			echo "<tr>
 			<td><a name='".$row['id']."'></a>".$row['id']."</td>
 			<td>".$row['date_time']."</td>
-			<td>".$row['pagename']."</td>
-			<td>".$row['pageversion']."</td>
+			<td>".$row['action']."</td>
+			<td>".$row['page']."</td>
+			<td>".$row['version']."</td>
 			<td>";
 
 // now try it
@@ -289,9 +292,9 @@ if 	($_POST['clear']==1 and $_GET['clear']==1 and $_SESSION['admin']==1){
 	$api = round($averageapi, 5);
 	$query="
 	INSERT INTO fw_statistic_archive (id, date_time_start, date_time_end, total, total_pc, total_mobile,
-	avg_time, avg_time_pc, avg_time_mobile, avg_api)
+	avg_time, avg_time_pc, avg_time_mobile, avg_api, median)
 	VALUES (null, '$start_datetime_query', '$end_datetime_query', '$total', '$totalpc', '$totalmobile',
-	'$average', '$averagepc', '$averagemobile', '$api')
+	'$average', '$averagepc', '$averagemobile', '$api', '$median')
 	";
 	echo "<br>$query<br>";
 	$result = $db_my->query($query);
@@ -330,13 +333,13 @@ $RUNTIME = round ($RUNTIME, 3);
 $RUNTIME_MS = $RUNTIME * 1000;
 $USERAGENT = $_SERVER['HTTP_USER_AGENT'];
 $SCRIPT_NAME = basename($_SERVER['SCRIPT_NAME']);
-$SCRIPT_PARENT = dirname($_SERVER['SCRIPT_NAME']);
+$SCRIPT_page = dirname($_SERVER['SCRIPT_NAME']);
 print "
 <!--
 Seitenaufbaudauer: $RUNTIME sek / $RUNTIME_MS ms
 Useragent: $USERAGENT
 Page: $SCRIPT_NAME
-Parent: $SCRIPT_PARENT
+page: $SCRIPT_page
 Querys: {$query_count}
 -->";
 ?>

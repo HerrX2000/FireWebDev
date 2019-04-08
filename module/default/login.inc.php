@@ -20,16 +20,17 @@ function file_title(){
 			if(@$_GET['processed']==1)
 			{
 				if($user->login()==true){
-					echo"<h3>Login: erfolgreich</h3>"."<b>Hallo: ".$_SESSION["username"]." <br>Weiter zu <a href='profil.php'>Mein Profil</a></b>
+					global $c;
+					echo"<h3>Login: erfolgreich</h3>"."<b>Hallo: ".$_SESSION["username"]." <br>Weiter zu <a href='".$c->a('profil')."'>Mein Profil</a></b>
 					 <script type=\"text/javascript\">
-					  location.href = \"./profil.php\";
+					  location.href = \"".$c->a('profil')."\";
 					</script>
 					";
 				}
 				else{
-					echo "<h3>Login:</h3> Benutzername und/oder Passwort waren falsch".$spam_protection;
+					echo "<h3>Login:</h3> Benutzername und/oder Passwort waren falsch";
 					login_form();
-					echo"<a href='javascript:history.back()' class='button'>Zur&uuml;ck</a>"; 
+					echo"<a href='javascript:history.back()' class='button' style='width:100%;'>Zur&uuml;ck</a>"; 
 				}	
 			}
 			else{
@@ -38,10 +39,11 @@ function file_title(){
 		}
 		else
 		{
+			global $c;
 			echo"<h3>Bereits eingelogt</h3>
-			<b>Weiter zu <a href='profil.php'>Mein Profil</a></b>
+			<b>Weiter zu <a href='".$c->a('profil')."'>Mein Profil</a></b>
 			<script type=\"text/javascript\">
-			  setTimeout(function () { location.href = \"./profil.php\"; }, 1000);
+			  setTimeout(function () { location.href = \"".$c->a('profil')."\"; }, 3000);
 			</script>
 			";
 			

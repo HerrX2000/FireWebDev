@@ -2,6 +2,22 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+if(isSet($_SESSION['lang']))
+{
+$lang = $_SESSION['lang'];
+include("strings-".$lang.".php");
+}
+else if(isSet($_COOKIE['lang']))
+{
+$lang = $_COOKIE['lang'];
+include("strings-".$lang.".php");
+}
+else{
+include("strings-en.php");
+}
+
+global $string;
+
 //////////////
 /*
  * Updated for Version 0.7beta 31.7.17			
@@ -76,7 +92,7 @@ if ($db_con->query($sql) === TRUE) {
 	$existed = 0;
 } else {
 	$existed = 1;
-    echo "Error creating table Settings: ".$db_con->error ."<br>";
+    echo "Error  creating table Settings: ".$db_con->error ."<br>";
 }
 if ($existed ==0){
 	$sql = "INSERT INTO `".$db_prefix."settings` (`id`,`name`, `title`, `value`) VALUES
@@ -88,17 +104,22 @@ if ($existed ==0){
 	(6, 'page_url', 'Homepage URL', '/'),
 	(7, 'adminemail', 'Admin Email', ''),
 	(8, 'cookiedomain', 'Cookie Domain', ''),
-	(9, 'cookiepath', 'Cookie Path', ''),
+	(9, 'cookiepath', 'Cookie Path', '/'),
 	(10, 'cookieprefix', 'Cookie Prefix', ''),
 	(11, 'meta_description', 'Meta Description', ''),
 	(12, 'meta_keywords', 'Meta Keywords', ''),
 	(13, 'meta_robots', 'Meta Robots', ''),
 	(14, 'default_style', 'Default Style', 'default'),
-	(15, 'version', 'FireWeb Version', '0.7beta'),
+	(15, 'version', 'FireWeb Version', '0.8alpha'),
 	(16, 'module', 'Selected Module', 'default'),
 	(17, 'core', 'Selected Core', 'core'),
 	(18, 'menu_order', 'Menu Order', 'Start=url=index.php'),
-	(19, 'lang', 'Language', 'en');
+	(19, 'lang', 'Language', 'en'),
+	(20, 'recaptcha_key', 'Recaptcha Key', ''),
+	(22, 'index_fun', 'Start Page Function', 'page'),
+	(23, 'index_act', 'Start action', 'page'),
+	(24, 'index_page', 'Start page', 'index'),
+	(25, 'controller', 'controller', 'dynamic');
 	";
 
 	//////////////////////
@@ -106,7 +127,8 @@ if ($existed ==0){
 	if ($db_con->query($sql) === TRUE) {
 		echo "Insert into ".$db_prefix."settings successfully<br>";
 	} else {
-		echo "Error insert into ".$db_prefix."Settings: ".$db_con->error ."<br>";
+		$error = true;
+		echo "Error  insert into ".$db_prefix."Settings: ".$db_con->error ."<br>";
 	}
 }
 
@@ -114,7 +136,7 @@ if ($existed ==0){
 
 $db_con = new mysqli($db_host, $db_user, $db_psw, $db_name);
 	$sql = "
-	CREATE TABLE IF NOT EXISTS `".$db_prefix."pages` (
+	CREATE TABLE `".$db_prefix."pages` (
 		  `id` int(11) NOT NULL AUTO_INCREMENT,
 		  `name` varchar(120) NOT NULL,
 		  `title` varchar(120) NOT NULL,
@@ -127,25 +149,44 @@ $db_con = new mysqli($db_host, $db_user, $db_psw, $db_name);
 	
 if ($db_con->query($sql) === TRUE) {
     echo "Table pages created successfully<br>";
+	$existed = 0;
 } else {
-    echo "Error creating table pages: ".$db_con->error ."<br>";
+	$existed = 1;
+	echo "Error  creating table pages: ".$db_con->error ."<br>";
+}
+
+if ($existed ==0){
+	$sql = "INSERT INTO `".$db_prefix."pages`
+	(`id`, `name`, `title`, `content`, `modifiable`)
+	VALUES
+	(NULL, 'index', 'index', '<div class=''content'';><h1>FireWeb installed</h1></div>', '1');
+	";
+
+	//////////////////////
+		
+	if ($db_con->query($sql) === TRUE) {
+		echo "Insert into ".$db_prefix."users successfully<br>";
+	} else {
+		$error = true;
+		echo "Error  insert into ".$db_prefix."users: ".$db_con->error ."<br>";
+	}
 }
 
 
 /////create stats
 $db_con = new mysqli($db_host, $db_user, $db_psw, $db_name);
 	$sql = "
-		CREATE TABLE `fw_statistic` (
+		CREATE TABLE IF NOT EXISTS `fw_statistic` (
 		  `id` int(11) UNSIGNED NOT NULL  AUTO_INCREMENT,
 		  `date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-		  `pagename` varchar(240) NOT NULL,
-		  `pageparent` varchar(480) NOT NULL DEFAULT '/',
-		  `pageversion` tinytext,
-		  `pageapi` smallint(5) DEFAULT NULL,
+		  `action` varchar(240) NOT NULL,
+		  `page` varchar(480) NOT NULL DEFAULT '/',
+		  `version` tinytext,
+		  `api` smallint(5) DEFAULT NULL,
 		  `core` tinytext,
 		  `module` tinytext,
 		  `useragent` text NOT NULL,
-		  `sessionid` id(5),
+		  `sessionid` mediumint(7),
 		  `exe_time` smallint(5) NOT NULL,
 		   PRIMARY KEY (ID)
 		) CHARSET=utf8;
@@ -153,18 +194,40 @@ $db_con = new mysqli($db_host, $db_user, $db_psw, $db_name);
 		
 	
 if ($db_con->query($sql) === TRUE) {
-    echo "Table statistic created successfully<br>";
+    echo "Table fw_statistic created successfully<br>";
 } else {
-    echo "Error creating table statistic: ".$db_con->error ."<br>";
+    $error = true;
+	echo "Error  creating table statistic: ".$db_con->error ."<br>";
 }
-/////create users
+$sql = "
+		CREATE TABLE `fw_statistic_archive` (
+		  `id` int(11) NOT NULL AUTO_INCREMENT,
+		  `date_time_start` datetime NOT NULL,
+		  `date_time_end` datetime NOT NULL,
+		  `total` int(11) NOT NULL,
+		  `total_pc` int(11) NOT NULL,
+		  `total_mobile` int(11) NOT NULL,
+		  `avg_time` float NOT NULL,
+		  `avg_time_pc` float NOT NULL,
+		  `avg_time_mobile` float NOT NULL,
+		  `avg_api` smallint(6) NOT NULL,
+		   PRIMARY KEY (ID)
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+";
+if ($db_con->query($sql) === TRUE) {
+    echo "Table fw_statistic_archive created successfully<br>";
+} else {
+    $error = true;
+	echo "Error  creating table statistic_archive: ".$db_con->error ."<br>";
+}
+/////create user admin
 $db_con = new mysqli($db_host, $db_user, $db_psw, $db_name);
 	$sql = "
 		CREATE TABLE `".$db_prefix."users` (
 		  `id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT,
 		  `username` varchar(100) NOT NULL,
 		  `password` varchar(100) NOT NULL,
-		  `algo` varchar(20) NOT NULL DEFAULT 'sha256',
+		  `algo` varchar(20) NOT NULL DEFAULT 'bcyrpt',
 		  `salt` varchar(8) DEFAULT NULL,
 		  `loginkey` varchar(100) NOT NULL,
 		  `email` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -177,9 +240,27 @@ $db_con = new mysqli($db_host, $db_user, $db_psw, $db_name);
 		
 	
 if ($db_con->query($sql) === TRUE) {
-    echo "Table userscreated successfully<br>";
+    echo "Table users created successfully<br>";
+	$existed = 0;
 } else {
-    echo "Error creating table users: ".$db_con->error ."<br>";
+	$existed = 1;
+	echo "Error  creating table users: ".$db_con->error ."<br>";
+}
+if ($existed ==0){
+	$sql = "INSERT INTO `".$db_prefix."users`
+	(`id`, `username`, `password`, `algo`, `salt`, `loginkey`, `email`, `usergroup`, `moderator`, `admin`)
+	VALUES
+	(NULL, 'admin', 'admin', 'none', NULL, '', '', '0', '0', '1');
+	";
+
+	//////////////////////
+		
+	if ($db_con->query($sql) === TRUE) {
+		echo "Insert into ".$db_prefix."users successfully<br>";
+	} else {
+		$error = true;
+		echo "Error  insert into ".$db_prefix."users: ".$db_con->error ."<br>";
+	}
 }
 
 ////
@@ -187,17 +268,22 @@ if ($db_con->query($sql) === TRUE) {
 
 $db_con->close();
 	}
-echo "
-<h2>SUCCESSFUL</h2>
-<p>INSTALL_FINISHED_HINT</p>
-<h3><a href=\"../index.php\">CONNTINUE</a></h3>
-<script type=\"text/javascript\">
-  setTimeout(function () { location.href = \"../index.php\"; }, 5000);
-</script>
-";
-
-$file = fopen("./BOLT", "w") or die("Unable to creat global.php!");
+if(!$error){
+	echo "
+	<h2>SUCCESSFUL</h2>
+	<p>{$string[INSTALL_FINISHED_HINT]}</p>
+	<h3><a href=\"../index.php\">CONNTINUE</a></h3>
+	<script type=\"text/javascript\">
+	  setTimeout(function () { location.href = \"../index.php\"; }, 5000);
+	</script>
+	";
+	$file = fopen("./BOLT", "w") or die("Unable to creat global.php!");
 fclose($file);
-
 }
+{
+	echo "
+	<h2>FAILURE</h2>";
+}
+}
+
 ?>

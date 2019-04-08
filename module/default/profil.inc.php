@@ -16,23 +16,23 @@ function file_title()
 	function content_main()
 	{ 
 		global $user;
+		global $c;
 		if ($user->verify(0)===true) 
 			{
 		if ($user->verify(0)===true){
-		$show_profil="none";
+		$show_profil="inline";
 		}
 		else{
-		$show_profil="display";	
+		$show_profil="none";	
 		}
+		
 		///header
 		echo"<div class='content' style='min-height:240px;'>";
 		if (find_mobile_browser()===true){
 		echo"
 		<script src=\"//cdn.ckeditor.com/4.5.4/basic/ckeditor.js\"></script>
-		 <input type='image' src='images/icons/mobile_menu.png' id='profil_menu_open' alt='Submit' onclick=\"toggle('profil_menu');\"
-		 style='float:right;cursor: pointer;margin-top:10px;width:32px;height:32px;'>
 			";
-		$profil_list_display="none";
+		$profil_list_display="display";
 		}
 		else{
 		echo"<script src=\"//cdn.tinymce.com/4/tinymce.min.js\"></script>
@@ -54,124 +54,31 @@ function file_title()
 		</script>
 		";
 		$profil_list_display="display";
-		echo"<h2 style='text-align:center;'>".$_SESSION["username"]."´s Profil</h2>";	
+		
+		
 		}
 		
+		if(!isset($_GET['p']) or $_GET['p']=="start"){
+			$display_menu=true;
+		}
+		else{
+			$display_menu=false;
+		}
+		
+		if($display_menu){
 			
-		///profil_list_entries
-		///Level-1
-		echo "
-		<div class='profil_menu' id='profil_menu' style='display:$profil_list_display;'>
+			}
+			else{
+				echo"<a href='".$c->p('start')."'><img src='".FW_CLIENT_ROOT."images/icons/back.png' alt='back' width='32px'></a>";
+			}
 		
-	<table id='profil_menu_table'>
-	<tr>
-			<td class='profil_menu_entry'>
-				<a href='?p=start' class='link' style='width:100%;height:40px;'><b>Start</b></a>
-			</td>
-	</tr>
-	<tr>
-		<td class='profil_menu_entry'>
-			<a class='link' onclick=\"toggle_sev('profil');\" style='cursor: pointer;'><b>Profil</b></a>
-		</td>
-	</tr>
-	<tr name='profil' style='display:$show_profil;'>
-		<td class='profil_menu_entry'>
-			<a href='?p=profil_bearbeiten' class='button' style='width:100%;height:40px;'>Passwort ändern</a>
-		</td>
-	</tr>
-		
-	<tr name='profil' style='display:$show_profil;'>
-		<td class='profil_menu_entry'>
-			<a href='?p=style_auswählen' class='button' style='width:100%;color:grey;'>Style auswählen &#10013;</a>
-		</td>
-	</tr>
-	<tr name='profil' style='display:$show_profil;'>
-		<td class='profil_menu_entry'>
-			<a href='?p=rechte_anzeigen' class='button' style='width:100%;height:40px;'>Rechte anzeigen</a>
-		</td>
-	</tr>
-	";
-	//Level-2
-	if ($user->verify(1)===true){
-	echo"
-	<tr name='profil' style='display:none;'>
-		<td class='profil_menu_entry'>
-				<a href='?p=avatar_upload' class='button'>Avatar ändern</a>
-			<!--<a href='?p=avatar_show' class='button'>!</a>-->
-		</td>
-	</tr>
-	<tr>
-		<td class='profil_menu_entry'>
-			<a class='link' onclick=\"toggle_sev('moderator');\" style='cursor: pointer;'><b>Moderation</b></a>
-		</td>
-	</tr>
-	<tr name='moderator' style='display:none;'>
-		<td class='profil_menu_entry'>
-			<a href='?p=news_schreiben' class='button' style='width:100%;color:grey;'>News schreiben &#10013;</a>
-		</td>
-	</tr>
-	<tr name='moderator' style='display:none;'>
-		<td class='profil_menu_entry'>
-			<a href='?p=event_erstellen' class='button' style='width:100%;color:grey;'>Event erstellen &#10013;</a>
-		</td>
-	</tr>
-	";}
-	//Level-3
-	if ($user->verify(2)===true){
-	echo"
-	<tr>
-		<td class='profil_menu_entry'>
-			<a class='link' onclick=\"toggle_sev('administration');\" style='cursor: pointer;'><b>Administration</b></a>
-		</td>
-	</tr>
-	<tr name='administration' style='display:none;'>
-		<td class='profil_menu_entry'>
-			<a href='?p=kommentare' class='button' style='width:100%;color:grey;'>Kommentare 	&#10013;</a>
-		</td>
-	</tr>
-	<tr name='administration' style='display:none;'>
-		<td class='profil_menu_entry'>
-			<a href='?p=bug_report' class='button' style='width:100%;color:grey;'>Bug-Report &#10013;</a>
-		</td>
-	</tr>
-	<tr name='administration' style='display:none;'>
-		<td class='profil_menu_entry'>
-			<a href='?p=website_status' class='button' style='width:100%;height:40px;'>Website-Status</a>
-		</td>
-	</tr>
-	<tr name='administration' style='display:none;'>
-		<td class='profil_menu_entry'>
-			<a href='inc/statistics.php' class='button' style='width:100%;height:40px;' target='_blank'>Statistiken &#8250;</a>
-		</td>
-	</tr>
-	<tr name='administration' style='display:none;'>
-		<td class='profil_menu_entry'>
-			<a href='administration.php' class='button' style='width:100%;height:40px;' target='_blank'>Admin-Panel &#8250;</a>
-		</td>
-	</tr>
-	
-	";
-	}
-	if (find_mobile_browser()===true)
-		{
-		echo"
-		<tr>
-			<td class='profil_menu_entry'>
-			<a class='link' href='calendar.php?p=mobile'><b>Kalender</b><a>
-			</td>
-		</tr>
-			";
-		}
-	echo"</table>
-	
-
-				</div>
-				<div class='profil_entry' style='min-height:120px;'>";
-		echo "
-		<h2 id=\"profil_title_mobile\" style=\"display:none;\">Mein Profil</h2>
-				<h1 id=\"profil_title\" style=\"display:initial;\">Mein Profil</h1>	
 				
-			
+		echo "
+		<div class='profil_title' style='display: inline-block;'>
+			<h2 id=\"profil_title_mobile\" style=\"text-align:center;display:none;\">Mein Profil</h2>
+				<h1 id=\"profil_title\" style=\"text-align:center;display:initial;\">Mein Profil</h1>	
+		</div>
+		<div class='profil_entry' style='min-height:120px;'>
 		";
 	///function
 	///function
@@ -183,7 +90,7 @@ function file_title()
 				case "profil_bearbeiten":
 					$profil_title = "Profil bearbeiten";
 				echo"
-				<form name='edit_profile' action='submitted.php?a=edit_profile' method='post'>
+				<form name='edit_profile' action='".$c->a('submitted').$c->get('action','edit_profile')."' method='post'>
 				<table style='width:100%;'>
 				<br>
 				<tr>
@@ -219,7 +126,7 @@ function file_title()
 					break;
 				case "avatar_show":
 					$profil_title = "Avatar anzeigen";
-					echo" <img src=\"uploads/avatar/".$_SESSION["uid"].".jpg\" alt=\"No Avatar\" height=\"64\" width=\"64\">";
+					echo" <img src=\"".FW_CLIENT_ROOT."uploads/avatar/".$_SESSION["uid"].".jpg\" alt=\"No Avatar\" height=\"64\" width=\"64\">";
 					break;
 				case "style_auswählen":
 					global $settings;
@@ -245,7 +152,7 @@ function file_title()
 					}
 					$profil_title = "Style auswählen";
 					echo"
-					<form action='profil.php' method='post'>
+					<form action='".$c->a('profil')."' method='post'>
 					<select name='select_style' class='soflow'>
 					<option value='".$settings['default_style']."' selected='selected'>".$settings['default_style']." - Standart</option>
 					";
@@ -254,7 +161,7 @@ function file_title()
 					<input type='submit' value='Wechseln'/>
 					</form>
 					<br><br><br>Manuell:
-					<form action='profil.php' method='post'>
+					<form action='".$c->a('profil')."' method='post'>
 					<input name='select_style' type='text' value='style'/>
 					<input type='submit' value='Senden'/>
 					</form>
@@ -295,20 +202,42 @@ function file_title()
 			///
 			if ($user->verify(1)===true){
 				switch ($_GET['p']) {
+					case "area_exp":
+						$profil_title = "Area-Manager (experimentell)";
+						$array_tables_area=fw_detect_tables($mode="area", 1);
+						echo "<table style='width:100%;border-collapse: collapse;'>";
+						
+						foreach($array_tables_area as $entry){
+							echo "<tr style='border-style:solid;border-color:#585858;border-width: 1px;height:54px;'>
+							<td style='font-size:2em;'>".$entry[2]."</td>
+							<td style='width:42px;'>
+							<a href='".$c->a("area_manager").$c->get('t',$entry[2])."' style='padding:2px;'><img alt='edit' src='".FW_CLIENT_ROOT."images/icons/edit.png' style='width:32px;height:32px;'></a>
+							</td>
+							<td style='width:42px;'>
+							<a href='".$c->ref('administration','manage_table').$c->get('type','area')."'><img src='".FW_CLIENT_ROOT."images/icons/remove.png' style='width:32px;height:32px;' alt='add_entry'></a>
+							</td>
+							";
+						}
+						echo "<tr>
+						<td></td><td></td>
+						<td style='border-style:solid;border-color:#585858;border-width: 1px;height:54px;'><a href='".$c->ref('administration','manage_table').$c->get('type','area')."'><img src='".FW_CLIENT_ROOT."images/icons/add.png' style='width:32px;height:32px;' alt='add_entry'></a></td>";
+						echo "</tr>";
+						echo "</table>";
+						break;
 					case "news_schreiben":
 						$profil_title = "News schreiben";
 						echo"&nbsp";
-						echo"<form name='news' action='submitted.php?a=entry' method='Post'>
+						echo"<form name='news' action='".$c->a('submitted').$c->get('action','entry')."' method='Post'>
 						Tabelle: <input type='text' value='news' name='table'>
 						<textarea name='editor' class='editor' type='text' maxlength='1000'></textarea>
 						</form>
-						<a href='#' onclick='document.news.submit();'"; if(find_mobile_browser()==False)echo "style='width:100%;'";echo " class='button'><b>Senden</b></a>
+						<a href='#' onclick='document.news.submit();' style='width:100%;' class='button'><b>Senden</b></a>
 						";
 						break;
 					///
 					case "event_erstellen":
 						$profil_title = "Event erstellen";
-						echo"<form name='calendar' action='submitted.php?a=calendar' method='Post'>
+						echo"<form name='calendar' action='".$c->a('submitted').$c->get('action','calendar')."' method='Post'>
 						<table>
 						<tr>
 						<td>Name:</td>
@@ -326,7 +255,7 @@ function file_title()
 						</table>
 						<br>
 						</form>
-						<a href='#' onclick='document.calendar.submit();' "; if(find_mobile_browser()==False)echo "style='width:480px;'";echo "class='button'>Erstellen</a> 
+						<a href='#' onclick='document.calendar.submit();' style='width:480px;' class='button'>Erstellen</a> 
 						";
 						break;
 				}
@@ -337,11 +266,15 @@ function file_title()
 			if ($user->verify(2)===true){
 				
 				switch ($_GET['p']) {
-					case "kommentare":
+					case "db_exp":
+						$profil_title = "Datenbank (experimentell)";
+						fw_detect_tables_render(fw_detect_tables(),"width:100%");
+						break;
+					/*case "kommentare":
 						$profil_title = "Kommentare";
 						echo"<br><br>";
 						show_comments($table='comments',$limit='6',$spalten='2');
-						break;
+						break;*/
 					///
 					case "bug_report":
 						$profil_title = "Bug Report";
@@ -352,7 +285,7 @@ function file_title()
 					case "website_status":
 						$profil_title = "Website Status";
 						echo"<br><br>";
-						echo"<form name='Status' action='submitted.php?a=status' method='post'>
+						echo"<form name='Status' action='".$c->a('submitted').$c->get('action','status')."' method='post'>
 						<select name='status'>
 						  <option value='1' selected='selected'>Online</option>
 						  <option value='0'>Offline</option>
@@ -362,17 +295,135 @@ function file_title()
 <br>Bis: 00:00 Uhr</textarea>
 						<br>
 						</form>
-						<a href='#' onclick='document.Status.submit();'"; if(find_mobile_browser()==False)echo "style='width:100%;'";echo " class='button'>Senden</a>";
+						<a href='#' onclick='document.Status.submit();' style='width:100%;' class='button'>Senden</a>";
 						
 						break;
 				}
 			}
 		}
 		else{
-			$profil_title = "Startseite";
-			echo"		
-			Weiter zum neuen User-Panel 0.7.2 <a href='profil_new.php' style='color:red;font-family:initial;font-size:1.5em;'>&rarr;</a>
+			$profil_title = $_SESSION["username"]."´s Profil";
+			/* outdated since 0.7.2 echo"
+			 <input type='image' src='images/icons/mobile_menu.png' id='profil_menu_open' alt='Submit' onclick=\"toggle('profil_menu');\"
+			 style='float:left;cursor: pointer;margin-top:10px;width:32px;height:32px;'>";*/
+			echo"<div class='profil_user_entry'><img src=\"".FW_CLIENT_ROOT."uploads/avatar/".$user->uid().".jpg\" alt='user_icon' width='128px' style='float:left;'>
+			<p style='margin-left:128px;margin-right:10%;'>Willkommen  im User-Panel, ".$user->uname().".
+			<br><i style='text-align:center;'>-beta-</i>
+			</p></div>";	
+			///profil_list_entries
+			///Level-1
+			echo "
+			<div class='profil_menu' id='profil_menu' style='display:$profil_list_display;'>
+			
+			<table id='profil_menu_table' style='width:100%;'>
+			<tr>
+				<td class='profil_menu_entry'>
+					<a onclick=\"toggle_sev('profil');\" class='button' style='height:40px;width:100%;cursor: pointer;outline-style:none;'><img src='".FW_CLIENT_ROOT."images/icons/user.png' alt='profil' height='20em'><b>Profil</b></a>
+				</td>
+			</tr>
+			<tr name='profil' style='display:$show_profil;width:100%;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->p('profil_bearbeiten')."' class='button' style='width:100%;height:40px;'>Passwort ändern</a>
+				</td>
+			</tr>
+				
+			<tr name='profil' style='display:$show_profil;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->p('style_auswählen')."' class='button' style='width:100%;height:40px;color:grey;'>Style auswählen &#10013;</a>
+				</td>
+			</tr>
+			<tr name='profil' style='display:$show_profil;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->p('rechte_anzeigen')."' class='button' style='width:100%;height:40px;'>Rechte anzeigen</a>
+				</td>
+			</tr>
 			";
+			//Level-2
+			if ($user->verify(1)===true){
+			echo"
+			<tr name='profil' style='display:$show_profil;'>
+				<td class='profil_menu_entry'>
+						<a href='".$c->p('avatar_upload')."' class='button' style='width:100%;height:40px;'>Avatar ändern</a>
+					<!--<a href='".$c->p('avatar_show')."' class='button'>!</a>-->
+				</td>
+			</tr>
+			<tr>
+				<td class='profil_menu_entry'>
+					<a onclick=\"toggle_sev('moderator');\" class='button' style='height:40px;width:100%;cursor: pointer;outline-style:none;'><img src='".FW_CLIENT_ROOT."images/icons/mod.png' alt='moderator' height='20em'> <b>Moderation</b></a>
+				</td>
+			</tr>
+			<tr name='moderator' style='display:none;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->p('area_exp')."' class='button' style='width:100%;height:40px;'>Area-Manager (experimentell)</a>
+				</td>
+			</tr>
+			<tr name='moderator' style='display:none;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->p('news_schreiben')."' class='button' style='width:100%;height:40px;color:grey;'>News schreiben &#10013;</a>
+				</td>
+			</tr>
+			<tr name='moderator' style='display:none;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->p('event_erstellen')."' class='button' style='width:100%;height:40px;color:grey;'>Event erstellen &#10013;</a>
+				</td>
+			</tr>
+			";}
+			//Level-3
+			if ($user->verify(2)===true){
+			echo"
+			<tr>
+				<td class='profil_menu_entry'>
+					<a onclick=\"toggle_sev('administration');\"  class='button' style='height:40px;width:100%;cursor: pointer;outline-style:none;'><img src='".FW_CLIENT_ROOT."images/icons/admin.png' alt='admin' height='20em'><b>Administration</b></a>
+				</td>
+			</tr>
+			<!--<tr name='administration' style='display:none;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->p('kommentare')."' class='button' style='width:100%;height:40px;color:grey;'>Kommentare 	&#10013;</a>
+				</td>
+			</tr>-->
+			<tr name='administration' style='display:none;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->p('bug_report')."' class='button' style='width:100%;height:40px;color:grey;'>Bug-Report &#10013;</a>
+				</td>
+			</tr>
+			<tr name='administration' style='display:none;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->p('db_exp')."' class='button' style='width:100%;height:40px;'>Datenbank (experimentell)</a>
+				</td>
+			</tr>
+			<tr name='administration' style='display:none;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->p('website_status')."' class='button' style='width:100%;height:40px;'>Website-Status</a>
+				</td>
+			</tr>
+			<tr name='administration' style='display:none;'>
+				<td class='profil_menu_entry'>
+					<a href='".$c->a('administration')."' class='button' style='width:100%;height:40px;'>Admin-Panel</a>
+				</td>
+			</tr>
+			<tr name='administration' style='display:none;'>
+				<td class='profil_menu_entry'>
+					<a href='".FW_CLIENT_ROOT."inc/statistics.php' class='button' style='width:100%;height:40px;' target='_blank'>Statistiken &#8250;</a>
+				</td>
+			</tr>
+			
+			
+			";
+			}
+			if (find_mobile_browser()===true)
+				{
+				echo"
+				<tr>
+					<td class='profil_menu_entry'>
+					<a class='link' href='calendar.php?p=mobile'><b>Kalender</b><a>
+					</td>
+				</tr>
+					";
+				}
+			echo"</table>
+			
+
+					</div>";
 		}
 		
 		
@@ -386,7 +437,7 @@ function file_title()
 	///bottom
 				echo "</div>	
 		<div class='content'>
-				<a href='logout.php?historyback=profil' class='button'><h3>Ausloggen</h3></a>
+				<a href='logout.php?historyback=profil' class='button' style='width:100%;'><h3>Ausloggen</h3></a>
 				</div>	
 				<script>";
 		if(find_mobile_browser()===true){

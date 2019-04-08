@@ -148,24 +148,21 @@ $RUNTIME = $ENDTIME - $STARTTIME;
 $RUNTIME = round ($RUNTIME, 3);
 $RUNTIME_MS = $RUNTIME * 1000;
 $USERAGENT = $_SERVER['HTTP_USER_AGENT'];
-$SCRIPT_NAME = basename($_SERVER['SCRIPT_NAME']);
-$SCRIPT_PARENT = dirname($_SERVER['SCRIPT_NAME']);
-
-if(isset ($_GET['p'])){
-	$SCRIPT_NAME = $SCRIPT_NAME."?p=".$_GET['p'];
-}
+$SCRIPT_ACTION = $c->cur()['a'];
+$SCRIPT_PAGE = $c->cur()['p'];
+//
 if(isset ($_GET['r'])){
-	$SCRIPT_NAME = $SCRIPT_NAME."&r=".$_GET['r'];
+	$SCRIPT_PAGE = $SCRIPT_PAGE."&r=".$_GET['r'];
 }
 //
-statistics_collector($SCRIPT_NAME, $USERAGENT, $RUNTIME_MS, $SCRIPT_PARENT);
+statistics_collector($SCRIPT_ACTION, $USERAGENT, $RUNTIME_MS, $SCRIPT_PAGE);
 //
 print "
 <!--
 Build-up time: $RUNTIME_MS ms
 Useragent: $USERAGENT
-Page: $SCRIPT_NAME
-Parent: $SCRIPT_PARENT
+Action: $SCRIPT_ACTION
+Page: $SCRIPT_PAGE
 
 Statistics are anonymously saved in a local database and are not shared automatically with any 3rd parties.
 If cookies are enabled an anonymous SessionID is created for less than an hour.

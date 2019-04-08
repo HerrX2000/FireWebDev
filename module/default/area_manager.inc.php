@@ -23,7 +23,11 @@ function file_title(){
 				edit_area_entries($table,$_POST['id']);
 			}
 			if (isset ($_GET['add']) and $_GET['add']=="true"){
-				add_area_entry($table=$table);
+				if(add_area_entry($table=$table)){
+					echo"<script type=\"text/javascript\">
+					  location.href = \"./profil.php\";
+					</script>";
+				}
 			}
 			if (isset($_POST['id']) and isset ($_GET['delete']) and $_GET['delete']=="true"){
 				delete_area_entry($table,$_POST['id']);

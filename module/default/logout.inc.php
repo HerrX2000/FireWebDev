@@ -20,7 +20,13 @@ function file_title(){
 			echo "Functions are not available.<br />\n";
 			exit;
 		}		
-		$user->logout();
+		if($user->logout()){
+			echo"
+			<h2>Ihre Sessions wurden gelöscht</h2>
+			Neuen Key erhalten
+			<br><a class='button' href='javascript:history.back()' style='width:100%;'>Zurück</a>
+			";
+		}
 		echo "</div>"; 
 	}
 //Content_left

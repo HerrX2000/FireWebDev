@@ -1,13 +1,64 @@
 <?php 
 //entries	
 //costum
+class comments{
+	function init($table){
+		$init=$table;
+		$this->init=$init;
+		global $c;
+		global $db_my;
+		
+		$table_n = $table;
+		$table = $db_my->escape_string($table);
+		$table = "comments_".$table;
+
+		$query="SELECT id, username, comment from ". $db_my->prefix ."$table ORDER BY id DESC";
+
+		//
+		$area_table=$db_my->query($query, $hide_errors=1, $write_query=0);
+		
+		$result=$db_my->query($query, $hide_errors=1, $write_query=0);
+		//
+		if($db_my->num_rows($result)!=0){
+			while ($row = $db_my->fetch_assoc($result))
+			{
+			$rows[] = $row ;
+			}
+			// Errorhandel
+			if(!isset($rows)) {
+				echo "Nicht gefunden";
+				exit;
+			}
+			$results = array();
+			$index=0;
+			foreach($rows as $row){
+				$results[$index]=array($row['id'], $row['username'], $row['comment']);
+				$index++;
+			}
+			$return = array("result" => $result, "table" => $table_n, "results" => $results);
+			$this->cur=$return;
+			return $return;
+		}
+		else{
+			return false;
+		}
+	}
+	function show(){
+		$results = $this->cur['results'];
+		foreach ($results as $result){
+			echo "Kommentar: ".$result[2]."<br>";
+		}
+		
+	}
+}
+
 function show_comments($table='',$limit='',$spalten='')
 		{
 			global $db_my;
 			$table = $db_my->escape_string($table);
 			//$db_my->query("SET NAMES 'utf8'", $hide_errors=0, $write_query=0);
 			//
-			$query="SELECT email, Benutzer, Kommentar from ". $db_my->prefix ."$table ORDER BY id DESC LIMIT $limit";
+			$query="SELECT Benutzer, Kommentar from ". $db_my->prefix ."$table ORDER BY id DESC LIMIT $limit";
 			//
 			$result=$db_my->query($query, $hide_errors=0, $write_query=0);
 			//

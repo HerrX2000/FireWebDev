@@ -17,7 +17,10 @@ function file_title(){
 	{	
 		$id=$_GET['p'];
 		echo "<div class='content'>";
-		echo show_entry($table="entry",$id=$id);
+		$entry = new entry;
+		$entry->init($table="pages",$id);
+		$entry->show();
+		//echo show_entry($table="entry",$id=$id);
 		echo "</div>";
 	}	
 
