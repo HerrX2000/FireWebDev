@@ -10,7 +10,8 @@ config.php
 
 ###
 !/images/icons/
-/images/*
+!/images/favicon/
+/images/
 
 !/addon/@meta/
 !/addon/@joomla1_5/
