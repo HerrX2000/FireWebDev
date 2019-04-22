@@ -52,13 +52,13 @@ function file_title($case="title"){
 			<input type='hidden' name='table' value='".$area->cur['table']."'>
 			<input type='hidden' name='id' value='".$area->cur['id']."'>
 			<input type='hidden' name='name' value='".$area->cur['name']."'>
-			<input type='image' src='".FW_CLIENT_ROOT."images/icons/area_edit.png' style='wdith:32px;height:32px;' alt='edit_area'>
+			<input type='image' src='".FW_CLIENT_ROOT."images/icons/area_edit.png' style='width:32px;height:32px;' alt='edit_area'>
 			</form>
 			</div>
 			<div style='float:right;'>
 			<form action='".$c->a('area_manager').$c->get('t', $area->cur['table'])."' method='post'>
 			<input type='hidden' name='table' value='".$area->cur['table']."'>
-			<input type='image' src='".FW_CLIENT_ROOT."images/icons/area_manager.png' style='wdith:32px;height:32px;' alt='manager_area'>
+			<input type='image' src='".FW_CLIENT_ROOT."images/icons/area_manager.png' style='width:32px;height:32px;' alt='manager_area'>
 			</form>
 			</div>
 			</div>";
@@ -74,6 +74,8 @@ function file_title($case="title"){
 	function content_left()
 	{ 
 	global $area;
+	global $user;
+	global $c;
 	echo "
 		<div  class=\"content_left\"'>
 		";
@@ -81,18 +83,26 @@ function file_title($case="title"){
 			$table=$_GET['p'];
 			$area_menu = $area->menu();
 			$first = true;
-			foreach($area_menu as $entry){
-				if (isset ($_GET['r']) and $_GET['r']===$entry[1]){
-					echo "<a href='".$entry[0]."' class='button_theme' style='width:100%;margin:0 0 1px 0;'>".$entry[1]."</a><br>";
+			if ($area_menu){
+				foreach($area_menu as $entry){
+					if (isset ($_GET['r']) and $_GET['r']===$entry[1]){
+						echo "<a href='{$entry[0]}' class='button_theme' style='width:100%;margin:0 0 1px 0;'>".$entry[1]."</a><br>";
+					}
+					elseif (!isset ($_GET['r']) and $first){
+						echo "<a href='".$entry[0]."' class='button_theme' style='width:100%;margin:0 0 1px 0;'>".$entry[1]."</a><br>";
+						$first = false;
+					}
+					else{
+						echo "<a href='".$entry[0]."' class='button' style='width:100%'>".$entry[1]."</a><br>";
+					}
+					
 				}
-				elseif (!isset ($_GET['r']) and $first){
-					echo "<a href='".$entry[0]."' class='button_theme' style='width:100%;margin:0 0 1px 0;'>".$entry[1]."</a><br>";
-					$first = false;
-				}
-				else{
-					echo "<a href='".$entry[0]."' class='button' style='width:100%'>".$entry[1]."</a><br>";
-				}
-				
+			}
+			else{
+					echo "Keine Einträge";
+			}
+			if($user->verify(1)){
+				echo "<a href={$c->a("area_manager")}{$c->get("t",$table)} class='button' style='width:100%'>Bereich verwalten</a>";
 			}
 		}
 		else{

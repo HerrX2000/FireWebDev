@@ -120,13 +120,16 @@ class area{
 		}
 		$counter=0;
 		$array = array();
-		foreach($rows as $row){
-		$array[$counter] = array();
-		array_push($array[$counter],$c->get('p',$this->cur['table']).$c->get('r', $row['name']));
-		array_push($array[$counter],$row['name']);
-		$counter++;
+		if(isset($rows)){
+			foreach($rows as $row){
+			$array[$counter] = array();
+			array_push($array[$counter],$c->a('area').$c->get('p',$this->cur['table']).$c->get('r', $row['name']));
+			array_push($array[$counter],$row['name']);
+			$counter++;
+			}
+			return $array;
 		}
-		return $array;
+		return false;
 	}
 }
 
@@ -435,7 +438,7 @@ function show_area_entries($table, $target){
 		while ($row = $db_my->fetch_assoc($result)){
 			$rows[] = $row ;
 		}
-		if(isset($rows)){		
+		if(isset($rows)){	
 			foreach($rows as $row){
 				echo "<tr style='border-style:solid;border-color:#585858;border-width: 1px;height:54px;'>
 				<form name='edit' action='".$c->get('t',$_GET['t'],1).$c->get('t',$_GET['t']).$c->get('edit','true')."' method='post'>

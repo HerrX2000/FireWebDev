@@ -29,10 +29,11 @@ $string['REPAIR_SEND'] = "reparieren";
 $string['$CON_TITLE'] = "<h2>Überprüfe Verbindung</h2>";	
 
 $string['INSTALL_SIMPLE_TITLE'] = "Einfache Installation";
-$string['INSTALL_SIMPLE_HINT'] = "Läd Basis Modul/Style";
+$string['INSTALL_SIMPLE_HINT'] = "Lädt Basis Modul/Style";
 $string['INSTALL_ADVANCED_TITLE'] = "Erweitere Einstellungen";
 $string['INSTALL_ADVANCED_SEND'] = "Senden";
 
+$string['INSTALL_FINISHED_HINT'] = "We recommend to delete the 'install' folder due to security reasons!";
 
 /*<h3>	English </h3>
 <p>Moco (More Control) is a organizer software under development and part of the "FireWeb" webbased software series.</p>

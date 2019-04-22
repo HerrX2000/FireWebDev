@@ -49,7 +49,7 @@ include("config.php");
 <body>
 
 <header id="header">
-<h1><?php echo $config['title']." ".$string['INSTALLATION'];?></h1>
+<h1><?php echo "FireWeb ".$string['INSTALLATION'];?></h1>
 </header>
 <div id="middle">
 <div id="container">
@@ -57,7 +57,7 @@ include("config.php");
 
 <div id="container_center">
 <section class="section">
-<?php if (!isset($_GET['page']) or $_GET['page']==1)initialize();elseif($_GET['page']==2)check_con();elseif($_GET['page']==3)installation();?>
+<?php if (!isset($_GET['page']) or $_GET['page']=="init")initialize();elseif($_GET['page']=="check_connection")check_con();elseif($_GET['page']=="advanced_setup")advanced_setup();elseif($_GET['page']=="installing")installation();?>
 </section>
 </div>
 </div>

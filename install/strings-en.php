@@ -25,6 +25,10 @@ $string['INSTALL_DATABASENAME'] = "Database Name";
 $string['INSTALL_PREFIX'] = "Table Prefix";
 $string['INSTALL_PREFIX_HINT'] = "Some hosts allow only a certain DB name per site. Use table prefix in this case for distinct Moco.";
 
+$string['INSTALL_SETTINGS']="Database Configuration";
+$string['INSTALL_ADVANCED_SETTINGS']="Advanced Options";
+$string['INSTALL_PAGE_NAME']="Page Name";
+
 $string['INSTALL_FINISHED_HINT'] = "We recommend to delete the 'install' folder due to security reasons!";
 
 $string['REPAIR_TITLE'] = "Repair?";
